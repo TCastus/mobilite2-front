@@ -6,25 +6,12 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v2.1.4
-        with:
-          node-version: '14.x'
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - run: npm ci
-
-      - name: eslint
+      - name: run eslint
         uses: reviewdog/action-eslint@v1
         with:
+          github_token: ${{ secrets.github_token }}
+          fail_on_error: true
           reporter: github-pr-review
           eslint_flags: 'src/'

@@ -6,6 +6,7 @@ import {Typography} from "@material-ui/core";
 /**
  * A component used to test the connectivity with the API
  */
+/* test */
 export default class TestApi extends React.Component {
     constructor(props) {
         super(props);

@@ -1,27 +1,37 @@
 import '../Assets/Style/App.css';
 import React from 'react';
-import Nav from './Nav';
-import Experience from './Experience';
-import Finance from './Finance';
-import Mobilite from './Mobilite';
-import Universite from './Universite';
-import Home from './Home';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Nav from '../Route/Nav';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {routeList} from '../Route/route';
 
+/**
+ * Main component of the mobilite app
+ * Generates routes using a description file,
+ * and creates the browser
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function App() {
+    /*
+    Generate a list of <Route> components using the description in route.js
+     */
+    const gen_routes = routeList.map((route, index) => {
+        console.log(route.path, route.component);
+        return <Route exact path={route.path}
+            key={"route_" + index}
+            component={route.component}/>;
+    });
+
     return (
-        <Router>
+        <BrowserRouter>
             <div className="App">
-                <Nav/>
+                <Nav routes={routeList}/>
+
                 <Switch>
-                    <Route path='/' exact component={Home}/>
-                    <Route path='/experience' component={Experience}/>
-                    <Route path='/finance' component={Finance}/>
-                    <Route path='/mobilite' component={Mobilite}/>
-                    <Route path='/universite' component={Universite}/>
+                    {gen_routes}
                 </Switch>
             </div>
-        </Router>
+        </BrowserRouter>
     );
 }
 

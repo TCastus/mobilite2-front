@@ -20,18 +20,17 @@ const useStyles = makeStyles((theme) => {
         title: {
             flexGrow: 1,
         },
+        navitem: {
+            color: 'white',
+            fontSize : 16,
+            textDecoration: 'none',
+            lineHeight: 1
+        }
     });
 });
 
 export default function Nav({routes}) {
     const classes = useStyles();
-    const navStyle = {
-        color: 'white',
-        fontSize : 16,
-        textDecoration: 'none',
-        lineHeight: 1
-
-    };
 
     return (
         <div className={classes.root}>
@@ -39,7 +38,7 @@ export default function Nav({routes}) {
                 <Toolbar>
                     {routes.map((route, index) => {
                         return (<Typography key={"nav_" + index} variant="h6" className={classes.title}>
-                            <Link style={navStyle} to={route.path}>{route.name}</Link>
+                            <Link to={route.path} className={classes.navitem} typographClass>{route.name}</Link>
                         </Typography>);
                     })}
                 </Toolbar>

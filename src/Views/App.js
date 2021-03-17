@@ -3,6 +3,8 @@ import React from 'react';
 import Nav from '../Route/Nav';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {routeList} from '../Route/route';
+import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
+import {theme} from "../Theme";
 
 /**
  * Main component of the mobilite app
@@ -23,15 +25,19 @@ function App() {
     });
 
     return (
-        <BrowserRouter>
-            <div className="App">
-                <Nav routes={routeList}/>
+        <div className="App">
+            <BrowserRouter>
+                <MuiThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Nav routes={routeList}/>
 
-                <Switch>
-                    {gen_routes}
-                </Switch>
-            </div>
-        </BrowserRouter>
+                    <Switch>
+                        {gen_routes}
+                    </Switch>
+                </MuiThemeProvider>
+            </BrowserRouter>
+        </div>
+
     );
 }
 

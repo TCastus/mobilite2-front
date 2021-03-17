@@ -3,7 +3,7 @@ import '../Assets/Style/App.css';
 import TestApi from "../Component/APITest";
 import { makeStyles } from '@material-ui/core/styles';
 import {CssBaseline} from "@material-ui/core";
-import Titre from "../Component/Bloc_Titre_Home";
+import Titre from "../Component/Bloc_Title_Home";
 import Destination from "../Component/Bloc_Destiantion";
 import Experience from "../Component/Bloc_Experience";
 

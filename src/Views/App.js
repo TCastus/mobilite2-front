@@ -1,6 +1,6 @@
 import '../Assets/Style/App.css';
 import React from 'react';
-import Nav from '../Route/Nav';
+import Nav from '../Component/Nav';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {routeList} from '../Route/route';
 import {CssBaseline, MuiThemeProvider} from "@material-ui/core";

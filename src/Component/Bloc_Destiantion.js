@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
         height: '40vh',
         color: 'black',
         background: 'white',
-        margin: '20px',
+        margin: '0px',
         padding: 2,
         textAlign: 'center',
     },
@@ -16,9 +16,9 @@ const useStyles = makeStyles(() => ({
     Experience: {
         height: '50vh',
         color: 'black',
-        background: 'lightcyan',
-        margin: '20px',
-        padding: 2,
+        background: theme.palette.primary.light,
+        margin: '0px',
+        padding: theme.spacing(2),
         textAlign: 'center',
     }
 

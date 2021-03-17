@@ -7,7 +7,7 @@ const useStyles = makeStyles(() => ({
         height: '20vh',
         color: 'lightcyan',
         background: 'rgba(100,100,100,100)',
-        margin: '20px',
+        margin: '0px',
         padding: 2,
         textAlign: 'center',
     },

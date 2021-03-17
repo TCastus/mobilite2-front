@@ -1,6 +1,6 @@
 import '../Assets/Style/App.css';
 import React from 'react';
-import Nav from '../Component/Nav';
+import Navbar from '../Component/Navbar';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {routeIndex} from '../Route/route';
 import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
@@ -14,34 +14,29 @@ import {theme} from "../Theme";
  * @constructor
  */
 function App() {
-    /*
-    Generate a list of <Route> components using the description in route.js
-     */
+    /* Generate a list of <Route> components using the description in route.js */
     const gen_routes = Object.keys(routeIndex).map((category, cat_index) => {
         return routeIndex[category].map((route, route_index) => {
             return <Route exact path={route.path}
                 key={"route_" + cat_index + "_" + route_index}
                 component={route.component}/>;
         });
-
     });
-
-    console.log(gen_routes);
 
     return (
         <div className="App">
             <BrowserRouter>
                 <MuiThemeProvider theme={theme}>
                     <CssBaseline />
-                    <Nav routes={routeIndex.navigation}/>
+                    <Navbar routes={routeIndex.navigation}/>
 
                     <Switch>
                         {gen_routes}
                     </Switch>
+
                 </MuiThemeProvider>
             </BrowserRouter>
         </div>
-
     );
 }
 

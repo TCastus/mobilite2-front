@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import * as PropTypes from "prop-types";
 
 // The prop-types module creates requirements for props of components
-Nav.propTypes = {
+Navbar.propTypes = {
     routes: PropTypes.array.isRequired,
 };
 
@@ -29,7 +29,11 @@ const useStyles = makeStyles((theme) => {
     });
 });
 
-export default function Nav({routes}) {
+/**
+ * Navbar component, rendered from the routeIndex.navigation list,
+ * passed as a prop
+ */
+export default function Navbar({routes}) {
     const classes = useStyles();
 
     return (

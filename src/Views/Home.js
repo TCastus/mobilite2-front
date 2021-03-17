@@ -22,6 +22,7 @@ function Home() {
     return (
         <div className={classes.root}>
             <Titre/>
+
             <Destination/>
             <Experience/>
             <CssBaseline/>

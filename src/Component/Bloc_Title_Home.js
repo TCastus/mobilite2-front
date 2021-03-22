@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Titre (){
     const classes = useStyles();
     return(
-        <div className={classes.Titre}>
-            <h1> Mobilités Internationales </h1>
-            <h2> Découvrer les avis de vos étudiants </h2>
-        </div>
+
     );
 }

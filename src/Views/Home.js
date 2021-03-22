@@ -1,12 +1,8 @@
 import React from 'react';
 import '../Assets/Style/App.css';
-import TestApi from "../Component/APITest";
 import { makeStyles } from '@material-ui/core/styles';
-import {CssBaseline} from "@material-ui/core";
-import Titre from "../Component/Bloc_Title_Home";
-import Destination from "../Component/Bloc_Destiantion";
-import Experience from "../Component/Bloc_Experience";
-
+import {Button, Container, CssBaseline, Typography} from "@material-ui/core";
+import MapPaperSelection from "../Component/Bloc_Destiantion";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -21,12 +17,30 @@ function Home() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Titre/>
-
-            <Destination/>
-            <Experience/>
             <CssBaseline/>
-            <TestApi/>
+
+            <div className={classes.Titre}>
+                <h1> Mobilités Internationales </h1>
+                <h2> Découvrer les avis de vos étudiants </h2>
+            </div>
+
+            <Container>
+                <MapPaperSelection/>
+            </Container>
+
+            <div className={classes.Experience}>
+                <Typography variant={'h3'}>Partagez votre expérience</Typography>
+                <Typography variant={'h4'}>
+                    Vous revenez d&apos;échange ? <br/>
+                    Aidez les étudiants dans leur choix en<br/>
+                    partageant votre expérience et en<br/>
+                    répondant à leurs questions.
+                </Typography>
+                <Button variant="contained" color="secondary" href="experience">
+                    Donner mon avis
+                </Button>
+            </div>
+
         </div>
     );
 }

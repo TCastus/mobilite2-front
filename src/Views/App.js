@@ -5,6 +5,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {routeIndex} from '../Route/route';
 import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
 import {theme} from "../Theme";
+import FooterAppBar from "../Component/FooterAppBar";
 
 /**
  * Main component of the mobilite app
@@ -34,6 +35,7 @@ function App() {
                         {gen_routes}
                     </Switch>
 
+                    <FooterAppBar routes={routeIndex.footer}/>
                 </MuiThemeProvider>
             </BrowserRouter>
         </div>

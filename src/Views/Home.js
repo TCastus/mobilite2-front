@@ -1,8 +1,9 @@
 import React from 'react';
 import '../Assets/Style/App.css';
 import { makeStyles } from '@material-ui/core/styles';
-import {Button, Container, CssBaseline, Typography} from "@material-ui/core";
+import {Button, Container, CssBaseline, Toolbar, Typography} from "@material-ui/core";
 import MapPaperSelection from "../Component/MapPaperSelection";
+import PlaneIcon from "../Assets/Icon/PlaneIcon";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,11 +34,10 @@ function Home() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <CssBaseline/>
 
             <div className={classes.title}>
                 <h1> Mobilités Internationales </h1>
-                <h2> Découvrer les avis de vos étudiants </h2>
+                <h2> Découvrez les avis des étudiants revenus d&apos;échange</h2>
             </div>
 
             <Container>
@@ -46,6 +46,8 @@ function Home() {
 
             <div className={classes.experience}>
                 <Typography variant={'h3'}>Partagez votre expérience</Typography>
+                <PlaneIcon />
+
                 <Typography variant={'h4'}>
                     Vous revenez d&apos;échange ? <br/>
                     Aidez les étudiants dans leur choix en<br/>

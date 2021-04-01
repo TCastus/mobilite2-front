@@ -29,10 +29,24 @@ body{
 
 .presGen .avis{
     font-weight: bold;
-    padding-top:1em;
+    padding-top:0.5em;
     padding-bottom:0.3em;
 }
 
 .noteGlobale{
-    font-size:1.3em
+    font-size:1.3em;
+    text-align:right;
+}
+
+.note{
+    background: #639CB1;
+    border-radius: 5px;
+    width: 200px;
+    height:85px;
+    padding-top: 1em;
+}
+
+.infos{
+    padding:1em;
+    text-align:left;
 }

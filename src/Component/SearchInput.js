@@ -1,13 +1,37 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable no-use-before-define*/
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import {Button} from "@material-ui/core";
 
-const filter = createFilterOptions();
 
-export default function FreeSoloCreateOption() {
+export default function ComboBox() {
+
+    const universities = [
+        { title: 'Aalto University', country: 'Finlande', ref: 'aalto-university'},
+        { title : 'a-test0', country: 'France', ref: 'test0'},
+        { title : 'b-test1', country: 'France', ref: 'test1'},
+        { title : 'c-test2', country: 'France', ref: 'test2'},
+        { title : 'd-test3', country: 'France', ref: 'test3'},
+        { title : 'e-test4', country: 'France', ref: 'test4'},
+        { title : 'f-test5', country: 'France', ref: 'test5'},
+        { title : 'g-test6', country: 'France', ref: 'test6'},
+        { title : 'h-test7', country: 'France', ref: 'test7'},
+        { title : 'i-test8', country: 'France', ref: 'test8'},
+        { title : 'j-test9', country: 'France', ref: 'test9'},
+        { title : 'k-test10', country: 'France', ref: 'test10'},
+    ];
     const [value, setValue] = React.useState(null);
+    let ref, i;
+    if (value != null){
+        for(i=0;i<universities.length;i++) {
+            if(value.title == universities[i].title){
+                ref = "./universite/" + universities[i].ref;
+            }
+        }
+
+    }
+
 
     return (
         <div>
@@ -44,15 +68,13 @@ export default function FreeSoloCreateOption() {
                     // Regular option
                     return option.title;
                 }}
-                renderOption={(option) => option.title}
                 style={{ width: 300, position: 'absolute', left: '50%', top: '60%', transform: 'translate(-50%, -50%)'}}
-                freeSolo
                 renderInput={(params) => (
                     <TextField {...params} label="Rechercher une université" variant="outlined" />
                 )}
             />
-
-            <Button variant="contained" color='theme.palette.primary.light' href={value}>
+            <br/><br/><br/><br/><br/>
+            <Button variant="contained" color='theme.palette.primary.light' href={ref}>
                 Rechercher
             </Button>
         </div>
@@ -60,18 +82,8 @@ export default function FreeSoloCreateOption() {
     );
 }
 
-const universities = [
-    { title: 'Aalto University', country: 'Finland'},
-    { title : 'test0', country: 'France'},
-    { title : 'test1', country: 'France'},
-    { title : 'test2', country: 'France'},
-    { title : 'test3', country: 'France'},
-    { title : 'test4', country: 'France'},
-    { title : 'test5', country: 'France'},
-    { title : 'test6', country: 'France'},
-    { title : 'test7', country: 'France'},
-    { title : 'test8', country: 'France'},
-    { title : 'test9', country: 'France'},
-    { title : 'test10', country: 'France'},
-];
+
+
+
+
 

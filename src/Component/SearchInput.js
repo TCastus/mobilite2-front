@@ -25,7 +25,7 @@ export default function ComboBox() {
     let ref, i;
     if (value != null){
         for(i=0;i<universities.length;i++) {
-            if(value.title == universities[i].title){
+            if(value.title === universities[i].title){
                 ref = "./universite/" + universities[i].ref;
             }
         }

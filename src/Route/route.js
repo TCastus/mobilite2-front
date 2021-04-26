@@ -6,6 +6,7 @@ import Universite from "../Views/Universite";
 import Apropos from "../Views/A_Propos";
 import Contact from "../Views/Contact";
 import MentionsLegales from "../Views/MentionsLegales";
+import UniDetail from "../Views/UniDetail";
 
 /*
 Constant used for route generation in ../App.js
@@ -59,7 +60,9 @@ export const routeIndex = {
     ],
     other: [
         {
-
-        }
+            name:"Détail Université",
+            component: UniDetail,
+            path: '/detail'
+        },
     ]
 };

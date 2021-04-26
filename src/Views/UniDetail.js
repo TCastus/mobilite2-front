@@ -4,23 +4,15 @@ import '../Assets/Style/Universite.css';
 
 
 import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/Star';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import MoneyOffIcon from '@material-ui/icons/MoneyOff';
-import LockIcon from '@material-ui/icons/Lock';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import PublicIcon from '@material-ui/icons/Public';
-import LanguageIcon from '@material-ui/icons/Language';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import MusicOffIcon from '@material-ui/icons/MusicOff';
+import { Star as StarIcon, StarBorder as StarBorderIcon, AttachMoney as AttachMoneyIcon,
+    MoneyOff as MoneyOffIcon, Lock as LockIcon, LockOpen as LockOpenIcon, Public as PublicIcon,
+    Language as LanguageIcon, MusicNote as MusicNoteIcon, MusicOff as MusicOffIcon } from '@material-ui/icons';
 
 
 function UniDetail() {
     return (<>
         <div className="header">
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <h1 className="title">Nom de l'universite</h1>
+            <h1 className="title">Nom de l&apos;universite</h1>
             <h2 className="subtitle">Ville, Pays, Continent</h2>
         </div>
         <div className="presGen">

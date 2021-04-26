@@ -16,7 +16,7 @@ import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import MusicOffIcon from '@material-ui/icons/MusicOff';
 
 
-function Universite() {
+function UniDetail() {
     return (<>
         <div className="header">
             {/* eslint-disable-next-line react/no-unescaped-entities */}
@@ -99,4 +99,4 @@ function Universite() {
     </>);
 }
 
-export default Universite;
+export default UniDetail;

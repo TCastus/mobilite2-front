@@ -1,9 +1,11 @@
 import React from 'react';
 import '../Assets/Style/App.css';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from "@material-ui/core/styles";
 import {Button, Container, CssBaseline, Toolbar, Typography} from "@material-ui/core";
-import MapPaperSelection from "../Component/MapPaperSelection";
+//import MapPaperSelection from "../Component/MapPaperSelection";
 import PlaneIcon from "../Assets/Icon/PlaneIcon";
+import SearchInput from "../Component/SearchInput";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         height: '20vh',
-        color: theme.palette.primary.light,
+        color: 'white',
         background: 'rgba(100,100,100,100)',
         margin: '0px',
-        padding: 2,
+        padding: 35,
         textAlign: 'center',
     },
     experience: {
@@ -27,22 +29,33 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
     },
+    search: {
+        height: '50vh',
+        color: 'black',
+        background: 'white',
+        margin: '0px',
+        padding: theme.spacing(2),
+        textAlign: 'center',
+    },
 }));
 
-function Home() {
 
+
+function Universite() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
 
             <div className={classes.title}>
-                <h1> Mobilités Internationales </h1>
-                <h2> Découvrez les avis des étudiants revenus d&apos;échange</h2>
+                <Typography variant={'h2'}> Rechercher une université </Typography>
             </div>
 
-            <Container>
-                <MapPaperSelection/>
-            </Container>
+            <div className={classes.search}>
+                <Typography variant={'h4'}> Vous voulez en savoir plus sur une <br/> université en particulier ?<br/>
+                    Rien de plus simple, entrez son nom <br/> dans la barre de recherche.</Typography>
+                <SearchInput/>
+
+            </div>
 
             <div className={classes.experience}>
                 <Typography variant={'h3'}>Partagez votre expérience</Typography>
@@ -60,8 +73,10 @@ function Home() {
             </div>
 
         </div>
+        /*<div className="Rechercher une université">
+            <h1> universities page </h1>
+        </div>*/
     );
 }
 
-export default Home;
-
+export default Universite;

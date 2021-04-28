@@ -1,10 +1,9 @@
 import React from 'react';
 import '../Assets/Style/App.css';
 import {makeStyles} from "@material-ui/core/styles";
-import {Button, Container, CssBaseline, Toolbar, Typography} from "@material-ui/core";
-//import MapPaperSelection from "../Component/MapPaperSelection";
+import {Button, Container, Typography} from "@material-ui/core";
 import PlaneIcon from "../Assets/Icon/PlaneIcon";
-import SearchInput from "../Component/SearchInput";
+import SearchBox from "../Component/SearchBox";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,12 +49,10 @@ function Universite() {
                 <Typography variant={'h2'}> Rechercher une université </Typography>
             </div>
 
-            <div className={classes.search}>
-                <Typography variant={'h4'}> Vous voulez en savoir plus sur une <br/> université en particulier ?<br/>
-                    Rien de plus simple, entrez son nom <br/> dans la barre de recherche.</Typography>
-                <SearchInput/>
+            <Container>
+                <SearchBox/>
+            </Container>
 
-            </div>
 
             <div className={classes.experience}>
                 <Typography variant={'h3'}>Partagez votre expérience</Typography>
@@ -73,9 +70,7 @@ function Universite() {
             </div>
 
         </div>
-        /*<div className="Rechercher une université">
-            <h1> universities page </h1>
-        </div>*/
+
     );
 }
 

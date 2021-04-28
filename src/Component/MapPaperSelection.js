@@ -1,7 +1,7 @@
 import '../Assets/Style/SelectionMap.css';
 import React from 'react';
 import{ makeStyles } from "@material-ui/core/styles";
-import {Container, Grid, Paper, Typography} from "@material-ui/core";
+import { Grid, Paper, Typography} from "@material-ui/core";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 
 

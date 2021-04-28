@@ -1,0 +1,63 @@
+
+
+body{
+    font: small-caps bold 24px/1 sans-serif;
+}
+
+.header .title{
+    color:white;
+    font-weight: bold;
+    font: small-caps bold 24px/1 sans-serif;
+
+
+}
+
+.header {
+    background-image: url("../images/fond.jpg");
+"background-clip: border-box;"
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+    padding:1.5em;
+}
+
+.header .subtitle {
+    color:white;
+    font-size: 1.8em;
+}
+
+.presGen{
+    background:white;
+}
+
+.presGen .avis{
+    font-weight: bold;
+    padding-top:0.5em;
+    padding-bottom:0.3em;
+}
+
+.noteGlobale{
+    font-size:1.3em;
+    text-align:right;
+}
+
+.note{
+    background: black;
+    color: #c59b08;
+    border-radius: 5px;
+    width: 400px;
+    height:75px;
+    position: center;
+    padding-top: 1em;
+    font: small-caps bold 24px/1 sans-serif;
+    text-align: center;
+    text-decoration: overline;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.infos{
+    padding:1em;
+    text-align:left;
+}
+

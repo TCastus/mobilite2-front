@@ -19,14 +19,15 @@ import {
 import {getUni} from "../Request/uni_request";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {makeStyles} from "@material-ui/core/styles";
+import {CircularProgress} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
     map: {
-        width: '100%',
+        width: '80%',
         height: '400px',
         margin: theme.spacing(2),
-        align: "left",
+        align: "center",
     },
 }));
 
@@ -37,9 +38,9 @@ function UniDetail() {
 
     useEffect(() => {
         getUni().then((res) => {
-            setLoaded(true);
             setUni(res.data);
-            console.log(res);
+            setLoaded(true);
+            console.log(res.data);
         });
     }, []);
 
@@ -52,18 +53,19 @@ function UniDetail() {
             <div className="presGen">
                 <Grid container spacing={2}>
                     <Grid item sm={6} xs={12}>
-                        <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} className={classes.map}>
+                        <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={13} scrollWheelZoom={true} className={classes.map}>
                             <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
-                            <Marker position={[51.505, -0.09]}>
+                            <Marker position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
                                 <Popup>
-                                    A pretty CSS3 popup. <br /> Easily customizable.
+                                    {uni.name}
                                 </Popup>
                             </Marker>
                         </MapContainer>
                     </Grid>
+
                     <Grid item sm={6} xs={12}>
                         <h3 className="avis">Les avis des étudiants</h3>
                         <Grid container spacing={2}>
@@ -123,18 +125,14 @@ function UniDetail() {
                             </Grid>
                         </Grid>
                         <div className="infos">
-                            <TypeLogement
-                                title="Test"
-                                textApercu="Blable c'est un apercu"
-                                textComplet="Ceci est mon text complet"
-                            />
+
                             <h4>+Les cours</h4>
                             <h4>+Recommandations</h4>
                         </div>
                     </Grid>
                 </Grid>
             </div>
-        </>) : <>Chargement</>);
+        </>) : <CircularProgress />);
 }
 
 export default UniDetail;

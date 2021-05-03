@@ -11,7 +11,7 @@ body{
 
 .header {
     background-image: url("../images/map_background.png");
-    "background-clip: border-box;"
+    background-clip: border-box;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% auto;

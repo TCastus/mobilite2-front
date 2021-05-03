@@ -1,82 +1,102 @@
 import React from 'react';
 import '../Assets/Style/App.css';
-import {makeStyles} from "@material-ui/core/styles";
-import {Button, Container, CssBaseline, Toolbar, Typography} from "@material-ui/core";
-//import MapPaperSelection from "../Component/MapPaperSelection";
-import PlaneIcon from "../Assets/Icon/PlaneIcon";
-import SearchInput from "../Component/SearchInput";
+import '../Assets/Style/Universite.css';
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        minHeight : '100vh',
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-    },
-    title: {
-        height: '20vh',
-        color: 'white',
-        background: 'rgba(100,100,100,100)',
-        margin: '0px',
-        padding: 35,
-        textAlign: 'center',
-    },
-    experience: {
-        height: '50vh',
-        color: 'black',
-        background: theme.palette.primary.light,
-        margin: '0px',
-        padding: theme.spacing(2),
-        textAlign: 'center',
-    },
-    search: {
-        height: '50vh',
-        color: 'black',
-        background: 'white',
-        margin: '0px',
-        padding: theme.spacing(2),
-        textAlign: 'center',
-    },
-}));
-
+import Grid from '@material-ui/core/Grid';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import MoneyOffIcon from '@material-ui/icons/MoneyOff';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import PublicIcon from '@material-ui/icons/Public';
+import LanguageIcon from '@material-ui/icons/Language';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import MusicOffIcon from '@material-ui/icons/MusicOff';
 
 
 function Universite() {
-    const classes = useStyles();
-    return (
-        <div className={classes.root}>
-
-            <div className={classes.title}>
-                <Typography variant={'h2'}> Rechercher une université </Typography>
-            </div>
-
-            <div className={classes.search}>
-                <Typography variant={'h4'}> Vous voulez en savoir plus sur une <br/> université en particulier ?<br/>
-                    Rien de plus simple, entrez son nom <br/> dans la barre de recherche.</Typography>
-                <SearchInput/>
-
-            </div>
-
-            <div className={classes.experience}>
-                <Typography variant={'h3'}>Partagez votre expérience</Typography>
-                <PlaneIcon />
-
-                <Typography variant={'h4'}>
-                    Vous revenez d&apos;échange ? <br/>
-                    Aidez les étudiants dans leur choix en<br/>
-                    partageant votre expérience et en<br/>
-                    répondant à leurs questions.
-                </Typography>
-                <Button variant="contained" color="secondary" href="experience">
-                    Donner mon avis
-                </Button>
-            </div>
-
+    return (<>
+        <div className="header">
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <h1 className="title">Nom de l'universite</h1>
+            <h2 className="subtitle">Ville, Pays, Continent</h2>
         </div>
-        /*<div className="Rechercher une université">
-            <h1> universities page </h1>
-        </div>*/
-    );
+        <div className="presGen">
+            <Grid container spacing={2}>
+                <Grid item sm={6} xs={12}>
+                    TEst
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                    <h3 className="avis">Les avis des étudiants</h3>
+                    <Grid container spacing={2}>
+                        <Grid item sm={4} xs={6}>
+                            <div className="noteGlobale">
+                                Note globale
+                            </div>
+                        </Grid>
+                        <Grid item sm={8} xs={6}>
+                            <StarIcon fontSize="large" />
+                            <StarIcon fontSize="large" />
+                            <StarIcon fontSize="large" />
+                            <StarIcon fontSize="large" />
+                            <StarBorderIcon fontSize="large" />
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <Grid item sm={1.5} xs={6}>
+                            <div className="note">
+                                <p>Coût de la vie</p>
+                                <AttachMoneyIcon fontSize="small" />
+                                <AttachMoneyIcon fontSize="small" />
+                                <AttachMoneyIcon fontSize="small" />
+                                <AttachMoneyIcon fontSize="small" />
+                                <MoneyOffIcon fontSize="small" />
+                            </div>
+                        </Grid>
+                        <Grid item sm={1.5} xs={6}>
+                            <div className="note">
+                                <p>Sécurité</p>
+                                <LockIcon fontSize="small" />
+                                <LockIcon fontSize="small" />
+                                <LockIcon fontSize="small" />
+                                <LockIcon fontSize="small" />
+                                <LockOpenIcon fontSize="small" />
+                            </div>
+                        </Grid>
+                        <Grid item sm={1.5} xs={6}>
+                            <div className="note">
+                                <p>Vie nocturne</p>
+                                <MusicNoteIcon fontSize="small" />
+                                <MusicNoteIcon fontSize="small" />
+                                <MusicNoteIcon fontSize="small" />
+                                <MusicNoteIcon fontSize="small" />
+                                <MusicOffIcon fontSize="small" />
+                            </div>
+                        </Grid>
+                        <Grid item sm={1.5} xs={6}>
+                            <div className="note">
+                                <p>Vie culturelle</p>
+                                <PublicIcon fontSize="small" />
+                                <PublicIcon fontSize="small" />
+                                <PublicIcon fontSize="small" />
+                                <PublicIcon fontSize="small" />
+                                <LanguageIcon fontSize="small" />
+                            </div>
+                        </Grid>
+                    </Grid>
+                    <div className="infos">
+                        <h4>-Logement </h4>
+                        Résidences sur le campus : Oui<br/>
+                        Coût approximatif : 500€<br/>
+                        <h4>+Les cours</h4>
+                        <h4>+Recommandations</h4>
+                    </div>
+                </Grid>
+            </Grid>
+        </div>
+    </>);
 }
 
 export default Universite;

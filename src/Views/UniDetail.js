@@ -19,6 +19,7 @@ import {
 import {getUni} from "../Request/uni_request";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {makeStyles} from "@material-ui/core/styles";
+import {Button} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +51,7 @@ function UniDetail() {
                 <h2 className="subtitle">Ville, Pays, Continent</h2>
             </div>
             <div className="presGen">
-                <Grid container spacing={2}>
+                <Grid container spacing={5}>
                     <Grid item sm={6} xs={12}>
                         <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} className={classes.map}>
                             <TileLayer
@@ -123,14 +124,20 @@ function UniDetail() {
                             </Grid>
                         </Grid>
                         <div className="infos">
-                            <TypeLogement
-                                title="Test"
-                                textApercu="Blable c'est un apercu"
-                                textComplet="Ceci est mon text complet"
-                            />
-                            <h4>+Les cours</h4>
-                            <h4>+Recommandations</h4>
+                            <h4>Logement</h4>
+                            Résidence sur le campus :<br />
+                            Cout approximatif :
+                            <h4>Les cours</h4>
+                            Departements concernes :<br />
+                            Le campus :
+                            <h4>Transport</h4>
+                            <h4>Tourisme</h4>
+                            <h4>Recommandations</h4>
+                            <h4>A apporter :</h4>
                         </div>
+                        <Button variant="contained" color="secondary" href="experience">
+                            Je suis allée ici !
+                        </Button>
                     </Grid>
                 </Grid>
             </div>

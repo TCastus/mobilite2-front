@@ -1,5 +1,5 @@
 {
   "API_PROD": "https://mobi-back.herokuapp.com/",
   "API_DEV": "http://localhost:8000/",
-  "ALWAYS_USE_PROD": false
+  "ALWAYS_USE_PROD": true
 }

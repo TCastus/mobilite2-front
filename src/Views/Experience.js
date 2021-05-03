@@ -3,17 +3,23 @@ import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import {blueGrey} from "@material-ui/core/colors";
 //import Box from '@material-ui/core/Box';
+import Typography from "@material-ui/core/Typography";
 import '../Assets/Style/style.css';
 import SecurityIcon from '@material-ui/icons/Security';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import {TextField} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import SendIcon from "@material-ui/icons/Send";
 import FormControl from "@material-ui/core/formcontrol";
-import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -64,142 +70,124 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function Experience() {
+
+
+export default function Experience() {
     const classes = useStyles();
-    const [value, handleChange] = React.useState(0);
+    const [selectedValue, setSelectedValue] = React.useState('a');
+
+    const handleChange2 = (event) => {
+        setSelectedValue(event.target.value);
+    };
+
+    const [value, setAge] = React.useState('');
+    const [open, setOpen] = React.useState(false);
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
 
     return (
-        <html>
-            <body>
-                <div className= "header">
-                    <h1 className="note">PARTAGER SON EXPERIENCE
-                    </h1>
-                    <form className={classes.Box} background="white" >
-                        <h2>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <label htmlFor="Prénom :" color="black">Prenom  </label>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="Prénom" id="Prénom" placeholder="Votre pseudo"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label htmlFor="Nom de Famille :">Nom de Famille  </label>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="Nom de Famille" id="Nom de Famille" placeholder="Nom"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label htmlFor="Département :">Département  </label>
-                                    </td>
-                                    <td>
-                                        <select name ="départ" id="départ">
-                                            <option value="TC">TC</option>
-                                            <option value="BS">BS</option>
-                                            <option value="SGM">SGM</option>
-                                            <option value="GM">GM</option>
-                                            <option value="GCU">GCU</option>
-                                            <option value="GEN">GEN</option>
-                                            <option value="IF">IF</option>
-                                            <option value="GE">GE</option>
-                                            <option value="GI">GI</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label htmlFor="email :"> Email  </label>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="email" id="email" placeholder="email"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label htmlFor="Année de l'échange :"> Année  </label>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="Année de l'échange" id="Année de l'échange" placeholder="Année de l'échange"/>
-                                    </td>
-                                </tr>
-                                <br/>
+        <Box component="div" className="header">
+            <Box component="div" className= "note">
+                <Typography>PARTAGER SON EXPERIENCE
+                </Typography>
+            </Box>
 
-                                <label textAlign="center">Souhaitez-vous que nous partagions votre e-mail
-                                            aux élèves intéressés par votre échange souhaitant vous poser des questions ? </label>
-                                <br/>
-                                <br/>
+            <Box component="div">
+                <Grid component="div" className={classes.Box} background="white">
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} spacing={3}>
+                            <InputLabel htmlFor="Prénom :" color="black">Prenom </InputLabel>
+                            <Input type="text" name="Prénom" id="Prénom" placeholder="Votre pseudo"/>
+                        </Grid>
+                        <Grid item xs={12} spacing={3}>
+                            <InputLabel htmlFor="Nom de Famille :">Nom de Famille </InputLabel>
+                            <Input type="text" name="Nom de Famille" id="Nom de Famille" placeholder="Nom"/>
+                        </Grid>
+                        <Grid item xs={12} spacing={3}>
+                            <InputLabel id="depart">Département</InputLabel>
+                            <Select labelId="depart" id="select" value={value} open={open} onClose={handleClose} onOpen={handleOpen} onChange={handleChange}
+                            >
+                                <MenuItem value="10">TC</MenuItem>
+                                <MenuItem value="20">IF</MenuItem>
+                                <MenuItem value="30">BS</MenuItem>
+                                <MenuItem value="40">SGM</MenuItem>
+                                <MenuItem value="50">GCU</MenuItem>
+                                <MenuItem value="60">GE</MenuItem>
+                                <MenuItem value="70">GEN</MenuItem>
+                                <MenuItem value="80">GI</MenuItem>
+                                <MenuItem value="90">GM</MenuItem>
+                            </Select>
+                        </Grid>
+                        <Grid item xs={12} spacing={3}>
+                            <InputLabel textAlign="center">Souhaitez-vous que nous partagions votre e-mail
+                                aux élèves intéressés par votre échange souhaitant vous poser des questions
+                                ? </InputLabel>
+                            <FormControl component="fieldset">
+                                <RadioGroup row aria-label="position" name="position" defaultValue="end">
+                                    <FormControlLabel value="end" control={<Radio color="primary" checked={selectedValue === 'a'} onChange={handleChange2} value="a" name="radio-button-demo" inputProps={{ 'aria-label': 'A' }}/>} label="Oui" />
+                                    <FormControlLabel value="end" control={<Radio color="primary" checked={selectedValue === 'b'} onChange={handleChange2} value="b" name="radio-button-demo" inputProps={{ 'aria-label': 'B' }}/>} label="Non" />
+                                </RadioGroup>
+                            </FormControl>
 
-                                <FormControl component="fieldset">
-                                    <FormLabel component="legend">Choix</FormLabel>
-                                    <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                        <FormControlLabel value="Oui" control={<Radio />} label="Oui" />
-                                        <FormControlLabel value="Non" control={<Radio />} label="Non" />
-                                    </RadioGroup>
-                                </FormControl>
+                        </Grid>
+                    </Grid>
+                </Grid>
 
-                            </table>
+            </Box>
 
-                        </h2>
-                    </form>
-                    <div>
-                        <h1 className={classes.Box}>
-                            <SecurityIcon></SecurityIcon>
-                            <label htmlFor = "sécu"> Sécurité </label>
-                            <br/>
-                            <Rating id = "sécu"
-                                name="hover-feedback"
-                                //value={value}
-                                precision={0.5}
+            <Box component="div">
+                <Typography className={classes.Box}>
+                    <SecurityIcon></SecurityIcon>
+                    <InputLabel htmlFor="sécu"> Sécurité </InputLabel>
+                    <br/>
+                    <Rating id="sécu"
+                        name="hover-feedback"
+                        //value={value}
+                        precision={0.5}
 
-                            />
-                            <br/>
-                            <AccountBoxIcon></AccountBoxIcon>
-                            <label htmlFor = "social"> Contact Humain </label>
-                            <br/>
-                            <Rating id = "social"
-                                name="hover-feedback2"
-                                //value={value}
-                                precision={0.5}
-                                color={blueGrey}
+                    />
+                    <br/>
+                    <AccountBoxIcon></AccountBoxIcon>
+                    <InputLabel htmlFor="social"> Contact Humain </InputLabel>
+                    <br/>
+                    <Rating id="social" name="hover-feedback2"
+                        //value={value}
+                        precision={0.5}
+                        color={blueGrey}
 
-                            />
+                    />
+                    <br/>
+                </Typography>
+            </Box>
 
-                            <br/>
+            <Box component="div" className={classes.Box}>
+                <Typography>
+                    Commentaire
+                </Typography>
+                <br/>
+                <TextField className={classes.BoxWhite} style={{textAlign: 'left'}} hintText="Message Field"
+                    floatingLabelText="MultiLine and FloatingLabel" multiline rows={5}/>
+            </Box>
 
+            <Box component="div">
+                <Button aria-label="submit" variant="contained" edge="start" color="secondary" component="span">
+                    <InputLabel> Submit </InputLabel>
+                    <SendIcon/>
+                </Button>
+            </Box>
+        </Box>
 
-
-
-                        </h1>
-                    </div>
-                    <div className={classes.Box}>
-                        <h1>
-                            Commentaire
-                        </h1>
-                        <br/>
-                        <TextField  className = {classes.BoxWhite} style={{textAlign: 'left'}} hintText="Message Field" floatingLabelText="MultiLine and FloatingLabel" multiline rows={5} />
-                    </div>
-
-                    <div>
-                        <IconButton aria-label="submit" variant="outlined" edge="start">
-                            <label> Submit </label>
-                            <SendIcon/>
-                        </IconButton>
-                    </div>
-
-
-                </div>
-
-            </body>
-        </html>
 
     );
 }
-
-export default Experience;
-

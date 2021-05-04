@@ -30,6 +30,7 @@
             "error",
             4
         ],
+        "no-unused-vars": "warn",
         "no-trailing-spaces": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",

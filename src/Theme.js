@@ -1,5 +1,5 @@
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import {cyan, grey} from "@material-ui/core/colors";
+import {cyan, pink} from "@material-ui/core/colors";
 
 export const theme = createMuiTheme({
     palette: {
@@ -10,9 +10,9 @@ export const theme = createMuiTheme({
             contrastText: '#fff',
         },
         secondary: {
-            main: grey[100],
-            light: grey[50],
-            dark:grey[500],
+            main: pink[200],
+            light: pink[50],
+            dark: pink[500],
             contrastText: '#000',
         },
         role: {
@@ -22,5 +22,10 @@ export const theme = createMuiTheme({
             maintainer: '#d3d3e2',
             owner: '#7b3af6',
         }
+    },
+    typography: {
+        fontFamily: [
+            "Candara",
+        ].join(','),
     },
 });

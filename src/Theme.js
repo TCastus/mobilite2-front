@@ -23,4 +23,9 @@ export const theme = createMuiTheme({
             owner: '#7b3af6',
         }
     },
+    typography: {
+        fontFamily: [
+            "Candara",
+        ].join(','),
+    },
 });

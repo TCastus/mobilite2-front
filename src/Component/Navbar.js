@@ -1,14 +1,10 @@
-import React, {useState} from 'react';
-import '../Assets/Style/App.css';
+import React from 'react';
 import {
-    AppBar, Collapse,
-    Fade, FormControlLabel,
-    Grow,
+    AppBar, Collapse, Drawer,
     Hidden,
-    IconButton,
+    IconButton, List, ListItem, ListItemIcon, ListItemText,
     makeStyles,
     Paper,
-    Switch,
     Toolbar,
     Typography
 } from "@material-ui/core";
@@ -16,27 +12,40 @@ import {Link} from "react-router-dom";
 import * as PropTypes from "prop-types";
 import MenuIcon from '@material-ui/icons/Menu';
 
-// The prop-types module creates requirements for props of components
+import '../Assets/Style/App.css';
+import plane from '../Assets/Icon/plane.png';
+
 Navbar.propTypes = {
     routes: PropTypes.array.isRequired,
 };
 
 const useStyles = makeStyles((theme) => {
     return ({
-        root: {
-            flexGrow: 1,
+        toolbar: {
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
         },
         menuButton: {
             marginRight: theme.spacing(2),
         },
-        title: {
-            flexGrow: 1,
+        mobititle: {
+            [theme.breakpoints.up("md")] : {
+                marginRight: theme.spacing(6)
+            },
+            fontWeight: "bold",
+            color: "white",
         },
-        navitem: {
+        link: {
             color: 'white',
             fontSize : 16,
             textDecoration: 'none',
-            lineHeight: 1
+            lineHeight: 1,
+            margin: theme.spacing(2),
+        },
+        drawerTitle: {
+            minWidth: "240px",
+            padding: theme.spacing(1),
         }
     });
 });
@@ -47,42 +56,68 @@ const useStyles = makeStyles((theme) => {
  */
 export default function Navbar({routes}) {
     const classes = useStyles();
-    const [checked, setChecked] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-    const handleChange = () => {
-        setChecked((prev) => !prev);
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
     };
 
     return (
-        <div className={classes.root}>
+        <div>
             <AppBar position="static">
-                <Toolbar>
-                    <Hidden xsDown>
-                        {routes.map((route, index) => {
-                            return (<Typography key={"nav_" + index} variant="h6" className={classes.title}>
-                                <Link to={route.path} className={classes.navitem} typographClass>{route.name}</Link>
-                            </Typography>);
-                        })}
-                    </Hidden>
+                <Toolbar className={classes.toolbar}>
 
                     <Hidden mdUp>
-                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleChange}>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleDrawerOpen}>
                             <MenuIcon />
                         </IconButton>
                     </Hidden>
+
+                    <img src={plane} height={"30px"} style={{paddingRight: '20px'}} alt={"Airplane"} />
+                    <Typography variant={"h6"} className={classes.mobititle} component={Link} to={"/"}>Mobilités internationales</Typography>
+
+                    <Hidden smDown>
+                        {routes.map((route, index) => {
+                            return (
+                                <Typography key={"nav_" + index} variant="h6" className={classes.link} component={Link} to={route.path}>
+                                    {route.name}
+                                </Typography>);
+                        })}
+                    </Hidden>
                 </Toolbar>
             </AppBar>
-            <Collapse in={checked}>
-                <Paper elevation={4} className={classes.paper}>
-                    {routes.map((route, index) => {
-                        console.log(route);
-                        return (<Typography key={"nav_small_" + index} variant="h6">
-                            <Link to={route.path} typographClass>{route.name}</Link>
-                        </Typography>);
-                    })}
-                </Paper>
-            </Collapse>
+            <Hidden mdUp implementation="css">
+                <Drawer
+                    variant="temporary"
+                    anchor="left"
+                    open={open}
+                    onClose={handleDrawerClose}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                >
+
+                    <Typography variant={"h6"} className={classes.drawerTitle}>
+                        <img src={plane} height={"30"} width={"30"} alt={"Airplane"} style={{verticalAlign: "middle", margin: "10px"}}/>
+                        Mobilités internationales
+                    </Typography>
+
+                    <List>
+                        {routes.map((route, index) => {
+                            return (
+                                <ListItem button key={"nav_" + index} component={Link} to={route.path}>
+                                    <ListItemIcon>{route.icon}</ListItemIcon>
+                                    <ListItemText primary={route.name} />
+                                </ListItem>
+                            );
+                        })}
+                    </List>
+                </Drawer>
+            </Hidden>
         </div>
     );
 }
-

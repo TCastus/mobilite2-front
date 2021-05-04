@@ -6,10 +6,10 @@ import {
     AttachMoney as AttachMoneyIcon,
     Language as LanguageIcon,
     Lock as LockIcon,
-    LockOpen as LockOpenIcon, Money,
+    LockOpen as LockOpenIcon,
     MoneyOff as MoneyOffIcon,
     MusicNote as MusicNoteIcon,
-    MusicOff as MusicOffIcon, Note,
+    MusicOff as MusicOffIcon,
     Public as PublicIcon,
     Star as StarIcon,
     StarBorder as StarBorderIcon
@@ -17,18 +17,20 @@ import {
 import {getUni} from "../Request/uni_request";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {makeStyles} from "@material-ui/core/styles";
-import {Box, Button, Card, Chip, Container, Paper, Typography} from "@material-ui/core";
+import {Box, Button, Card, Chip, Container, Typography} from "@material-ui/core";
 import {CircularProgress} from "@material-ui/core";
 import PageHeader from "../Component/PageHeader";
-import NoteCadre from "../Component/NoteCadre";
+import NotePaper from "../Component/NotePaper";
 
 
 const useStyles = makeStyles((theme) => ({
     map: {
+        [theme.breakpoints.up("md")] : {
+            margin: theme.spacing(2),
+        },
         width: '100%',
         height: '100%',
         minHeight: '200px',
-        margin: theme.spacing(2),
         align: "center",
     },
     presGen: {
@@ -97,17 +99,17 @@ function UniDetail() {
                     </Grid>
 
                     <Grid item sm={6} xs={12}>
-                        <Typography variant={"h3"} className={classes.avis}>Les avis des étudiants</Typography>
+                        <Typography variant={"h4"} className={classes.avis}>Les avis des étudiants</Typography>
 
                         <Grid container spacing={2}>
-                            <NoteCadre IconOn={StarIcon} IconOff={StarBorderIcon} title={"Note globale"} note={3} cols={12} />
-                            <NoteCadre IconOn={AttachMoneyIcon} IconOff={MoneyOffIcon} title={"Coût de la vie"} note={4} />
-                            <NoteCadre IconOn={LockIcon} IconOff={LockOpenIcon} title={"Sécurité"} note={4} />
-                            <NoteCadre IconOn={MusicNoteIcon} IconOff={MusicOffIcon} title={"Vie nocturne"} note={4} />
-                            <NoteCadre IconOn={PublicIcon} IconOff={LanguageIcon} title={"Vie culturelle"} note={4} />
+                            <NotePaper IconOn={StarIcon} IconOff={StarBorderIcon} title={"Note globale"} note={3} cols={12} />
+                            <NotePaper IconOn={AttachMoneyIcon} IconOff={MoneyOffIcon} title={"Coût de la vie"} note={4} />
+                            <NotePaper IconOn={LockIcon} IconOff={LockOpenIcon} title={"Sécurité"} note={4} />
+                            <NotePaper IconOn={MusicNoteIcon} IconOff={MusicOffIcon} title={"Vie nocturne"} note={4} />
+                            <NotePaper IconOn={PublicIcon} IconOff={LanguageIcon} title={"Vie culturelle"} note={4} />
                         </Grid>
 
-                        <Box className={classes.infos}>
+                        <div className={classes.infos}>
                             <Typography variant={"h6"}>Logement</Typography>
                             <Typography variant={"body1"}>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
                             <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
@@ -120,19 +122,14 @@ function UniDetail() {
                             </Typography>
                             <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
                             <Typography variant={"body1"}>Le campus : </Typography>
-
-                            {/*<h4>Transport</h4>*/}
-                            {/*<h4>Tourisme</h4>*/}
-                            {/*<h4>Recommandations</h4>*/}
-                            {/*<h4>A apporter :</h4>*/}
-                        </Box>
+                        </div>
                         <Button variant="contained" color="secondary" href="experience">
                             Je suis allée ici !
                         </Button>
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Typography variant={"h3"} className={classes.avis}>Commentaires</Typography>
+                        <Typography variant={"h4"} className={classes.avis}>Commentaires</Typography>
                         {uni.reviews.map((item, index) =>
                             <Card key={index} className={classes.commentCard}>
                                 <Typography variant={"h6"} className={classes.commentTitle}>Commentaire de {item.surname} {item.name} diplômé en {item.diploma_year}</Typography>

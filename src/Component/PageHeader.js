@@ -1,8 +1,7 @@
 import React from "react";
 import * as PropTypes from "prop-types";
-import {Box, Container, Typography} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 import '../Assets/Style/App.css';
-import '../Assets/Style/Universite.css';
 import {makeStyles} from "@material-ui/core/styles";
 import backgroundMapImg from "../Assets/images/map_background.png";
 
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundClip: 'border-box',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundSize: '100% auto',
+        backgroundSize: '100% 100%',
         paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(5),
     },
@@ -32,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * Page header with a title and subtitle, to be called at the top of pages
+ * @param title a string, the title
+ * @param subtitle a string for the subtitle
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function PageHeader({title, subtitle}) {
     const classes = useStyles();
 

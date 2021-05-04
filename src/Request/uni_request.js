@@ -17,7 +17,14 @@ const client = axios.create({
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getHealthCheck = () => {
-    return client.get("check")
+    return client.get("api/check")
+        .then(res => {
+            return res;
+        }).catch(rematchError);
+};
+
+export const getUni = () => {
+    return client.get('/api/university/1/')
         .then(res => {
             return res;
         }).catch(rematchError);

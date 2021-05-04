@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-    AppBar, Collapse, Drawer,
+    AppBar, Drawer,
     Hidden,
     IconButton, List, ListItem, ListItemIcon, ListItemText,
     makeStyles,
-    Paper,
     Toolbar,
     Typography
 } from "@material-ui/core";

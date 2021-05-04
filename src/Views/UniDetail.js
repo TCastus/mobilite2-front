@@ -17,7 +17,7 @@ import {
 import {getUni} from "../Request/uni_request";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {makeStyles} from "@material-ui/core/styles";
-import {Box, Button, Card, Chip, Container, Typography} from "@material-ui/core";
+import {Button, Card, Chip, Container, Typography} from "@material-ui/core";
 import {CircularProgress} from "@material-ui/core";
 import PageHeader from "../Component/PageHeader";
 import NotePaper from "../Component/NotePaper";
@@ -74,9 +74,6 @@ function UniDetail() {
             console.log(res.data);
         });
     }, []);
-
-    // À remplacer + tard par l'API quand elle sera ok
-    const departements = ["IF", "TC","GE"];
 
     return (loaded ?
         (<>

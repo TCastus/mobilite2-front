@@ -2,16 +2,16 @@ import '../Assets/Style/SelectionMap.css';
 import React from 'react';
 import{ makeStyles } from "@material-ui/core/styles";
 import {Button,Grid,FormControl,Switch,TextField, Paper, Typography} from "@material-ui/core";
-import SliderENABLE from "../Component/SliderENABLE";
-import SliderDISABLE from "../Component/SliderDISABLE";
-import TextFieldPays from "../Component/TextFieldPays";
-import TextFieldPaysDISABLED from "../Component/TextFieldPaysDISABLED";
-import RadioSearch from "../Component/RadioSearch";
-import RadioSearchDISABLED from "../Component/RadioSearchDISABLED";
-import DepartChoix from "../Component/DepartChoix";
-import DepartChoixDISABLE from "../Component/DepartChoixDISABLE";
-import DemandeChoix from "../Component/DemandeChoix";
-import DemandeChoixDISABLE from "../Component/DemandeChoixDISABLE";
+import SliderENABLE from "../Component/pageRecherche/SliderENABLE";
+import SliderDISABLE from "../Component/pageRecherche/SliderDISABLE";
+import TextFieldPays from "../Component/pageRecherche/TextFieldPays";
+import TextFieldPaysDISABLED from "../Component/pageRecherche/TextFieldPaysDISABLED";
+import RadioSearch from "../Component/pageRecherche/RadioSearch";
+import RadioSearchDISABLED from "../Component/pageRecherche/RadioSearchDISABLED";
+import DepartChoix from "../Component/pageRecherche/DepartChoix";
+import DepartChoixDISABLE from "../Component/pageRecherche/DepartChoixDISABLE";
+import DemandeChoix from "../Component/pageRecherche/DemandeChoix";
+import DemandeChoixDISABLE from "../Component/pageRecherche/DemandeChoixDISABLE";
 
 
 function sliderState(bool){

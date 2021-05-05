@@ -12,8 +12,9 @@ import DepartChoix from "../Component/pageRecherche/DepartChoix";
 import DepartChoixDISABLE from "../Component/pageRecherche/DepartChoixDISABLE";
 import DemandeChoix from "../Component/pageRecherche/DemandeChoix";
 import DemandeChoixDISABLE from "../Component/pageRecherche/DemandeChoixDISABLE";
+//import axios from "axios";
 
-
+//gestion des sliders
 function sliderState(bool){
     if (bool === true){
         return (<SliderENABLE/>);
@@ -22,6 +23,7 @@ function sliderState(bool){
     }
 }
 
+//gestion du textfield pays
 function textFieldState(bool){
     if (bool === true){
         return (<TextFieldPays/>);
@@ -30,6 +32,7 @@ function textFieldState(bool){
     }
 }
 
+//gestion des radio Hors Europe
 function radioState(bool){
     if (bool === true){
         return (<RadioSearch/>);
@@ -37,6 +40,8 @@ function radioState(bool){
         return (<RadioSearchDISABLED/>);
     }
 }
+
+//gestion du taux de demande
 function demandeState(bool){
     if (bool === true){
         return (<DemandeChoix/>);
@@ -45,6 +50,7 @@ function demandeState(bool){
     }
 }
 
+//gestion du choix de departement
 function departState(bool){
     if (bool === true){
         return (<DepartChoix/>);
@@ -53,6 +59,7 @@ function departState(bool){
     }
 }
 
+//creation d'un style
 const useStyles = makeStyles((theme) => ({
     paper: {
         background: 'lightgrey',
@@ -75,21 +82,83 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBox () {
     const classes = useStyles();
 
+    //initialisation des differents etats de chaque item du form
     const [state, setState] = React.useState({
-        checkedA: true,
-        checkedB: true,
-        checkedC: true,
-        checkedD: true,
-        checkedE: true,
-        checkedF: true,
-        checkedG: true,
-        checkedH: true,
-        checkedI: true,
+        checkedA: false,
+        checkedB: false,
+        checkedC: false,
+        checkedD: false,
+        checkedE: false,
+        checkedF: false,
+        checkedG: false,
+        checkedH: false,
+        checkedI: false,
     });
 
+    //gestion des switch
     const handleSwitch = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
+    /*
+    //gestion du clic du 1er bouton Rechercher
+    function handleClick1(){
+
+        axios.props();
+    }
+
+    //gestion du clic du 2e bouton Rechercher
+    function handleClick2(){
+        //valeur slider note globale
+        if (state.checkedA === true){
+            //on créé un int note avec la valeur du slider
+
+        }
+
+        //valeur slider sécurité
+        if (state.checkedB === true){
+
+        }
+
+        //valeur slider cout de la vie
+        if (state.checkedC === true){
+
+        }
+
+        //valeur slider vie nocturne
+        if (state.checkedD === true){
+
+        }
+
+        //valeur slider vie culturelle
+        if (state.checkedE === true){
+
+        }
+
+        //valeur textfield pays
+        if (state.checkedF === true){
+
+        }
+
+        //valeur radio europe
+        if (state.checkedG === true){
+
+        }
+
+        //valeur textfield demande
+        if (state.checkedH === true){
+
+        }
+
+        //valeur textfield departement
+        if (state.checkedI === true){
+
+        }
+
+        axios.props();
+        //Il faudra remplacer l'appel du bouton par celui la quand la fonction sera faite :
+        // <Button variant="contained" color='theme.palette.primary.light' onClick={handleClick2}>
+    }*/
+
 
     return (
         <Paper elevation={3} className={classes.paper}>
@@ -300,7 +369,7 @@ export default function SearchBox () {
 
 
                 <Grid item xs={12}>
-                    <Button variant="contained" color='theme.palette.primary.light'>
+                    <Button variant="contained" color='theme.palette.primary.light' >
                         Rechercher
                     </Button>
                 </Grid>

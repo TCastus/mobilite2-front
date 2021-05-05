@@ -12,7 +12,7 @@ const currencies = [
     },
     {
         value: 'BIM',
-        label: 'Bioscience BIM',
+        label: 'Biosciences BIM',
     },
     {
         value: 'BB',

@@ -13,6 +13,8 @@ import Apropos from "../Views/A_Propos";
 import Contact from "../Views/Contact";
 import MentionsLegales from "../Views/MentionsLegales";
 import UniDetail from "../Views/UniDetail";
+import Rechercher from "../Views/Rechercher";
+
 
 
 /*
@@ -33,6 +35,12 @@ export const routeIndex = {
             component: Experience,
             path: '/experience',
             icon: <RecordVoiceOverIcon />,
+        },
+        {
+            name: "Rechercher",
+            component: Rechercher,
+            path: '/rechercher',
+            icon: <EuroIcon />,
         },
         {
             name: "Financements",

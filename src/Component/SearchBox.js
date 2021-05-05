@@ -156,7 +156,7 @@ export default function SearchBox () {
 
                         </Grid>
                         <Grid item xs={3}>
-                            <Typography variant={'h6'}>Note globale minimale</Typography>
+                            <Typography variant={'h6'}>Note globale</Typography>
                         </Grid>
                         <Grid item xs={6}>
                             <Slider

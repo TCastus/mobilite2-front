@@ -61,6 +61,15 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
     },
 
+    items: {
+        margin: theme.spacing(1, 'auto'),
+        textAlign: 'left',
+    },
+
+    switch :{
+        textAlign: "right",
+    },
+
 }));
 
 export default function SearchBox () {
@@ -107,8 +116,8 @@ export default function SearchBox () {
 
 
                 <Grid item xs={6}>
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedA}
                                 onChange={handleSwitch}
@@ -126,8 +135,8 @@ export default function SearchBox () {
                         </Grid>
                     </Grid>
 
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedB}
                                 onChange={handleSwitch}
@@ -145,8 +154,8 @@ export default function SearchBox () {
                         </Grid>
                     </Grid>
 
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedC}
                                 onChange={handleSwitch}
@@ -163,8 +172,8 @@ export default function SearchBox () {
                         </Grid>
                     </Grid>
 
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedD}
                                 onChange={handleSwitch}
@@ -181,8 +190,8 @@ export default function SearchBox () {
                         </Grid>
                     </Grid>
 
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedE}
                                 onChange={handleSwitch}
@@ -203,9 +212,9 @@ export default function SearchBox () {
 
 
 
-                <Grid item xs={6}>
-                    <Grid container>
-                        <Grid item xs={3}>
+                <Grid item xs={6} className={classes.items}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedF}
                                 onChange={handleSwitch}
@@ -225,8 +234,8 @@ export default function SearchBox () {
                     </Grid>
 
 
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedG}
                                 onChange={handleSwitch}
@@ -248,8 +257,8 @@ export default function SearchBox () {
                     </Grid>
 
 
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedH}
                                 onChange={handleSwitch}
@@ -268,8 +277,8 @@ export default function SearchBox () {
 
                     </Grid>
 
-                    <Grid container>
-                        <Grid item xs={3}>
+                    <Grid container className={classes.items}>
+                        <Grid item xs={3} className={classes.switch}>
                             <Switch
                                 checked={state.checkedI}
                                 onChange={handleSwitch}

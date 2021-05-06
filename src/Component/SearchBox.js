@@ -1,65 +1,20 @@
 import '../Assets/Style/SelectionMap.css';
-import React from 'react';
-import{ makeStyles } from "@material-ui/core/styles";
-import {Button,Grid,FormControl,Switch,TextField, Paper, Typography} from "@material-ui/core";
-import SliderENABLE from "../Component/pageRecherche/SliderENABLE";
-import SliderDISABLE from "../Component/pageRecherche/SliderDISABLE";
-import TextFieldPays from "../Component/pageRecherche/TextFieldPays";
-import TextFieldPaysDISABLED from "../Component/pageRecherche/TextFieldPaysDISABLED";
-import RadioSearch from "../Component/pageRecherche/RadioSearch";
-import RadioSearchDISABLED from "../Component/pageRecherche/RadioSearchDISABLED";
-import DepartChoix from "../Component/pageRecherche/DepartChoix";
-import DepartChoixDISABLE from "../Component/pageRecherche/DepartChoixDISABLE";
-import DemandeChoix from "../Component/pageRecherche/DemandeChoix";
-import DemandeChoixDISABLE from "../Component/pageRecherche/DemandeChoixDISABLE";
-//import axios from "axios";
+import React, {useState} from 'react';
+import {makeStyles} from "@material-ui/core/styles";
+import {Button, FormControl, Grid, Paper, Switch, TextField, Typography} from "@material-ui/core";
+import SearchSlider from "./SearchSlider";
+import SearchTextFieldPays from "./SearchTextFieldPays";
+import {getSearchName, getSearchAdvance} from "../Request/uni_request";
+import TextFieldPays from "./pageRecherche/TextFieldPays";
+import TextFieldPaysDISABLED from "./pageRecherche/TextFieldPaysDISABLED";
+import RadioSearch from "./pageRecherche/RadioSearch";
+import RadioSearchDISABLED from "./pageRecherche/RadioSearchDISABLED";
+import DemandeChoix from "./pageRecherche/DemandeChoix";
+import DemandeChoixDISABLE from "./pageRecherche/DemandeChoixDISABLE";
+import DepartChoix from "./pageRecherche/DepartChoix";
+import DepartChoixDISABLE from "./pageRecherche/DepartChoixDISABLE";
 
-//gestion des sliders
-function sliderState(bool){
-    if (bool === true){
-        return (<SliderENABLE/>);
-    } else {
-        return (<SliderDISABLE/>);
-    }
-}
 
-//gestion du textfield pays
-function textFieldState(bool){
-    if (bool === true){
-        return (<TextFieldPays/>);
-    } else {
-        return (<TextFieldPaysDISABLED/>);
-    }
-}
-
-//gestion des radio Hors Europe
-function radioState(bool){
-    if (bool === true){
-        return (<RadioSearch/>);
-    } else {
-        return (<RadioSearchDISABLED/>);
-    }
-}
-
-//gestion du taux de demande
-function demandeState(bool){
-    if (bool === true){
-        return (<DemandeChoix/>);
-    } else {
-        return (<DemandeChoixDISABLE/>);
-    }
-}
-
-//gestion du choix de departement
-function departState(bool){
-    if (bool === true){
-        return (<DepartChoix/>);
-    } else {
-        return (<DepartChoixDISABLE/>);
-    }
-}
-
-//creation d'un style
 const useStyles = makeStyles((theme) => ({
     paper: {
         background: 'lightgrey',
@@ -73,308 +28,177 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left',
     },
 
-    switch :{
+    switch: {
         textAlign: "right",
     },
 
 }));
 
-export default function SearchBox () {
+export default function SearchBox() {
     const classes = useStyles();
 
-    //initialisation des differents etats de chaque item du form
-    const [state, setState] = React.useState({
-        checkedA: false,
-        checkedB: false,
-        checkedC: false,
-        checkedD: false,
-        checkedE: false,
-        checkedF: false,
-        checkedG: false,
-        checkedH: false,
-        checkedI: false,
-    });
+    // Uni name for first search form
+    const [name, setName] = useState("");
 
-    //gestion des switch
-    const handleSwitch = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
+    // Switch states for second form
+    const sliders = ['Note globale', 'Sécurité', 'Cout de la vie', 'Vie culturelle', 'Vie nocturne' ];
+    const [swActivated, setSwActivated] = useState(Array(sliders.length).fill(false));
+    const [sliderValues, setSliderValues] = useState(Array(sliders.length).fill(0));
+
+    // University results
+    const [uniList, setUniList] = useState([]);
+    const [rechercheDone, setRecherDone] = useState(false);
+
+
+    // First form submission
+    const searchName = () => {
+        getSearchName(name).then(res => {
+            setUniList(res.data);
+            setRecherDone(true);
+        });
     };
-    /*
-    //gestion du clic du 1er bouton Rechercher
-    function handleClick1(){
 
-        axios.props();
-    }
+    // Second form submission
+    const searchAdvanced = () => {
+        let form = {};
+        for (let i=0;i<sliders.length;i++) {
+            if (swActivated[i]) {
+                form[sliders[i]] = sliderValues[i];
 
-    //gestion du clic du 2e bouton Rechercher
-    function handleClick2(){
-        //valeur slider note globale
-        if (state.checkedA === true){
-            //on créé un int note avec la valeur du slider
-
+            }
         }
 
-        //valeur slider sécurité
-        if (state.checkedB === true){
-
-        }
-
-        //valeur slider cout de la vie
-        if (state.checkedC === true){
-
-        }
-
-        //valeur slider vie nocturne
-        if (state.checkedD === true){
-
-        }
-
-        //valeur slider vie culturelle
-        if (state.checkedE === true){
-
-        }
-
-        //valeur textfield pays
-        if (state.checkedF === true){
-
-        }
-
-        //valeur radio europe
-        if (state.checkedG === true){
-
-        }
-
-        //valeur textfield demande
-        if (state.checkedH === true){
-
-        }
-
-        //valeur textfield departement
-        if (state.checkedI === true){
-
-        }
-
-        axios.props();
-        //Il faudra remplacer l'appel du bouton par celui la quand la fonction sera faite :
-        // <Button variant="contained" color='theme.palette.primary.light' onClick={handleClick2}>
-    }*/
+        getSearchAdvance(form).then(res => {
+            setUniList(res.data);
+            setRecherDone(true);
+        });
+    };
 
 
     return (
         <Paper elevation={3} className={classes.paper}>
+
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Typography variant={'h5'}>Rechercher par nom</Typography>
-                    <br/>
-                    <form className={classes.root} noValidate autoComplete="off">
-                        <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal"  />
+                    <form onSubmit={searchName}>
+                        <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal"/>
+                        <Button variant="contained" color='theme.palette.primary.light' type="submit">
+                            Rechercher
+                        </Button>
                     </form>
-                    <br/>
-                    <Button variant="contained" color='theme.palette.primary.light'>
-                        Rechercher
-                    </Button>
-                    <br/>
                 </Grid>
 
-
-
-                <Grid item xs={12}>
-                    <Typography variant={'h5'}>Filtrer</Typography>
-                </Grid>
-
-
-
-                <Grid item xs={6}>
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedA}
-                                onChange={handleSwitch}
-                                name="checkedA"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Note globale</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            {sliderState(state.checkedA)}
-                        </Grid>
-                    </Grid>
-
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedB}
-                                onChange={handleSwitch}
-                                name="checkedB"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Sécurité</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            {sliderState(state.checkedB)}
-                        </Grid>
-                    </Grid>
-
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedC}
-                                onChange={handleSwitch}
-                                name="checkedC"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Coût de la vie</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            {sliderState(state.checkedC)}
-                        </Grid>
-                    </Grid>
-
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedD}
-                                onChange={handleSwitch}
-                                name="checkedD"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Vie nocturne</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            {sliderState(state.checkedD)}
-                        </Grid>
-                    </Grid>
-
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedE}
-                                onChange={handleSwitch}
-                                name="checkedE"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Vie culturelle</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            {sliderState(state.checkedE)}
-                        </Grid>
-                    </Grid>
-
-                </Grid>
-
-
-
-                <Grid item xs={6} className={classes.items}>
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedF}
-                                onChange={handleSwitch}
-                                name="checkedF"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Pays</Typography>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <form className={classes.root} noValidate autoComplete="off">
-                                {textFieldState(state.checkedF)}
-                            </form>
-                        </Grid>
+                <form onSubmit={searchAdvanced}>
+                    <Grid item xs={12}>
+                        <Typography variant={'h5'}>Filtrer</Typography>
                     </Grid>
 
 
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedG}
-                                onChange={handleSwitch}
-                                name="checkedG"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Hors Europe</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <div>
-                                <FormControl component="fieldset">
-                                    {radioState(state.checkedG)}
-                                </FormControl>
-                            </div>
-                        </Grid>
+                    <Grid item xs={6}>
+                        <SearchSlider name={"checkedA"} titre={"Note globale"}
+                            activated={swActivated} number={1} setActivated={setSwActivated}
+                            sliderValues={sliderValues} setSliderValues={setSliderValues}
+                        />
+                        <SearchSlider name={"checkedB"} titre={"Sécurité"} activated={swActivated} number={2} setActivated={setSwActivated}/>
+                        <SearchSlider name={"checkedC"} titre={"Coût de la vie"} activated={swActivated} number={3} setActivated={setSwActivated}/>
+                        <SearchSlider name={"checkedD"} titre={"Vie nocturne"} activated={swActivated} number={4} setActivated={setSwActivated}/>
+                        <SearchSlider name={"checkedE"} titre={"Vie culturelle"} activated={swActivated} number={5} setActivated={setSwActivated}/>
                     </Grid>
 
 
-                    <Grid container className={classes.items}>
+                    <Grid item xs={6} className={classes.items}>
+                        <Grid container className={classes.items}>
+                            <Grid item xs={3} className={classes.switch}>
+                                <Switch
+                                    ref={ref}
+                                    checked={activated[number]}
+                                    onChange={handleSwitch}
+                                    name="checkedF"
+                                    color="primary"
+                                    inputProps={{'aria-label': 'secondary checkbox'}}
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Typography variant={'h6'}>{titre}</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                                {activated[number] ? <TextFieldPays/> : <TextFieldPaysDISABLED />}
+
+                            </Grid>
+                        </Grid>
+
                         <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedH}
-                                onChange={handleSwitch}
-                                name="checkedH"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Demande</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            {demandeState(state.checkedH)}
+                            <Grid container className={classes.items}>
+
+                                <Switch
+                                    ref={ref}
+                                    checked={activated[number]}
+                                    onChange={handleSwitch}
+                                    name="checkedG"
+                                    color="primary"
+                                    inputProps={{'aria-label': 'secondary checkbox'}}
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Typography variant={'h6'}>Hors Europe</Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <div>
+                                    <FormControl component="fieldset">
+                                        {activated[number] ? <RadioSearch/> : <RadioSearchDISABLED />}
+                                    </FormControl>
+                                </div>
+                            </Grid>
+
 
                         </Grid>
 
+                        <Grid item xs={3} className={classes.switch}>
+                            <Grid container className={classes.items}>
+                                <Switch
+                                    ref={ref}
+                                    checked={activated[number]}
+                                    onChange={handleSwitch}
+                                    name="checkedH"
+                                    color="primary"
+                                    inputProps={{'aria-label': 'secondary checkbox'}}
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Typography variant={'h6'}>Demande</Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                {activated[number] ? <DemandeChoix/> : <DemandeChoixDISABLE/>}
+                            </Grid>
+                        </Grid>
+
+                        <Grid container className={classes.items}>
+                            <Grid item xs={3} className={classes.switch}>
+                                <Switch
+                                    checked={activated[number]}
+                                    onChange={handleSwitch}
+                                    name="checkedI"
+                                    color="primary"
+                                    inputProps={{'aria-label': 'secondary checkbox'}}
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Typography variant={'h6'}>Département</Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                {activated[number] ? <DepartChoix/> : <DepartChoixDISABLE/>}
+                            </Grid>
+                        </Grid>
                     </Grid>
 
-                    <Grid container className={classes.items}>
-                        <Grid item xs={3} className={classes.switch}>
-                            <Switch
-                                checked={state.checkedI}
-                                onChange={handleSwitch}
-                                name="checkedI"
-                                color="primary"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Typography variant={'h6'}>Département</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            {departState(state.checkedI)}
-                        </Grid>
-
+                    <Grid item xs={12}>
+                        <Button variant="contained" color='theme.palette.primary.light' type="submit">
+                            Rechercher
+                        </Button>
                     </Grid>
-
-                </Grid>
-
-
-                <Grid item xs={12}>
-                    <Button variant="contained" color='theme.palette.primary.light' >
-                        Rechercher
-                    </Button>
-                </Grid>
+                </form>
             </Grid>
-
         </Paper>
     );
 }

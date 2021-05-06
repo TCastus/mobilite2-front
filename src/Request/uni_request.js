@@ -29,3 +29,10 @@ export const getUni = () => {
             return res;
         }).catch(rematchError);
 };
+
+export const getUniAll = () => {
+    return client.get('/api/university/')
+        .then(res => {
+            return res;
+        }).catch(rematchError);
+};

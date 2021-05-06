@@ -5,6 +5,10 @@ import {Container, Grid, Paper, Typography} from "@material-ui/core";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import {rematchError} from "../Request/error_handling";
+import config from "../config.json";
+import {getUni, getUniAll} from '../Request/uni_request';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,11 +29,21 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
 export default function MapPaperSelection () {
     const classes = useStyles();
     const [value, setAge] = React.useState('');
     const [open, setOpen] = React.useState(false);
+    const [uni, setUni] = React.useState({});
 
+
+
+    React.useEffect(() => {
+        getUni().then((res) => {
+            setUni(res.data);
+            console.log(res.data);
+        });
+    }, []);
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -44,23 +58,28 @@ export default function MapPaperSelection () {
     };
 
 
+
+
+
     return (
         <Paper elevation={3} className={classes.paper}>
             <Typography variant={'h2'}> Choisissez votre destination </Typography>
 
             <Grid container spacing={1}>
                 <Grid item xs={6}>
-                    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} className={classes.map}>
+                    <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={13} scrollWheelZoom={true} className={classes.map}>
                         <TileLayer
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={[51.505, -0.09]}>
+                        <Marker position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
                             <Popup>
-                                A pretty CSS3 popup. <br /> Easily customizable.
+                                {uni.name}
                             </Popup>
                         </Marker>
                     </MapContainer>
+
+
 
                 </Grid>
 

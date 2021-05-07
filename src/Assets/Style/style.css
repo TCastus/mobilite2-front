@@ -6,14 +6,13 @@ body{
 
 .header .title{
     color:white;
-    font-weight: bold;
     font: small-caps bold 24px/1 sans-serif;
 
 
 }
 
 .header {
-    background-image: url("../images/fond.jpg");
+    'background-image: url("../images/fond.jpg");'
 "background-clip: border-box;"
     background-repeat: no-repeat;
     background-position: center;

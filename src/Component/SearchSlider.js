@@ -1,7 +1,5 @@
 import {Grid, Slider, Switch, Typography} from "@material-ui/core";
 import React from "react";
-import SliderENABLE from "./pageRecherche/SliderENABLE";
-import SliderDISABLE from "./pageRecherche/SliderDISABLE";
 import * as PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -58,7 +56,7 @@ export default function SearchSlider({name, titre, activated, number, setActivat
                     min={0}
                     max={5}
                     marks
-                    disabled={activated[number]}
+                    disabled={!activated[number]}
                 />
             </Grid>
         </Grid>

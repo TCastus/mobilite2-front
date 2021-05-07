@@ -55,4 +55,4 @@ export const getSearchAdvance = (form) => {
         .then(res => {
             return res;
         }).catch(rematchError);
-}
+};

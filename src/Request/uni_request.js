@@ -1,6 +1,8 @@
 import axios from "axios";
 import config from "../config.json";
 import {rematchError} from "./error_handling";
+import {Typography} from "@material-ui/core";
+import React from "react";
 
 /**
  * Prepare the request with the address and headers
@@ -23,8 +25,10 @@ export const getHealthCheck = () => {
         }).catch(rematchError);
 };
 
-export const getUni = () => {
-    return client.get('/api/university/1/')
+export const getUni = (i) => {
+    let path = '/api/university/';
+    let path2 = path.replace('/university/', '/university/'+ i +'/');
+    return client.get(path2)
         .then(res => {
             return res;
         }).catch(rematchError);
@@ -36,3 +40,4 @@ export const getUniAll = () => {
             return res;
         }).catch(rematchError);
 };
+

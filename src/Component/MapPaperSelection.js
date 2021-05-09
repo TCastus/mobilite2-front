@@ -8,6 +8,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {rematchError} from "../Request/error_handling";
 import config from "../config.json";
 import {getUni, getUniAll} from '../Request/uni_request';
+import {CircularProgress} from "@material-ui/core";
+import {array} from "prop-types";
+import {routeIndex} from "../Route/route";
+import {Route} from "react-router-dom";
+import UniMarker from "./UniMarker";
 
 
 
@@ -35,15 +40,40 @@ export default function MapPaperSelection () {
     const [value, setAge] = React.useState('');
     const [open, setOpen] = React.useState(false);
     const [uni, setUni] = React.useState({});
+    const [uniA, setUniA] = React.useState({});
+    const [loaded, setLoaded] = React.useState(false);
 
+    const allMarkers = () => {
+        return uniA.map((uni) =>
+            <UniMarker latitude = {uni.latitude} longitude = {uni.longitude} key = {uni.name}/>
+        );
+    };
 
+    /*const allmarkers = () => {
+
+        for (let elem of uniA) {
+            return <UniMarker latitude = {elem.latitude} longitude = {elem.longitude} name = {elem.name} />;
+
+        }
+
+    };/*
 
     React.useEffect(() => {
-        getUni().then((res) => {
-            setUni(res.data);
-            console.log(res.data);
+        getUniAll().then((res) => {
+            setLoaded(true);
+            setUniA(res.data);
+            console.log(res.data.length);
         });
     }, []);
+
+    /*React.useEffect(() => {
+        getUni(0).then((res) => {
+            setUni(res.data);
+            setLoaded(true);
+            console.log(res.data);
+        });
+    }, []);*/
+
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -58,57 +88,56 @@ export default function MapPaperSelection () {
     };
 
 
+    return ( loaded ?
+
+        (<>
+            <Paper elevation={3} className={classes.paper}>
+                <Typography variant={'h2'}> Choisissez votre destination </Typography>
+
+                <Grid container spacing={1}>
+                    <Grid item xs={6}>
+                        <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={13} scrollWheelZoom={true} className={classes.map}>
+                            <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            {allMarkers}
+
+                        </MapContainer>
 
 
 
-    return (
-        <Paper elevation={3} className={classes.paper}>
-            <Typography variant={'h2'}> Choisissez votre destination </Typography>
+                    </Grid>
 
-            <Grid container spacing={1}>
-                <Grid item xs={6}>
-                    <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={13} scrollWheelZoom={true} className={classes.map}>
-                        <TileLayer
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <Marker position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
-                            <Popup>
-                                {uni.name}
-                            </Popup>
-                        </Marker>
-                    </MapContainer>
+                    <Grid item xs={6}>
+
+                        <Typography display="inColomn">U</Typography>
+                        <Typography display="inColomn">N</Typography>
+                        <Typography display="inColomn">I</Typography>
+                        <Typography display="inColomn">V</Typography>
+                        <Typography display="inColomn">E</Typography>
+                        <Typography display="inColomn">R</Typography>
+                        <Typography display="inColomn">S</Typography>
+                        <Typography display="inColomn">I</Typography>
+                        <Typography display="inColomn">T</Typography>
+                        <Typography display="inColomn">E</Typography>
 
 
+                        <Typography variant={'h5'}>Universités</Typography>
+                        <br/>
+                        <Select labelId="universite" id="select" value={value} open={open} onClose={handleClose} onOpen={handleOpen} onChange={handleChange} >
+                            <MenuItem value="10">U1</MenuItem>
+                            <MenuItem value="20">U2</MenuItem>
+                            <MenuItem value="30">U3</MenuItem>
+                            <MenuItem value="40">U3</MenuItem>
+                        </Select>
+                    </Grid>
 
                 </Grid>
 
-                <Grid item xs={6}>
+            </Paper>
 
-                    <Typography display="inColomn">U</Typography>
-                    <Typography display="inColomn">N</Typography>
-                    <Typography display="inColomn">I</Typography>
-                    <Typography display="inColomn">V</Typography>
-                    <Typography display="inColomn">E</Typography>
-                    <Typography display="inColomn">R</Typography>
-                    <Typography display="inColomn">S</Typography>
-                    <Typography display="inColomn">I</Typography>
-                    <Typography display="inColomn">T</Typography>
-                    <Typography display="inColomn">E</Typography>
+        </>) : <CircularProgress />);
 
 
-                    <Typography variant={'h5'}>Universités</Typography>
-                    <br/>
-                    <Select labelId="universite" id="select" value={value} open={open} onClose={handleClose} onOpen={handleOpen} onChange={handleChange} >
-                        <MenuItem value="10">U1</MenuItem>
-                        <MenuItem value="20">U2</MenuItem>
-                        <MenuItem value="30">U3</MenuItem>
-                        <MenuItem value="40">U3</MenuItem>
-                    </Select>
-                </Grid>
-
-            </Grid>
-
-        </Paper>
-    );
 }

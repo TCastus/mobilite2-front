@@ -34,40 +34,16 @@ export default function MapPaperSelection () {
     const classes = useStyles();
     const [value, setAge] = React.useState('');
     const [open, setOpen] = React.useState(false);
-    const [uni, setUni] = React.useState({});
     const [uniA, setUniA] = React.useState({});
     const [loaded, setLoaded] = React.useState(false);
 
-    const allMarkers = () => {
-        return uniA.map((uni) =>
-            <UniMarker latitude = {uni.latitude} longitude = {uni.longitude} key = {uni.name}/>
-        );
-    };
-
-    /*const allmarkers = () => {
-
-        for (let elem of uniA) {
-            return <UniMarker latitude = {elem.latitude} longitude = {elem.longitude} name = {elem.name} />;
-
-        }
-
-    };*/
-
     React.useEffect(() => {
         getUniAll().then((res) => {
-            setLoaded(true);
             setUniA(res.data);
-            console.log(res.data.length);
-        });
-    }, []);
-
-    /*React.useEffect(() => {
-        getUni(0).then((res) => {
-            setUni(res.data);
             setLoaded(true);
             console.log(res.data);
         });
-    }, []);*/
+    }, []);
 
 
     const handleChange = (event) => {
@@ -91,14 +67,17 @@ export default function MapPaperSelection () {
 
                 <Grid container spacing={1}>
                     <Grid item xs={6}>
-                        <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={13} scrollWheelZoom={true} className={classes.map}>
+                        {loaded &&
+                        <MapContainer center={[parseFloat(uniA[0].latitude), parseFloat(uniA[0].longitude)]} zoom={13} scrollWheelZoom={true} className={classes.map}>
                             <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
-                            {allMarkers}
+                            {uniA.map((uni) =>
+                                <UniMarker latitude = {uni.latitude} longitude = {uni.longitude} key = {uni.name}/>
+                            )}
 
-                        </MapContainer>
+                        </MapContainer> }
 
 
 

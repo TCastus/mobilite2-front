@@ -9,9 +9,6 @@ import {rematchError} from "../Request/error_handling";
 import config from "../config.json";
 import {getUni, getUniAll} from '../Request/uni_request';
 import {CircularProgress} from "@material-ui/core";
-import {array} from "prop-types";
-import {routeIndex} from "../Route/route";
-import {Route} from "react-router-dom";
 import UniMarker from "./UniMarker";
 
 

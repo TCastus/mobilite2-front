@@ -32,6 +32,7 @@ export const getUni = (i) => {
         .then(res => {
             return res;
         }).catch(rematchError);
+
 };
 
 export const getUniAll = () => {

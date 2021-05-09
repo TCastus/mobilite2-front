@@ -6,7 +6,6 @@ UniMarker.propTypes = {
     key: PropTypes.string,
     longitude: PropTypes.string,
     latitude: PropTypes.string,
-
 };
 
 function UniMarker ({key, latitude, longitude}) {

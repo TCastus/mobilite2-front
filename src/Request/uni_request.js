@@ -33,7 +33,6 @@ export const getUni = (i) => {
             return res;
         }).catch(rematchError);
 
-
 };
 
 export const getUniAll = () => {

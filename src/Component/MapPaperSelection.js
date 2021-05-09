@@ -56,7 +56,7 @@ export default function MapPaperSelection () {
 
         }
 
-    };/*
+    };*/
 
     React.useEffect(() => {
         getUniAll().then((res) => {

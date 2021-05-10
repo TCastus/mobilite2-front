@@ -7,6 +7,7 @@ import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
 import {theme} from "../Theme";
 import FooterAppBar from "../Component/FooterAppBar";
 
+import {imageOverlay} from "leaflet/dist/leaflet-src.esm";
 /**
  * Main component of the mobilite app
  * Generates routes using a description file,
@@ -37,6 +38,9 @@ function App() {
 
                     <FooterAppBar routes={routeIndex.footer}/>
                 </MuiThemeProvider>
+
+
+
             </BrowserRouter>
         </div>
     );

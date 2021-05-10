@@ -1,6 +1,11 @@
 import React from "react";
 import {Marker, Popup} from "react-leaflet";
 import PropTypes from "prop-types";
+import {divIcon} from "leaflet";
+import { renderToStaticMarkup } from 'react-dom/server';
+import {blue, red} from "@material-ui/core/colors";
+import {makeStyles} from "@material-ui/core/styles";
+
 
 UniMarker.propTypes = {
     key: PropTypes.string,
@@ -9,10 +14,25 @@ UniMarker.propTypes = {
 
 };
 
+
+
 function UniMarker ({key, latitude, longitude}) {
+
+    const handleClick = event => {
+        let id = {key};
+    };
+    const iconMarkup = renderToStaticMarkup(<i className="./../Assets/images/marker-icon-2x.png" />);
+    const customMarkerIcon = divIcon({
+        //iconUrl: require('./../Assets/images/marker-icon-2x.png'),
+        html: iconMarkup,
+    });
+
+
+
     return(
         (<>
-            <Marker position= {[parseFloat(latitude), parseFloat(longitude)]}>
+
+            <Marker id = {key} icon={customMarkerIcon} position= {[parseFloat(latitude), parseFloat(longitude)]} onClick={handleClick}>
                 <Popup>
                     {key}
                 </Popup>

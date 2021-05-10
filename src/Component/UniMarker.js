@@ -3,6 +3,7 @@ import {Marker, Popup} from "react-leaflet";
 import PropTypes from "prop-types";
 import {divIcon} from "leaflet";
 import { renderToStaticMarkup } from 'react-dom/server';
+import { Redirect, useHistory } from "react-router-dom";
 
 
 UniMarker.propTypes = {
@@ -14,8 +15,21 @@ UniMarker.propTypes = {
 
 function UniMarker ({key, latitude, longitude}) {
 
-    const handleClick = event => {
-        let id = {key};
+
+    const state = {
+        redirect: false
+    };
+
+    const setRedirect = () => {
+        this.setState({
+            redirect: true
+        });
+    };
+
+    const renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/UniDetail' />; // utiliser l'id
+        }
     };
     const iconMarkup = renderToStaticMarkup(<i className="./../Assets/images/marker-icon-2x.png" />);
     const customMarkerIcon = divIcon({
@@ -28,7 +42,7 @@ function UniMarker ({key, latitude, longitude}) {
     return(
         (<>
 
-            <Marker id = {key} icon={customMarkerIcon} position= {[parseFloat(latitude), parseFloat(longitude)]} onClick={handleClick}>
+            <Marker id = {key} icon={customMarkerIcon} position= {[parseFloat(latitude), parseFloat(longitude)]} onClick={setRedirect}>
                 <Popup>
                     {key}
                 </Popup>

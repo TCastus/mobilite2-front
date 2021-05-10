@@ -38,5 +38,4 @@ function UniMarker ({key, latitude, longitude}) {
         </>));
 }
 
-
 export default UniMarker;

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {divIcon} from "leaflet";
 import { renderToStaticMarkup } from 'react-dom/server';
 
+
 UniMarker.propTypes = {
     key: PropTypes.string,
     longitude: PropTypes.string,

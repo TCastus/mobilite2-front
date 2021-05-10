@@ -97,7 +97,6 @@ export default function MapPaperSelection () {
 
                         </MapContainer>}
 
-
                     </Grid>
 
                     <Grid item xs={6}>

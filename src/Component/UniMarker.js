@@ -3,9 +3,6 @@ import {Marker, Popup} from "react-leaflet";
 import PropTypes from "prop-types";
 import {divIcon} from "leaflet";
 import { renderToStaticMarkup } from 'react-dom/server';
-import {blue, red} from "@material-ui/core/colors";
-import {makeStyles} from "@material-ui/core/styles";
-
 
 UniMarker.propTypes = {
     key: PropTypes.string,

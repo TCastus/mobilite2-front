@@ -14,8 +14,6 @@ UniMarker.propTypes = {
 
 };
 
-
-
 function UniMarker ({key, latitude, longitude}) {
 
     const handleClick = event => {

@@ -8,6 +8,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {getUniAll} from '../Request/uni_request';
 import {CircularProgress} from "@material-ui/core";
 import UniMarker from "./UniMarker";
+import {renderToStaticMarkup} from "react-dom/server";
+import {divIcon} from "leaflet";
 
 
 
@@ -37,6 +39,11 @@ export default function MapPaperSelection () {
     const [open, setOpen] = React.useState(false);
     const [uniA, setUniA] = React.useState({});
     const [loaded, setLoaded] = React.useState(false);
+    const iconMarkup = renderToStaticMarkup(<i className="./../Assets/images/marker-icon-2x.png" />);
+    const customMarkerIcon = divIcon({
+        //iconUrl: require('./../Assets/images/marker-icon-2x.png'),
+        html: iconMarkup,
+    });
 
 
 
@@ -91,9 +98,11 @@ export default function MapPaperSelection () {
                         <MapContainer center={[parseFloat(uniA[0].latitude), parseFloat(uniA[0].longitude)]} zoom={13} scrollWheelZoom={true} className={classes.map}>
                             <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-                            {uniA.map((uni) =>
-                                <UniMarker latitude = {uni.latitude} longitude = {uni.longitude} key = {uni.name}/>
-                            )}
+                            {uniA.map((uni) => {
+                                console.log(uni);
+                                return <UniMarker latitude={uni.latitude} longitude={uni.longitude} key={uni.name}/>;
+                            })}
+
 
                         </MapContainer>}
 

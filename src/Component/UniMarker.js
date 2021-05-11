@@ -1,9 +1,12 @@
 import React from "react";
-import {Marker, Popup} from "react-leaflet";
+import {Marker, Popup, Circle} from "react-leaflet";
 import PropTypes from "prop-types";
 import {divIcon} from "leaflet";
 import { renderToStaticMarkup } from 'react-dom/server';
 import {Redirect} from 'react-router-dom';
+import img from "./../Assets/images/marker-icon-2x.png";
+import {Button} from "@material-ui/core";
+
 
 UniMarker.propTypes = {
     key: PropTypes.string,
@@ -15,26 +18,18 @@ UniMarker.propTypes = {
 function UniMarker ({key, latitude, longitude}) {
 
 
-    const direct = (event) => {
-        return <Redirect from="/" to="./Experience"/>;
-    };
-
-    const iconMarkup = renderToStaticMarkup(<i className="./../Assets/images/marker-icon-2x.png" />);
-    const customMarkerIcon = divIcon({
-        //iconUrl: require('./../Assets/images/marker-icon-2x.png'),
-        html: iconMarkup,
-    });
-
-
-
     return(
         (<>
 
-            <Marker onClick={direct} id = {key} icon={customMarkerIcon} position= {[parseFloat(latitude), parseFloat(longitude)]}>
-                <Popup>
-                    {key}
+            <Circle  radius={700} center= {[parseFloat(latitude), parseFloat(longitude)]}>
+                <Popup minWidth='400px' minLength='700px' maxWidth='400px' maxLength={'700px'} >
+                    <Button href='UniDetail' >
+                        Name: {key}
+                    </Button>
                 </Popup>
-            </Marker>
+            </Circle>
+
+
         </>));
 }
 

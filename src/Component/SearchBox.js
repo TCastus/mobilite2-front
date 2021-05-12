@@ -2,7 +2,7 @@ import '../Assets/Style/SelectionMap.css';
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import {
-    Button, Container,
+    Button, Chip, Container,
     FormControl,
     Grid,
     Paper,
@@ -95,6 +95,7 @@ export default function SearchBox() {
         getUniAll().then((res) => {
             setUniList(res.data);
             setRecherDone(true);
+            console.log(res.data);
         });
     }, []);
 
@@ -246,20 +247,17 @@ export default function SearchBox() {
                             <TableRow>
                                 <TableCell align="right">Nom</TableCell>
                                 <TableCell align="right">Pays</TableCell>
-                                <TableCell align="right">Départements</TableCell>
-                                <TableCell align="right">Jsp</TableCell>
+                                <TableCell align="center">Départements</TableCell>
+                                <TableCell align="left">Demande</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {uniList.map((row) => (
                                 <TableRow key={row.name}>
-                                    <TableCell component="th" scope="row">
-                                        {row.name}
-                                    </TableCell>
-                                    <TableCell align="right">{row.name}</TableCell>
+                                    <TableCell align="right" component="th" scope="row"> {row.name} </TableCell>
                                     <TableCell align="right">{row.id}</TableCell>
-                                    <TableCell align="right">{row.name}</TableCell>
-                                    <TableCell align="right">{row.name}</TableCell>
+                                    <TableCell align="center">{row.department_availability.map((depart) => (<Chip key={depart.name} label={depart.name}/>))}</TableCell>
+                                    <TableCell align="left">{row.access}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

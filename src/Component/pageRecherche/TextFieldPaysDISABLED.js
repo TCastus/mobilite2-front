@@ -12,8 +12,4 @@ export default function TextFieldPaysDISABLED () {
             size="small"
         />
     );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> pageRecherche

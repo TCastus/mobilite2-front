@@ -4,6 +4,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Button, Container, Typography} from "@material-ui/core";
 import PlaneIcon from "../Assets/Icon/PlaneIcon";
 import SearchBox from "../Component/SearchBox";
+import PageHeader from "../Component/PageHeader";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -11,14 +13,6 @@ const useStyles = makeStyles((theme) => ({
         minHeight : '100vh',
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-    },
-    title: {
-        height: '20vh',
-        color: 'white',
-        background: 'rgba(100,100,100,100)',
-        margin: '0px',
-        padding: 35,
-        textAlign: 'center',
     },
     experience: {
         height: '50vh',
@@ -45,9 +39,7 @@ function Rechercher() {
     return (
         <div className={classes.root}>
 
-            <div className={classes.title}>
-                <Typography variant={'h2'}> Rechercher une université </Typography>
-            </div>
+            <PageHeader title={"Rechercher une université"}/>
 
             <Container>
                 <SearchBox/>

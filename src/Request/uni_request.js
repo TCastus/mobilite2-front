@@ -39,7 +39,7 @@ export const getUni = () => {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getUniAll = () => {
-    return client.get('/api/university/?format=json')
+    return client.get('/api/university/')
         .then(res => {
             return res;
         }).catch(rematchError);

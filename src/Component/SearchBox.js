@@ -24,10 +24,10 @@ import DepartChoix from "./pageRecherche/DepartChoix";
 import DepartChoixDISABLE from "./pageRecherche/DepartChoixDISABLE";
 
 const columns = [
-    { id: 'universite', label: 'Université', minWidth: 170 },
-    { id: 'pays', label: 'Pays', minWidth: 170 },
-    { id: 'demande', label: 'Demande', minWidth: 170 },
-    { id: 'departements', label: 'Départements', minWidth: 170 },
+    {id: 'universite', label: 'Université', minWidth: 170},
+    {id: 'pays', label: 'Pays', minWidth: 170},
+    {id: 'demande', label: 'Demande', minWidth: 170},
+    {id: 'departements', label: 'Départements', minWidth: 170},
 
 ];
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     switch: {
         textAlign: "right",
     },
-    searchUni :{
+    searchUni: {
         margin: theme.spacing(1, 'auto'),
         textAlign: 'center',
     },
@@ -70,7 +70,7 @@ export default function SearchBox() {
     const [name, setName] = useState("");
 
     // Switch states for second form
-    const sliders = ['Note globale', 'Sécurité', 'Cout de la vie', 'Vie culturelle', 'Vie nocturne' ];
+    const sliders = ['Note globale', 'Sécurité', 'Cout de la vie', 'Vie culturelle', 'Vie nocturne'];
     const [swActivated, setSwActivated] = useState(Array(sliders.length).fill(false));
     const [sliderValues, setSliderValues] = useState(Array(sliders.length).fill(0));
 
@@ -92,25 +92,11 @@ export default function SearchBox() {
     };
 
     useEffect(() => {
-        getUniAll().then((res)=>{
-            setRecherDone(true);
+        getUniAll().then((res) => {
             setUniList(res.data);
-            console.log(res.data);
-
+            setRecherDone(true);
         });
     }, []);
-
-    function createData(universite, pays, demande, departements) {
-        return {universite, pays, demande, departements};
-    }
-    const rows = [
-        //tests
-        createData('univ1', 'france', 'haute', 'TC, GE'),
-        createData('univ2', 'france', 'bof', 'TC, GE'),
-        //data
-        createData(uniList[0].name, 'france', uniList[0].access, uniList[0].department_availability),
-    ];
-
 
 
     // First form submission
@@ -124,7 +110,7 @@ export default function SearchBox() {
     // Second form submission
     const searchAdvanced = () => {
         let form = {};
-        for (let i=0;i<sliders.length;i++) {
+        for (let i = 0; i < sliders.length; i++) {
             if (swActivated[i]) {
                 form[sliders[i]] = sliderValues[i];
 
@@ -144,7 +130,7 @@ export default function SearchBox() {
     });
 
     const handleSwitch = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
+        setState({...state, [event.target.name]: event.target.checked});
     };
 
     return (
@@ -173,28 +159,36 @@ export default function SearchBox() {
                             <Grid container className={classes.items}>
 
                                 <Grid item xs={6}>
-                                    <SearchSlider name={"checkedA"} titre={"Note globale"} activated={swActivated} number={1} setActivated={setSwActivated} sliderValues={sliderValues} setSliderValues={setSliderValues}/>
-                                    <SearchSlider name={"checkedB"} titre={"Sécurité"} activated={swActivated} number={2} setActivated={setSwActivated}/>
-                                    <SearchSlider name={"checkedC"} titre={"Coût de la vie"} activated={swActivated} number={3} setActivated={setSwActivated}/>
-                                    <SearchSlider name={"checkedD"} titre={"Vie nocturne"} activated={swActivated} number={4} setActivated={setSwActivated}/>
-                                    <SearchSlider name={"checkedE"} titre={"Vie culturelle"} activated={swActivated} number={5} setActivated={setSwActivated}/>
+                                    <SearchSlider name={"checkedA"} titre={"Note globale"} activated={swActivated}
+                                        number={1} setActivated={setSwActivated} sliderValues={sliderValues}
+                                        setSliderValues={setSliderValues}/>
+                                    <SearchSlider name={"checkedB"} titre={"Sécurité"} activated={swActivated}
+                                        number={2} setActivated={setSwActivated}/>
+                                    <SearchSlider name={"checkedC"} titre={"Coût de la vie"} activated={swActivated}
+                                        number={3} setActivated={setSwActivated}/>
+                                    <SearchSlider name={"checkedD"} titre={"Vie nocturne"} activated={swActivated}
+                                        number={4} setActivated={setSwActivated}/>
+                                    <SearchSlider name={"checkedE"} titre={"Vie culturelle"} activated={swActivated}
+                                        number={5} setActivated={setSwActivated}/>
                                 </Grid>
 
                                 <Grid item xs={6}>
                                     <Grid container className={classes.items}>
                                         <Grid item xs={3} className={classes.switch}>
-                                            <Switch checked={state.checkedF} onChange={handleSwitch} name="checkedF" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                            <Switch checked={state.checkedF} onChange={handleSwitch} name="checkedF"
+                                                color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Typography variant={'h6'}>Pays</Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            {state.checkedF ? <TextFieldPays/> : <TextFieldPaysDISABLED />}
+                                            {state.checkedF ? <TextFieldPays/> : <TextFieldPaysDISABLED/>}
                                         </Grid>
                                     </Grid>
                                     <Grid container className={classes.items}>
                                         <Grid item xs={3} className={classes.switch}>
-                                            <Switch checked={state.checkedG} onChange={handleSwitch} name="checkedG" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                            <Switch checked={state.checkedG} onChange={handleSwitch} name="checkedG"
+                                                color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Typography variant={'h6'}>Hors Europe</Typography>
@@ -202,14 +196,15 @@ export default function SearchBox() {
                                         <Grid item xs={6}>
                                             <div>
                                                 <FormControl component="fieldset">
-                                                    {state.checkedG ? <RadioSearch/> : <RadioSearchDISABLED />}
+                                                    {state.checkedG ? <RadioSearch/> : <RadioSearchDISABLED/>}
                                                 </FormControl>
                                             </div>
                                         </Grid>
                                     </Grid>
                                     <Grid container className={classes.items}>
                                         <Grid item xs={3} className={classes.switch}>
-                                            <Switch checked={state.checkedH} onChange={handleSwitch} name="checkedH" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                            <Switch checked={state.checkedH} onChange={handleSwitch} name="checkedH"
+                                                color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Typography variant={'h6'}>Demande</Typography>
@@ -221,7 +216,8 @@ export default function SearchBox() {
 
                                     <Grid container className={classes.items}>
                                         <Grid item xs={3} className={classes.switch}>
-                                            <Switch checked={state.checkedI} onChange={handleSwitch} name="checkedI" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                            <Switch checked={state.checkedI} onChange={handleSwitch} name="checkedI"
+                                                color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Typography variant={'h6'}>Département</Typography>
@@ -244,49 +240,31 @@ export default function SearchBox() {
             </Paper>
             <div className={classes.root}>
                 {rechercheDone &&
-                    <Paper className={classes.paper2}>
-                        <TableContainer className={classes.container}>
-                            <Table stickyHeader aria-label="sticky table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map((column) => (
-                                            <TableCell
-                                                key={column.id}
-                                                style={{ minWidth: column.minWidth }}
-                                            >
-                                                {column.label}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                        return (
-                                            <TableRow hover role="checkbox" tabIndex={-1} key={row.code} >
-                                                {columns.map((column) => {
-                                                    const value = row[column.id];
-                                                    return (
-                                                        <TableCell key={column.id}>
-                                                            {value}
-                                                        </TableCell>
-                                                    );
-                                                })}
-                                            </TableRow>
-                                        );
-                                    })}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
-                            rowsPerPageOptions={[10, 25, 100]}
-                            component="div"
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onChangePage={handleChangePage}
-                            onChangeRowsPerPage={handleChangeRowsPerPage}
-                        />
-                    </Paper>
+                <TableContainer className={classes.container}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="right">Nom</TableCell>
+                                <TableCell align="right">Pays</TableCell>
+                                <TableCell align="right">Départements</TableCell>
+                                <TableCell align="right">Jsp</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {uniList.map((row) => (
+                                <TableRow key={row.name}>
+                                    <TableCell component="th" scope="row">
+                                        {row.name}
+                                    </TableCell>
+                                    <TableCell align="right">{row.name}</TableCell>
+                                    <TableCell align="right">{row.id}</TableCell>
+                                    <TableCell align="right">{row.name}</TableCell>
+                                    <TableCell align="right">{row.name}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 }
             </div>
         </Container>

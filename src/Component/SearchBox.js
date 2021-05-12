@@ -1,9 +1,9 @@
 import '../Assets/Style/SelectionMap.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import {Button, FormControl, Grid, Paper, Switch, TextField, Typography} from "@material-ui/core";
+import {Button, FormControl, Grid, Paper, Switch, Table, TextField, Typography} from "@material-ui/core";
 import SearchSlider from "./SearchSlider";
-import {getSearchName, getSearchAdvance} from "../Request/uni_request";
+import {getSearchName, getSearchAdvance, getUniAll} from "../Request/uni_request";
 import TextFieldPays from "./pageRecherche/TextFieldPays";
 import TextFieldPaysDISABLED from "./pageRecherche/TextFieldPaysDISABLED";
 import RadioSearch from "./pageRecherche/RadioSearch";
@@ -51,6 +51,13 @@ export default function SearchBox() {
     // University results
     const [uniList, setUniList] = useState([]);
     const [rechercheDone, setRecherDone] = useState(false);
+
+    useEffect(() => {
+        getUniAll().then((res)=>{
+            setRecherDone(true);
+            setUniList(res.data);
+        });
+    }, []);
 
 
     // First form submission
@@ -182,6 +189,12 @@ export default function SearchBox() {
                     </form>
                 </Grid>
             </Grid>
+            <Table>
+                {rechercheDone &&
+                <Paper>
+
+                </Paper>}
+            </Table>
         </Paper>
     );
 }

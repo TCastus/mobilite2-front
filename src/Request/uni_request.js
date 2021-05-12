@@ -35,6 +35,17 @@ export const getUni = () => {
 };
 
 /**
+ * Get all universities' details from API
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getUniAll = () => {
+    return client.get('/api/university/')
+        .then(res => {
+            return res;
+        }).catch(rematchError);
+};
+
+/**
  * Performs a get request to search university by name
  * @returns {Promise<AxiosResponse<any>>}
  */

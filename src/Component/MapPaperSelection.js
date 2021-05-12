@@ -1,19 +1,18 @@
-import '../Assets/Style/SelectionMap.css';
+// import '../Assets/Style/SelectionMap.css';
 import React from 'react';
 import{ makeStyles } from "@material-ui/core/styles";
-import { Grid, Paper, Typography} from "@material-ui/core";
+import {Container, Grid, Paper, Typography} from "@material-ui/core";
 import {MapContainer, TileLayer} from "react-leaflet";
 import {getUniAll} from '../Request/uni_request';
 import {CircularProgress} from "@material-ui/core";
 import UniMarker from "./UniMarker";
-import PinDropIcon from '@material-ui/icons/PinDrop';
-
-
+import {Marker, Popup} from "leaflet/dist/leaflet-src.esm";
 
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         background: 'cadetblue',
+        width: "100%",
         margin: theme.spacing(3),
         padding: theme.spacing(5),
         textAlign: 'center',
@@ -84,7 +83,6 @@ export default function MapPaperSelection () {
                             Cliquez sur une destination
                         </Typography>
                         <Typography display="inColomn">
-                            <PinDropIcon></PinDropIcon>
                         </Typography>
 
                     </Grid>

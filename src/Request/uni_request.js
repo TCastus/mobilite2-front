@@ -3,6 +3,7 @@ import config from "../config.json";
 import {rematchError} from "./error_handling";
 import {Typography} from "@material-ui/core";
 import React from "react";
+// import "../Assets/Style/SelectionMap.css";
 
 /**
  * Prepare the request with the address and headers
@@ -28,7 +29,7 @@ export const getHealthCheck = () => {
 export const getUni = (i) => {
     let path = '/api/university/';
     let path2 = path.replace('/university/', '/university/'+ i +'/');
-    return client.get(path2)
+    return client.get('/api/university/1/')
         .then(res => {
             return res;
         }).catch(rematchError);

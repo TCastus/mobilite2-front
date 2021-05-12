@@ -1,7 +1,17 @@
 import '../Assets/Style/SelectionMap.css';
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import {Button, FormControl, Grid, Paper, Switch, Table, TextField, Typography} from "@material-ui/core";
+import {
+    Button, Container,
+    FormControl,
+    Grid,
+    Paper,
+    Switch,
+    Table, TableBody, TableCell,
+    TableContainer, TableHead, TablePagination, TableRow,
+    TextField,
+    Typography
+} from "@material-ui/core";
 import SearchSlider from "./SearchSlider";
 import {getSearchName, getSearchAdvance, getUniAll} from "../Request/uni_request";
 import TextFieldPays from "./pageRecherche/TextFieldPays";
@@ -13,10 +23,23 @@ import DemandeChoixDISABLE from "./pageRecherche/DemandeChoixDISABLE";
 import DepartChoix from "./pageRecherche/DepartChoix";
 import DepartChoixDISABLE from "./pageRecherche/DepartChoixDISABLE";
 
+const columns = [
+    { id: 'universite', label: 'Université', minWidth: 170 },
+    { id: 'pays', label: 'Pays', minWidth: 170 },
+    { id: 'demande', label: 'Demande', minWidth: 170 },
+    { id: 'departements', label: 'Départements', minWidth: 170 },
+
+];
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         background: 'lightgrey',
+        margin: theme.spacing(5),
+        padding: theme.spacing(5),
+        textAlign: 'center',
+    },
+    paper2: {
+        background: 'whitesmoke',
         margin: theme.spacing(5),
         padding: theme.spacing(5),
         textAlign: 'center',
@@ -33,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     searchUni :{
         margin: theme.spacing(1, 'auto'),
         textAlign: 'center',
+    },
+    container: {
+        maxHeight: 440,
     },
 
 }));
@@ -52,12 +78,39 @@ export default function SearchBox() {
     const [uniList, setUniList] = useState([]);
     const [rechercheDone, setRecherDone] = useState(false);
 
+    //Table items
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
     useEffect(() => {
         getUniAll().then((res)=>{
             setRecherDone(true);
             setUniList(res.data);
+            console.log(res.data);
+
         });
     }, []);
+
+    function createData(universite, pays, demande, departements) {
+        return {universite, pays, demande, departements};
+    }
+    const rows = [
+        //tests
+        createData('univ1', 'france', 'haute', 'TC, GE'),
+        createData('univ2', 'france', 'bof', 'TC, GE'),
+        //data
+        createData(uniList[0].name, 'france', uniList[0].access, uniList[0].department_availability),
+    ];
+
 
 
     // First form submission
@@ -94,107 +147,148 @@ export default function SearchBox() {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
 
-
     return (
-        <Paper elevation={3} className={classes.paper}>
+        <Container>
+            <Paper elevation={3} className={classes.paper}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Typography variant={'h5'}>Rechercher par nom</Typography>
+                        <form onSubmit={searchName}>
+                            <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal"/>
+                            <Grid item xs={12} className={classes.searchUni}>
+                                <Button variant="contained" color='theme.palette.primary.light' type="submit">
+                                    Rechercher
+                                </Button>
+                            </Grid>
+                        </form>
+                    </Grid>
 
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Typography variant={'h5'}>Rechercher par nom</Typography>
-                    <form onSubmit={searchName}>
-                        <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal"/>
-                        <Grid item xs={12} className={classes.searchUni}>
-                            <Button variant="contained" color='theme.palette.primary.light' type="submit">
-                                Rechercher
-                            </Button>
-                        </Grid>
-                    </form>
-                </Grid>
 
+                    <Grid item xs={12}>
+                        <Typography variant={'h5'}>Filtrer</Typography>
+                    </Grid>
 
-                <Grid item xs={12}>
-                    <Typography variant={'h5'}>Filtrer</Typography>
-                </Grid>
+                    <Grid item xs={12}>
+                        <form onSubmit={searchAdvanced}>
+                            <Grid container className={classes.items}>
 
-                <Grid item xs={12}>
-                    <form onSubmit={searchAdvanced}>
-                        <Grid container className={classes.items}>
+                                <Grid item xs={6}>
+                                    <SearchSlider name={"checkedA"} titre={"Note globale"} activated={swActivated} number={1} setActivated={setSwActivated} sliderValues={sliderValues} setSliderValues={setSliderValues}/>
+                                    <SearchSlider name={"checkedB"} titre={"Sécurité"} activated={swActivated} number={2} setActivated={setSwActivated}/>
+                                    <SearchSlider name={"checkedC"} titre={"Coût de la vie"} activated={swActivated} number={3} setActivated={setSwActivated}/>
+                                    <SearchSlider name={"checkedD"} titre={"Vie nocturne"} activated={swActivated} number={4} setActivated={setSwActivated}/>
+                                    <SearchSlider name={"checkedE"} titre={"Vie culturelle"} activated={swActivated} number={5} setActivated={setSwActivated}/>
+                                </Grid>
 
-                            <Grid item xs={6}>
-                                <SearchSlider name={"checkedA"} titre={"Note globale"} activated={swActivated} number={1} setActivated={setSwActivated} sliderValues={sliderValues} setSliderValues={setSliderValues}/>
-                                <SearchSlider name={"checkedB"} titre={"Sécurité"} activated={swActivated} number={2} setActivated={setSwActivated}/>
-                                <SearchSlider name={"checkedC"} titre={"Coût de la vie"} activated={swActivated} number={3} setActivated={setSwActivated}/>
-                                <SearchSlider name={"checkedD"} titre={"Vie nocturne"} activated={swActivated} number={4} setActivated={setSwActivated}/>
-                                <SearchSlider name={"checkedE"} titre={"Vie culturelle"} activated={swActivated} number={5} setActivated={setSwActivated}/>
+                                <Grid item xs={6}>
+                                    <Grid container className={classes.items}>
+                                        <Grid item xs={3} className={classes.switch}>
+                                            <Switch checked={state.checkedF} onChange={handleSwitch} name="checkedF" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                            <Typography variant={'h6'}>Pays</Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            {state.checkedF ? <TextFieldPays/> : <TextFieldPaysDISABLED />}
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container className={classes.items}>
+                                        <Grid item xs={3} className={classes.switch}>
+                                            <Switch checked={state.checkedG} onChange={handleSwitch} name="checkedG" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                            <Typography variant={'h6'}>Hors Europe</Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <div>
+                                                <FormControl component="fieldset">
+                                                    {state.checkedG ? <RadioSearch/> : <RadioSearchDISABLED />}
+                                                </FormControl>
+                                            </div>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container className={classes.items}>
+                                        <Grid item xs={3} className={classes.switch}>
+                                            <Switch checked={state.checkedH} onChange={handleSwitch} name="checkedH" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                            <Typography variant={'h6'}>Demande</Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            {state.checkedH ? <DemandeChoix/> : <DemandeChoixDISABLE/>}
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container className={classes.items}>
+                                        <Grid item xs={3} className={classes.switch}>
+                                            <Switch checked={state.checkedI} onChange={handleSwitch} name="checkedI" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                            <Typography variant={'h6'}>Département</Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            {state.checkedI ? <DepartChoix/> : <DepartChoixDISABLE/>}
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </Grid>
 
-                            <Grid item xs={6}>
-                                <Grid container className={classes.items}>
-                                    <Grid item xs={3} className={classes.switch}>
-                                        <Switch checked={state.checkedF} onChange={handleSwitch} name="checkedF" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Typography variant={'h6'}>Pays</Typography>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        {state.checkedF ? <TextFieldPays/> : <TextFieldPaysDISABLED />}
-                                    </Grid>
-                                </Grid>
-                                <Grid container className={classes.items}>
-                                    <Grid item xs={3} className={classes.switch}>
-                                        <Switch checked={state.checkedG} onChange={handleSwitch} name="checkedG" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Typography variant={'h6'}>Hors Europe</Typography>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <div>
-                                            <FormControl component="fieldset">
-                                                {state.checkedG ? <RadioSearch/> : <RadioSearchDISABLED />}
-                                            </FormControl>
-                                        </div>
-                                    </Grid>
-                                </Grid>
-                                <Grid container className={classes.items}>
-                                    <Grid item xs={3} className={classes.switch}>
-                                        <Switch checked={state.checkedH} onChange={handleSwitch} name="checkedH" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Typography variant={'h6'}>Demande</Typography>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        {state.checkedH ? <DemandeChoix/> : <DemandeChoixDISABLE/>}
-                                    </Grid>
-                                </Grid>
-
-                                <Grid container className={classes.items}>
-                                    <Grid item xs={3} className={classes.switch}>
-                                        <Switch checked={state.checkedI} onChange={handleSwitch} name="checkedI" color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Typography variant={'h6'}>Département</Typography>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        {state.checkedI ? <DepartChoix/> : <DepartChoixDISABLE/>}
-                                    </Grid>
-                                </Grid>
+                            <Grid item xs={12}>
+                                <Button variant="contained" color='theme.palette.primary.light' type="submit">
+                                    Rechercher
+                                </Button>
                             </Grid>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <Button variant="contained" color='theme.palette.primary.light' type="submit">
-                                Rechercher
-                            </Button>
-                        </Grid>
-                    </form>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Table>
+            </Paper>
+            <div className={classes.root}>
                 {rechercheDone &&
-                <Paper>
-
-                </Paper>}
-            </Table>
-        </Paper>
+                    <Paper className={classes.paper2}>
+                        <TableContainer className={classes.container}>
+                            <Table stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                    <TableRow>
+                                        {columns.map((column) => (
+                                            <TableCell
+                                                key={column.id}
+                                                style={{ minWidth: column.minWidth }}
+                                            >
+                                                {column.label}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                                        return (
+                                            <TableRow hover role="checkbox" tabIndex={-1} key={row.code} >
+                                                {columns.map((column) => {
+                                                    const value = row[column.id];
+                                                    return (
+                                                        <TableCell key={column.id}>
+                                                            {value}
+                                                        </TableCell>
+                                                    );
+                                                })}
+                                            </TableRow>
+                                        );
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[10, 25, 100]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onChangePage={handleChangePage}
+                            onChangeRowsPerPage={handleChangeRowsPerPage}
+                        />
+                    </Paper>
+                }
+            </div>
+        </Container>
     );
 }

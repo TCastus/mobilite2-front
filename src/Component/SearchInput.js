@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define*/
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -22,7 +21,7 @@ export default function ComboBox() {
         { title : 'k-test10', country: 'France', ref: 'test10'},
     ];
     const [value, setValue] = React.useState(null);
-    let ref, i;
+    /*let ref, i;
     if (value != null){
         for(i=0;i<universities.length;i++) {
             if(value.title === universities[i].title){
@@ -30,7 +29,7 @@ export default function ComboBox() {
             }
         }
 
-    }
+    }*/
 
 
     return (
@@ -68,13 +67,12 @@ export default function ComboBox() {
                     // Regular option
                     return option.title;
                 }}
-                style={{ width: 300, position: 'absolute', left: '50%', top: '60%', transform: 'translate(-50%, -50%)'}}
+                style={{ width: 200, background: 'white'}}
                 renderInput={(params) => (
-                    <TextField {...params} label="Rechercher une université" variant="outlined" />
+                    <TextField {...params} label="Rechercher" variant="outlined" />
                 )}
             />
-            <br/><br/><br/><br/><br/>
-            <Button variant="contained" color='theme.palette.primary.light' href={ref}>
+            <Button variant="contained" color='theme.palette.primary.light'>
                 Rechercher
             </Button>
         </div>

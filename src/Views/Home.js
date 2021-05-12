@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Assets/Style/App.css';
 import { makeStyles } from '@material-ui/core/styles';
-import {Button, Container, CssBaseline, Toolbar, Typography} from "@material-ui/core";
+import {Button, Container, Typography} from "@material-ui/core";
 import MapPaperSelection from "../Component/MapPaperSelection";
 import PlaneIcon from "../Assets/Icon/PlaneIcon";
 

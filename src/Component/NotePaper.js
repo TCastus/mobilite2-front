@@ -28,7 +28,7 @@ export default function NotePaper({IconOn, IconOff, title, note, cols}) {
             <Paper>
                 <Typography variant={"body1"}>{title}</Typography>
                 {[1,2,3,4,5].map((value =>
-                    (value <= note) ? <IconOn fontSize={"small"} /> : <IconOff fontSize={"small"} />
+                    (value <= note) ? <IconOn key={value} fontSize={"small"} /> : <IconOff key={value} fontSize={"small"} />
                 ))}
             </Paper>
         </Grid>

@@ -60,25 +60,64 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function UniDetail() {
+const continent = {
+    "AS" : "Asie",
+    "AF" : "Afrique",
+    "AdN" : "Amerique du Nord",
+    "AdS" : "Amerique du Sud",
+    "EU" : "Europe",
+    "OC" : "Oceanie"
+};
+//{continent[uni.continent]}
+
+const mobitype = {
+    "DD" : "Double Diplôme",
+    "E" : "Echange"
+};
+
+const period = {
+    "Hebdo" : "Hebdomadaire",
+    "Mensuel" :  "Mensuel",
+    "Trim" : "Trimestriel",
+    "Sem" : "Semestriel",
+    "An" : "Annuel"
+};
+
+const access = {
+    "High" : "Demande forte",
+    "Medium" : "Demande normale",
+    "Low" : "Demande faible"
+};
+
+const languages = {
+    "TOEIC" : "TOEIC",
+    "INC" : "INCONNU",
+    "AUCUN" : "AUCUN"
+};
+
+function UniDetail(props) {
     const classes = useStyles();
 
     const [loaded, setLoaded] = useState(false); // true if API content is loaded
     const [uni, setUni] = useState({}); // contains API content
 
+    // eslint-disable-next-line react/prop-types
+    const uni_id = props.match.params.id;
+
     // Load university data from API
     useEffect(() => {
-        getUni().then((res) => {
+        console.log(loaded);
+        getUni(uni_id).then((res) => {
+            console.log(res.data);
             setUni(res.data);
             setLoaded(true);
-            console.log(res.data);
         });
+
     }, []);
 
     return (loaded ?
         (<>
             <PageHeader title={uni.name} subtitle={"Ville, pays, continent"}/>
-
             <Container className={classes.presGen} maxWidth={"lg"}>
                 <Grid container spacing={5}>
                     <Grid item sm={6} xs={12}>
@@ -107,16 +146,30 @@ function UniDetail() {
                         </Grid>
 
                         <div className={classes.infos}>
+
+                            <Typography variant={"h6"}>L universite en elle-meme</Typography>
+                            <Typography variant={"body1"}>Classement mondial de l universite : {uni.cwur_rank}</Typography>
+                            <Typography variant={"body1"}>Site web : {uni.website}</Typography>
+
+                            <Typography variant={"h6"}>Comment y acceder ?</Typography>
+                            <Typography variant={"body1"}>Duree de l echange : {"1 semestre"}</Typography>
+                            <Typography variant={"body1"}>Quand partir ? : {"4A S1"}</Typography>
+                            <Typography variant={"body1"}>Nombre de places en double diplomes : {"2"}</Typography>
+                            <Typography variant={"body1"}>Nombre de places en echange : {"2"}</Typography>
+                            <Typography variant={"body1"}>Demande : {"Demande forte"}</Typography>
+                            <Typography variant={"body1"}>Niveau d anglais requis : {"TOEIC"}</Typography>
+
+                            <Typography variant={"h6"}>Les cours</Typography>
+                            <Typography variant={"body1"}>Départements concernés :</Typography>{uni.department_availability.map((item) => <Chip className={classes.chip} key={item.name} size={"small"} label={item.name} />)}
+                            <Typography variant={"body1"}>Difficulte des cours : {uni.courses_difficulty+" /5"}</Typography>
+                            <Typography variant={"body1"}>Interet des cours : {uni.courses_interest+" /5"}</Typography>
+
                             <Typography variant={"h6"}>Logement</Typography>
                             <Typography variant={"body1"}>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
                             <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
 
 
-                            <Typography variant={"h6"}>Les cours</Typography>
-                            <Typography variant={"body1"}>
-                                Départements conernés :
-                                {uni.department_availability.map((item) => <Chip className={classes.chip} key={item.name} size={"small"} label={item.name} />)}
-                            </Typography>
+
                             <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
                             <Typography variant={"body1"}>Le campus : </Typography>
                         </div>
@@ -127,12 +180,23 @@ function UniDetail() {
 
                     <Grid item xs={12}>
                         <Typography variant={"h4"} className={classes.avis}>Commentaires</Typography>
-                        {uni.reviews.map((item, index) =>
-                            <Card key={index} className={classes.commentCard}>
-                                <Typography variant={"h6"} className={classes.commentTitle}>Commentaire de {item.surname} {item.name} diplômé en {item.diploma_year}</Typography>
-                                <Typography variant={"body1"} className={classes.comment}>{item.comments}</Typography>
-                            </Card>
-                        )}
+                        {
+                            uni.reviews.length == 0 ? (
+                                <div>
+                                    <Typography variant={"body1"}>Pas de commentaire pour cette universite</Typography>
+                                    <Button variant="contained" color="secondary" href="experience">
+                                        Donner mon avis
+                                    </Button>
+                                </div>
+                            ) :
+                                uni.reviews.map((item, index) =>
+                                    <Card key={index} className={classes.commentCard}>
+                                        <Typography variant={"h6"} className={classes.commentTitle}>Commentaire de {item.surname} {item.name} diplômé en {item.diploma_year}</Typography>
+                                        <Typography variant={"body1"} className={classes.comment}>{item.comments}</Typography>
+                                    </Card>
+                                )
+                        }
+
                     </Grid>
                 </Grid>
             </Container>

@@ -27,8 +27,9 @@ export const getHealthCheck = () => {
  * Get university detail from API
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const getUni = () => {
-    return client.get('/api/university/1/')
+export const getUni = (id) => {
+    //console.log(id);
+    return client.get('/api/university/'+id+'/')
         .then(res => {
             return res;
         }).catch(rematchError);

@@ -76,12 +76,6 @@ export const routeIndex = {
         {
             name:"Détail Université",
             component: UniDetail,
-            path: '/detail'
-        },
-
-        {
-            name:"Détail Université",
-            component: UniDetail,
             path: '/universite/:id'
         },
     ]

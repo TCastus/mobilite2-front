@@ -21,6 +21,7 @@ import {Button, Card, Chip, Container, Typography} from "@material-ui/core";
 import {CircularProgress} from "@material-ui/core";
 import PageHeader from "../Component/PageHeader";
 import NotePaper from "../Component/NotePaper";
+import {Link} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const continent = {
+/*const continent = {
     "AS" : "Asie",
     "AF" : "Afrique",
     "AdN" : "Amerique du Nord",
@@ -68,7 +69,6 @@ const continent = {
     "EU" : "Europe",
     "OC" : "Oceanie"
 };
-//{continent[uni.continent]}
 
 const mobitype = {
     "DD" : "Double Diplôme",
@@ -93,7 +93,7 @@ const languages = {
     "TOEIC" : "TOEIC",
     "INC" : "INCONNU",
     "AUCUN" : "AUCUN"
-};
+};*/
 
 function UniDetail(props) {
     const classes = useStyles();
@@ -167,23 +167,21 @@ function UniDetail(props) {
                             <Typography variant={"body1"}>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
                             <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
 
-
-
                             <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
                             <Typography variant={"body1"}>Le campus : </Typography>
                         </div>
-                        <Button variant="contained" color="secondary" href="experience">
-                            Je suis allée ici !
+                        <Button variant="contained" color="secondary" component={Link} to="/experience">
+                            Je suis allé(e) ici !
                         </Button>
                     </Grid>
 
                     <Grid item xs={12}>
                         <Typography variant={"h4"} className={classes.avis}>Commentaires</Typography>
                         {
-                            uni.reviews.length == 0 ? (
+                            uni.reviews.length === 0 ? (
                                 <div>
-                                    <Typography variant={"body1"}>Pas de commentaire pour cette universite</Typography>
-                                    <Button variant="contained" color="secondary" href="experience">
+                                    <Typography variant={"body1"}>Pas de commentaire pour cette université</Typography>
+                                    <Button variant="contained" color="secondary" component={Link} to="/experience">
                                         Donner mon avis
                                     </Button>
                                 </div>

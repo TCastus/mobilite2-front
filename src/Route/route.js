@@ -79,4 +79,5 @@ export const routeIndex = {
             path: '/detail'
         },
     ]
+
 };

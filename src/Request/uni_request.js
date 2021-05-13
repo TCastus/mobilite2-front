@@ -24,7 +24,7 @@ export const getHealthCheck = () => {
 };
 
 export const getUni = (i) => {
-    return client.get('/api/university/1/')
+    return client.get('/api/university/'+i+'/')
         .then(res => {
             return res;
         }).catch(rematchError);

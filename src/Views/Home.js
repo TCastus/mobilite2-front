@@ -36,24 +36,26 @@ const useStyles = makeStyles((theme) => ({
     container: {
         background: 'cadetblue',
         width: "100%",
-        padding: theme.spacing(5),
+        paddingTop: theme.spacing(2),
+        [theme.breakpoints.up['md']]: {
+            padding: theme.spacing(5),
+        },
         textAlign: 'center',
     },
     map: {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(2),
         width: '100%',
         height: '500px',
     },
     shareExp: {
-        backgroundColor: 'black',
+        backgroundColor: '#404040',
         color: '#c59b08',
-        padding: 10,
-        margin: '20px',
-        borderWidth: '8px',
-        borderRadius: '5px 5px 5px 5px',
-        opacity: 0.75,
-        background: "whitesmoke",
-        font: 'small-caps bold 24px/1 sans-serif',
+        padding: theme.spacing(3),
+        display: "flex",
+        alignItems: "center",
+    },
+    avisButton: {
+        marginTop: theme.spacing(3),
     }
 }));
 
@@ -96,32 +98,21 @@ export default function Home() {
                         )}
                     </MapContainer>
                 </Box>
-                : <CircularProgress/>};
+                : <CircularProgress/>}
 
             <Box component="div" className={classes.shareExp}>
-                <Typography variant={'h4'}>PARTAGEZ VOTRE EXPERIENCE</Typography>
-                <PlaneIcon/>
-
                 <Grid container spacing={1}>
-                    <Grid item xs={6} sm={7}>
-                        <Typography variant={'h6'}>
-                            Vous revenez d&apos;échange ? <br/>
-                            Aidez les étudiants dans leur choix en<br/>
-                            partageant votre expérience et en<br/>
-                            répondant à leurs questions.
-                        </Typography>
+                    <Grid item sm={6} style={{display: "flex", alignItems:"center", textAlign:"center", fontVariantCaps: 'small-caps', textDecoration:'underline'}}>
+                        <Typography component={Link} to={"experience"} variant={'h4'} style={{color: '#c59b08', margin:'0 auto'}}>Partagez votre expérience <BorderColorTwoToneIcon/></Typography>
                     </Grid>
 
-                    <Grid item xs={6} sm={2}>
-                        <Button variant="contained" color="primary" component={Link} to={"experience"}>
-                            Donner mon avis
-                            <BorderColorTwoToneIcon/>
-                        </Button>
+                    <Grid item sm={6}>
+                        <Typography variant={'h6'} style={{textAlign: 'left'}}>
+                            Vous êtes partis en d&apos;échange ? Aidez les étudiants dans leur choix en partageant votre expérience et en répondant à leurs questions.
+                        </Typography>
                     </Grid>
                 </Grid>
             </Box>
         </Box>
     );
 }
-
-

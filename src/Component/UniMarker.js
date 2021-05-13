@@ -6,12 +6,11 @@ UniMarker.propTypes = {
     name: PropTypes.string,
     longitude: PropTypes.string,
     latitude: PropTypes.string,
-    id: PropTypes.number,
     key: PropTypes.number,
 
 };
 
-function UniMarker ({name, latitude, longitude, id}) {
+function UniMarker ({name, latitude, longitude}) {
     return(
         (<>
             <Marker position={[parseFloat(latitude), parseFloat(longitude)]}>

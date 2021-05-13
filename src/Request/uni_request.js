@@ -24,11 +24,10 @@ export const getHealthCheck = () => {
 };
 
 export const getUni = (i) => {
-    return client.get('/api/university/'+i+'/')
+    return client.get('/api/university/'+ i +'/')
         .then(res => {
             return res;
         }).catch(rematchError);
-
 };
 
 export const getUniAll = () => {

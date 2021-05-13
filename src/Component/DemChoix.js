@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import * as PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 import {Grid, Switch, Typography} from "@material-ui/core";
@@ -7,11 +6,16 @@ import DemandeChoix from "./pageRecherche/DemandeChoix";
 import DemandeChoixDISABLE from "./pageRecherche/DemandeChoixDISABLE";
 
 
-Navbar.propTypes = {
+DemChoix.propTypes = {
+    ref: PropTypes.string,
+    name: PropTypes.string,
+    titre: PropTypes.string,
     activated: PropTypes.bool,
+    number: PropTypes.number,
+    setActivated: PropTypes.func
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     switch: {
         textAlign: "right",
     },

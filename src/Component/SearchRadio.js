@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import * as PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 import {FormControl, Grid, Switch, Typography} from "@material-ui/core";
@@ -6,8 +5,13 @@ import React from "react";
 import RadioSearch from "./pageRecherche/RadioSearch";
 import RadioSearchDISABLED from "./pageRecherche/RadioSearchDISABLED";
 
-Navbar.propTypes = {
+SearchRadio.propTypes = {
+    ref: PropTypes.string,
+    name: PropTypes.string,
+    titre: PropTypes.string,
     activated: PropTypes.bool,
+    number: PropTypes.number,
+    setActivated: PropTypes.func
 };
 
 const useStyles = makeStyles((theme) => ({

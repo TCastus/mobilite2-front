@@ -9,8 +9,6 @@ SearchSlider.propTypes = {
     activated: PropTypes.array.isRequired,
     number: PropTypes.number.isRequired,
     setActivated: PropTypes.func.isRequired,
-    sliderValues: PropTypes.array.isRequired,
-    setSliderValues: PropTypes.func.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SearchSlider({name, titre, activated, number, setActivated, sliderValues, setSliderValues}) {
+export default function SearchSlider({name, titre, activated, number, setActivated}) {
     const classes = useStyles();
 
     const handleSwitch = () => {

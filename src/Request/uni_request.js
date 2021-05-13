@@ -27,9 +27,19 @@ export const getHealthCheck = () => {
  * Get university detail from API
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const getUni = (id) => {
-    //console.log(id);
-    return client.get('/api/university/'+id+'/')
+export const getUni = (i) => {
+    return client.get('/api/university/'+ i +'/')
+        .then(res => {
+            return res;
+        }).catch(rematchError);
+};
+
+/**
+ * Get all universities' details from API
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getUniAll = () => {
+    return client.get('/api/university/')
         .then(res => {
             return res;
         }).catch(rematchError);

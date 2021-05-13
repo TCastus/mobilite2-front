@@ -85,4 +85,5 @@ export const routeIndex = {
             path: '/universite/:id'
         },
     ]
+
 };

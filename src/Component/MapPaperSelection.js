@@ -34,8 +34,6 @@ export default function MapPaperSelection () {
     const [uniA, setUniA] = React.useState({});
     const [loaded, setLoaded] = React.useState(false);
 
-
-
     React.useEffect(() => {
         getUniAll().then((res) => {
             setUniA(res.data);
@@ -44,10 +42,7 @@ export default function MapPaperSelection () {
         });
     }, []);
 
-
-
     return ( loaded ?
-
         (<>
             <Paper elevation={3} className={classes.paper}>
                 <Typography variant={'h2'}> Choisissez votre destination </Typography>
@@ -63,12 +58,10 @@ export default function MapPaperSelection () {
                                 console.log(uni);
                                 return <UniMarker latitude={uni.latitude} longitude={uni.longitude} name={uni.name} id ={uni.id} key={uni.id}/>;
                             })}
-
                         </MapContainer>}
                     </Grid>
 
                     <Grid item xs={6}>
-
                         <Typography display="inColomn">U</Typography>
                         <Typography display="inColomn">N</Typography>
                         <Typography display="inColomn">I</Typography>
@@ -84,7 +77,6 @@ export default function MapPaperSelection () {
                         </Typography>
                         <Typography display="inColomn">
                         </Typography>
-
                     </Grid>
                 </Grid>
             </Paper>

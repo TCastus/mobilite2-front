@@ -19,11 +19,15 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: '100% 100%',
         paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(5),
+        font: 'small-caps bold 24px/1 sans-serif',
+
     },
     title: {
         color: 'white',
         fontWeight: 'bold',
-        fontSize: '4em',
+        fontSize: '3em',
+        font: 'small-caps bold 24px/1 sans-serif',
+
     },
     subtitle: {
         color: 'white',

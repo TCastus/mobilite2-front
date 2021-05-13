@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
     },
+
     title: {
         height: '20vh',
         color: theme.palette.primary.light,
@@ -63,7 +64,7 @@ export default function Home() {
     return (
         <Box component ="div" className="note">
 
-            <PageHeader title={"Mobilités Internationales"}
+            <PageHeader classeName={classes.homeHeader} title={"Mobilités Internationales"}
                 subtitle={"Découvrez les avis des étudiants revenus d'échange"} />
                         
             <Box className= {classes.mapContainer}>

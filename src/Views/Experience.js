@@ -1,37 +1,22 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Rating from '@material-ui/lab/Rating';
 import {blueGrey} from "@material-ui/core/colors";
-import Typography from "@material-ui/core/Typography";
-import '../Assets/Style/style.css';
-import SecurityIcon from '@material-ui/icons/Security';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import {Container, TextField} from "@material-ui/core";
-//import Button from "@material-ui/core/Button";
-import SendIcon from "@material-ui/icons/Send";
-import FormControl from "@material-ui/core/FormControl";
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
+import {Box, Grid, MenuItem, Typography, FormControl,
+    RadioGroup, FormControlLabel, Radio, InputLabel, Select,
+    Input, Container, TextField} from "@material-ui/core";
+import Rating from '@material-ui/lab/Rating';
+import { Security as SecurityIcon,
+    AccountBox as AccountBoxIcon,
+    AttachMoney as AttachMoneyIcon,
+    EmojiPeople as EmojiPeopleIcon,
+    Send as SendIcon } from '@material-ui/icons';
+
 import PageHeader from "../Component/PageHeader";
-//import TextfieldExp from "../Component/pageExperience/TextfieldExp";
+import RatingForm from "../Component/RatingForm";
+
 
 const useStyles = makeStyles((theme) => ({
-    avis: {
-        textAlign: 'center',
-        margin: '0px',
-        padding: 2,
-        height: '20vh',
-    },
-    Box: {
+    grid: {
         border: '2px solid white',
         padding: 10,
         margin: theme.spacing(1, 'auto'),
@@ -41,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         background: "whitesmoke",
 
     },
-    Box2: {
+    ratingsGrid: {
         color: theme.palette.secondary,
         padding: 10,
         margin: theme.spacing(1, 'auto'),
@@ -51,71 +36,29 @@ const useStyles = makeStyles((theme) => ({
         background: "lightgrey",
         textAlign: "center",
     },
-    BoxWhite: {
+    comment: {
         padding: 10,
         margin: theme.spacing(1, 'auto'),
         background: "white",
-        //width: '400px'
 
     },
     items:{
         margin: theme.spacing(1, 'auto'),
     },
-
 }));
 
 export default function Experience() {
     const classes = useStyles();
 
-    //states of the name, lastname, year, email
-    //const [name, setName] = React.useState("");
-    //const [lastname, setLastName] = React.useState("");
-    //const [year, setYear] = React.useState("");
-    const [email, setEmail] = React.useState("");
-
-
-
-    const [selectedValue, setSelectedValue] = React.useState('a');
-
-    const handleChange2 = (event) => {
-        setSelectedValue(event.target.value);
-    };
-
-    const [value, setAge] = React.useState('');
-    const [open, setOpen] = React.useState(false);
-
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleChange3 = (event) => {
-        setEmail(event.target.value);
-    };
-
-    const handleSubmit = () => {
-
-    };
-
-
-
-
     return (
-        <div className={classes.root}>
+        <>
             <PageHeader title={"Partagez votre expérience"}/>
 
             <Container maxWidth="md">
-                <form onSubmit={handleSubmit} >
+                <form>
                     <Box component="div" className="header">
                         <Box component="div">
-                            <Grid component="div" className={classes.Box} >
+                            <Grid component="div" className={classes.grid} >
                                 <Typography variant={'h4'} className={classes.items}>Vous revenez d&apos;échange ?</Typography>
                                 <Typography variant={'h5'} className={classes.items}>Remplissez le formulaire ci-dessous et aidez les futures<br/> générations à faire leur choix !</Typography>
                                 <Grid container className={classes.items}>
@@ -134,7 +77,7 @@ export default function Experience() {
 
                                             <Grid item xs={12} spacing={3}>
                                                 <Typography id="depart">Département</Typography>
-                                                <Select labelId="depart" type="depart" id="select" value={value} open={open} onClose={handleClose} onOpen={handleOpen} onChange={handleChange}>
+                                                <Select labelId="depart" type="depart" id="select">
                                                     <MenuItem value="10">TC</MenuItem>
                                                     <MenuItem value="20">IF</MenuItem>
                                                     <MenuItem value="30">BS</MenuItem>
@@ -157,11 +100,11 @@ export default function Experience() {
                                         <Grid container>
                                             <Grid item xs={12}>
                                                 <Typography> Commentaire </Typography>
-                                                <TextField className={classes.BoxWhite} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." hintText="Message Field" floatingLabelText="MultiLine and FloatingLabel" multiline rows={5}/>
+                                                <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." hintText="Message Field" floatingLabelText="MultiLine and FloatingLabel" multiline rows={5}/>
                                             </Grid>
                                             <Grid item xs={12} spacing={3} className={classes.items}>
                                                 <Typography>Email</Typography>
-                                                <Input type="email" onChange={handleChange3} name="Email" id="Email" placeholder="ex : toto@gmail.com"/>
+                                                <Input type="email" name="Email" id="Email" placeholder="ex : toto@gmail.com"/>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Typography textAlign="center">
@@ -170,8 +113,8 @@ export default function Experience() {
                                                 </Typography>
                                                 <FormControl component="fieldset">
                                                     <RadioGroup row aria-label="position" name="position" defaultValue="end">
-                                                        <FormControlLabel value="end" control={<Radio color="primary" checked={selectedValue === 'a'} onChange={handleChange2} value="a" name="radio-button-demo" inputProps={{ 'aria-label': 'A' }}/>} label="Oui" />
-                                                        <FormControlLabel value="end" control={<Radio color="primary" checked={selectedValue === 'b'} onChange={handleChange2} value="b" name="radio-button-demo" inputProps={{ 'aria-label': 'B' }}/>} label="Non" />
+                                                        <FormControlLabel value="end" control={<Radio color="primary" value="a" name="radio-button-demo" inputProps={{ 'aria-label': 'A' }}/>} label="Oui" />
+                                                        <FormControlLabel value="end" control={<Radio color="primary" value="b" name="radio-button-demo" inputProps={{ 'aria-label': 'B' }}/>} label="Non" />
                                                     </RadioGroup>
                                                 </FormControl>
                                             </Grid>
@@ -183,80 +126,19 @@ export default function Experience() {
                         </Box>
 
                         <Box component="div" maxWidth="sm">
-                            <Grid container className={classes.Box2}>
-                                <Grid item xs={3}>
-                                    <Container maxWidth="md">
-                                        <Typography variant={'h6'} className={classes.Box}>
-                                            <Grid container>
-                                                <Grid item xs={12}>
-                                                    <SecurityIcon> </SecurityIcon>
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    Sécurité
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    <Rating id="sécu" name="hover-feedback" /*value={value} */ precision={0.5}/>
-                                                </Grid>
-                                            </Grid>
-                                        </Typography>
-                                    </Container>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Container maxWidth="sm">
-                                        <Typography variant={'h6'} className={classes.Box}>
-                                            <Grid container>
-                                                <Grid item xs={12}>
-                                                    <AttachMoneyIcon> </AttachMoneyIcon>
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    Coût de la vie
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    <Rating id="cout" name="hover-feedback2"/*value={value}*/ precision={0.5} color={blueGrey}/>
-                                                </Grid>
-                                            </Grid>
-                                        </Typography>
-                                    </Container>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Container maxWidth="sm">
-                                        <Typography variant={'h6'} className={classes.Box}>
-                                            <Grid container>
-                                                <Grid item xs={12}>
-                                                    <AccountBoxIcon> </AccountBoxIcon>
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    Vie culturelle
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    <Rating id="social" name="hover-feedback3"/*value={value}*/ precision={0.5} color={blueGrey}/>
-                                                </Grid>
-                                            </Grid>
-                                        </Typography>
-                                    </Container>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <Container maxWidth="sm">
-                                        <Typography variant={'h6'} className={classes.Box}>
-                                            <Grid container>
-                                                <Grid item xs={12}>
-                                                    <EmojiPeopleIcon> </EmojiPeopleIcon>
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    Vie nocturne
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    <Rating id="nuit" name="hover-feedback4"/*value={value}*/ precision={0.5} color={blueGrey}/>
-                                                </Grid>
-                                            </Grid>
-                                        </Typography>
-                                    </Container>
-                                </Grid>
+                            <Grid container className={classes.ratingsGrid}>
+
+                                <RatingForm title={"Sécurité"} Icon={SecurityIcon} />
+                                <RatingForm title={"Coût de la vie"} Icon={AttachMoneyIcon} />
+                                <RatingForm title={"Vie culturelle"} Icon={AccountBoxIcon} />
+                                <RatingForm title={"Vie nocturne"} Icon={EmojiPeopleIcon} />
+
+
                                 <Grid item xs={12}>
                                     <Typography variant={'h4'}>
                                         Note globale
                                         <Grid item xs={12}>
-                                            <Rating id="note" name="hover-feedback5"/*value={value}*/ precision={0.5} color={blueGrey}/>
+                                            <Rating id="note" name="hover-feedback5" precision={0.5} color={blueGrey}/>
                                         </Grid>
                                     </Typography>
                                 </Grid>
@@ -273,6 +155,6 @@ export default function Experience() {
                     </Box>
                 </form>
             </Container>
-        </div>
+        </>
     );
 }

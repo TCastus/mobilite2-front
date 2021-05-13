@@ -7,7 +7,7 @@ import DemandeChoix from "./pageRecherche/DemandeChoix";
 import DemandeChoixDISABLE from "./pageRecherche/DemandeChoixDISABLE";
 
 
-Navbar.propTypes = {
+DemChoix.propTypes = {
     ref: PropTypes.string,
     name: PropTypes.string,
     titre: PropTypes.string,

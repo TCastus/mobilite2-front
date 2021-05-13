@@ -7,7 +7,7 @@ import {
     Paper,
     Switch,
     Table, TableBody, TableCell,
-    TableContainer, TableHead, TablePagination, TableRow,
+    TableContainer, TableHead, TableRow,
     TextField,
     Typography
 } from "@material-ui/core";
@@ -21,14 +21,6 @@ import DemandeChoix from "./pageRecherche/DemandeChoix";
 import DemandeChoixDISABLE from "./pageRecherche/DemandeChoixDISABLE";
 import DepartChoix from "./pageRecherche/DepartChoix";
 import DepartChoixDISABLE from "./pageRecherche/DepartChoixDISABLE";
-
-const columns = [
-    {id: 'universite', label: 'Université', minWidth: 170},
-    {id: 'pays', label: 'Pays', minWidth: 170},
-    {id: 'demande', label: 'Demande', minWidth: 170},
-    {id: 'departements', label: 'Départements', minWidth: 170},
-
-];
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -77,19 +69,7 @@ export default function SearchBox() {
     const [uniList, setUniList] = useState([]);
     const [rechercheDone, setRecherDone] = useState(false);
 
-    //Table items
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
-
+    // Temporary, to replace search
     useEffect(() => {
         getUniAll().then((res) => {
             setUniList(res.data);
@@ -140,7 +120,8 @@ export default function SearchBox() {
                     <Grid item xs={12}>
                         <Typography variant={'h5'}>Rechercher par nom</Typography>
                         <form onSubmit={searchName}>
-                            <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal"/>
+                            <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal" value={name}
+                                onChange={(e) => setName(e.target.value)}/>
                             <Grid item xs={12} className={classes.searchUni}>
                                 <Button variant="contained" color='theme.palette.primary.light' type="submit">
                                     Rechercher

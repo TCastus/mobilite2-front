@@ -8,10 +8,15 @@ import DemandeChoixDISABLE from "./pageRecherche/DemandeChoixDISABLE";
 
 
 Navbar.propTypes = {
+    ref: PropTypes.string,
+    name: PropTypes.string,
+    titre: PropTypes.string,
     activated: PropTypes.bool,
+    number: PropTypes.number,
+    setActivated: PropTypes.func
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     switch: {
         textAlign: "right",
     },

@@ -18,7 +18,9 @@ const useStyles = makeStyles((theme) =>
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            alignItems:"center"
+            alignItems:"center",
+            font: 'small-caps bold 24px/1 sans-serif',
+
         },
         github: {
             color: theme.palette.secondary.contrastText,

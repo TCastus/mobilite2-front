@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import * as PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core/styles";
 import {FormControl, Grid, Switch, Typography} from "@material-ui/core";

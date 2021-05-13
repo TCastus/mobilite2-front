@@ -78,6 +78,12 @@ export const routeIndex = {
             component: UniDetail,
             path: '/detail'
         },
+
+        {
+            name:"Détail Université",
+            component: UniDetail,
+            path: '/universite/:id'
+        },
     ]
 
 };

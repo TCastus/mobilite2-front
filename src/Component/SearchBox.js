@@ -59,6 +59,7 @@ export default function SearchBox() {
 
     // Uni name for first search form
     const [name, setName] = useState("");
+    //setName("Alice");
 
     // Switch states for second form
     const sliders = ['Note globale', 'Sécurité', 'Cout de la vie', 'Vie culturelle', 'Vie nocturne'];

@@ -23,6 +23,10 @@ export const getHealthCheck = () => {
         }).catch(rematchError);
 };
 
+/**
+ * Get university detail from API
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export const getUni = (i) => {
     return client.get('/api/university/'+ i +'/')
         .then(res => {
@@ -30,6 +34,10 @@ export const getUni = (i) => {
         }).catch(rematchError);
 };
 
+/**
+ * Get all universities' details from API
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export const getUniAll = () => {
     return client.get('/api/university/')
         .then(res => {
@@ -37,3 +45,25 @@ export const getUniAll = () => {
         }).catch(rematchError);
 };
 
+/**
+ * Performs a get request to search university by name
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getSearchName = (name) => {
+    return client.get('/api/university/search?name='+name)
+        .then(res => {
+            return res;
+        }).catch(rematchError);
+};
+
+/**
+ * Use API advanced search form to retrieve selected universities
+ * @param form
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getSearchAdvance = (form) => {
+    return client.post('/api/university/search', form)
+        .then(res => {
+            return res;
+        }).catch(rematchError);
+};

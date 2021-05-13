@@ -1,12 +1,11 @@
 // import '../Assets/Style/SelectionMap.css';
 import React from 'react';
 import{ makeStyles } from "@material-ui/core/styles";
-import {Container, Grid, Paper, Typography} from "@material-ui/core";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import {MapContainer, TileLayer} from "react-leaflet";
 import {getUniAll} from '../Request/uni_request';
 import {CircularProgress} from "@material-ui/core";
 import UniMarker from "./UniMarker";
-import {Marker, Popup} from "leaflet/dist/leaflet-src.esm";
 
 
 const useStyles = makeStyles((theme) => ({

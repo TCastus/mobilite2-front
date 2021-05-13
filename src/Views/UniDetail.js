@@ -62,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
 
 function UniDetail() {
     const classes = useStyles();
-
     const [loaded, setLoaded] = useState(false); // true if API content is loaded
     const [uni, setUni] = useState({}); // contains API content
 

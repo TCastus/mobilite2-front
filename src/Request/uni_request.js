@@ -23,9 +23,17 @@ export const getHealthCheck = () => {
         }).catch(rematchError);
 };
 
-export const getUni = () => {
-    return client.get('/api/university/1/')
+export const getUni = (i) => {
+    return client.get('/api/university/'+ i +'/')
         .then(res => {
             return res;
         }).catch(rematchError);
 };
+
+export const getUniAll = () => {
+    return client.get('/api/university/')
+        .then(res => {
+            return res;
+        }).catch(rematchError);
+};
+

@@ -21,7 +21,7 @@ import {Button, Card, Chip, Container, Typography} from "@material-ui/core";
 import {CircularProgress} from "@material-ui/core";
 import PageHeader from "../Component/PageHeader";
 import NotePaper from "../Component/NotePaper";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -95,24 +95,23 @@ const languages = {
     "AUCUN" : "AUCUN"
 };*/
 
-function UniDetail(props) {
+export default function UniDetail() {
     const classes = useStyles();
+
     const [loaded, setLoaded] = useState(false); // true if API content is loaded
     const [uni, setUni] = useState({}); // contains API content
 
-    // eslint-disable-next-line react/prop-types
-    const uni_id = props.match.params.id;
+    const { id } = useParams();
 
     // Load university data from API
     useEffect(() => {
-        console.log(loaded);
-        getUni(uni_id).then((res) => {
+        getUni(id).then((res) => {
             console.log(res.data);
             setUni(res.data);
             setLoaded(true);
         });
 
-    }, []);
+    }, [id]);
 
     return (loaded ?
         (<>
@@ -120,7 +119,7 @@ function UniDetail(props) {
             <Container className={classes.presGen} maxWidth={"lg"}>
                 <Grid container spacing={5}>
                     <Grid item sm={6} xs={12}>
-                        <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={13} scrollWheelZoom={false} className={classes.map}>
+                        <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={8} scrollWheelZoom={false} className={classes.map}>
                             <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -199,5 +198,3 @@ function UniDetail(props) {
             </Container>
         </>) : <CircularProgress />);
 }
-
-export default UniDetail;

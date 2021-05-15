@@ -29,3 +29,17 @@ export const theme = createMuiTheme({
         ].join(','),
     },
 });
+
+theme.typography.h1 = {
+    fontSize: '2.5em',
+    [theme.breakpoints.up('md')]: {
+        fontSize: '4.5em',
+    }
+};
+
+theme.typography.h2 = {
+    fontSize: '1.5em',
+    [theme.breakpoints.up('md')]: {
+        fontSize: '2.5em',
+    }
+};

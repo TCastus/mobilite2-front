@@ -158,7 +158,14 @@ export default function UniDetail() {
                             <Typography variant={"body1"}>Niveau d anglais requis : {"TOEIC"}</Typography>
 
                             <Typography variant={"h6"}>Les cours</Typography>
-                            <Typography variant={"body1"}>Départements concernés :</Typography>{uni.department_availability.map((item) => <Chip className={classes.chip} key={item.name} size={"small"} label={item.name} />)}
+                            <Typography variant={"body1"}>Départements concernés en DD :</Typography>
+
+                            {/* Oui j'en suis fier*/}
+                            {[...new Set(uni.placesDD
+                                .map((res)=>res.department_availability.map((dep)=>dep.name))
+                                .reduce((list1, list2)=>list1.concat(list2)))]
+                                .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}
+
                             <Typography variant={"body1"}>Difficulte des cours : {uni.courses_difficulty+" /5"}</Typography>
                             <Typography variant={"body1"}>Interet des cours : {uni.courses_interest+" /5"}</Typography>
 

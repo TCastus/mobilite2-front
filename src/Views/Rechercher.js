@@ -266,7 +266,12 @@ function Rechercher() {
                                     <TableRow key={row.name}>
                                         <TableCell align="right" component="th" scope="row"> {row.name} </TableCell>
                                         <TableCell align="right">{row.id}</TableCell>
-                                        <TableCell align="center">{row.department_availability.map((depart) => (<Chip key={depart.name} label={depart.name}/>))}</TableCell>
+                                        <TableCell align="center">
+                                            {[...new Set(row.placesDD
+                                                .map((res)=>res.department_availability.map((dep)=>dep.name))
+                                                .reduce((list1, list2)=>list1.concat(list2)))]
+                                                .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}
+                                        </TableCell>
                                         <TableCell align="left">{row.access}</TableCell>
                                     </TableRow>
                                 ))}

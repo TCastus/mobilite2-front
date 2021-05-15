@@ -161,7 +161,6 @@ function Rechercher() {
                             </form>
                         </Grid>
 
-
                         <Grid item xs={12}>
                             <Typography variant={'h5'}>Filtrer</Typography>
                         </Grid>

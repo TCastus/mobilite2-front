@@ -1,10 +1,8 @@
 import React from 'react';
 import '../Assets/Style/App.css';
 import {makeStyles} from '@material-ui/core/styles';
-import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
-import PlaneIcon from "../Assets/Icon/PlaneIcon";
+import {CircularProgress, Typography} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import BorderColorTwoToneIcon from '@material-ui/icons/BorderColorTwoTone';
 import {Link} from "react-router-dom";
 import PageHeader from "../Component/PageHeader";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";

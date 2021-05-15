@@ -47,14 +47,14 @@ export default function Mobilite() {
     return (
         <div className={classes.root}>
 
-            <PageHeader title={"Les différentes mobilités"}/>
+            <PageHeader title={"Se rensigner sur les mobilités"}/>
 
             <Box component="div" className={classes.boxFAQ}>
                 <Typography variant={'h4'}>
                     Besoin d&apos;informations supplémentaires sur les échanges ?
                 </Typography>
                 <Typography variant={'h5'}>
-                    Découvre les informations essentielles que tu dois savoir spécifiques à ton département !
+                    Consulte les informations spécifiques données par ton département
                 </Typography>
 
                 <Grid container spacing={3}>

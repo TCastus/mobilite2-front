@@ -47,16 +47,6 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: '500px',
     },
-    shareExp: {
-        backgroundColor: '#404040',
-        color: '#c59b08',
-        padding: theme.spacing(3),
-        display: "flex",
-        alignItems: "center",
-    },
-    avisButton: {
-        marginTop: theme.spacing(3),
-    }
 }));
 
 export default function Home() {
@@ -99,20 +89,6 @@ export default function Home() {
                     </MapContainer>
                 </Box>
                 : <CircularProgress/>}
-
-            <Box component="div" className={classes.shareExp}>
-                <Grid container spacing={1}>
-                    <Grid item sm={6} style={{display: "flex", alignItems:"center", textAlign:"center", fontVariantCaps: 'small-caps', textDecoration:'underline'}}>
-                        <Typography component={Link} to={"experience"} variant={'h4'} style={{color: '#c59b08', margin:'0 auto'}}>Partagez votre expérience <BorderColorTwoToneIcon/></Typography>
-                    </Grid>
-
-                    <Grid item sm={6}>
-                        <Typography variant={'h6'} style={{textAlign: 'left'}}>
-                            Vous êtes partis en d&apos;échange ? Aidez les étudiants dans leur choix en partageant votre expérience et en répondant à leurs questions.
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Box>
         </Box>
     );
 }

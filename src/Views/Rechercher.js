@@ -3,27 +3,18 @@ import '../Assets/Style/App.css';
 import {makeStyles} from "@material-ui/core/styles";
 import {
     Button, Chip,
-    Container,
-    FormControl,
-    Grid,
-    Paper,
-    Switch, Table, TableBody, TableCell,
+    Container, FormControlLabel,
+    Grid, MenuItem,
+    Paper, Radio, RadioGroup, Select,
+    Table, TableBody, TableCell,
     TableContainer, TableHead, TableRow,
     TextField,
     Typography
 } from "@material-ui/core";
+import { Controller, useForm } from "react-hook-form";
 import PageHeader from "../Component/PageHeader";
+import { getUniAll } from "../Request/uni_request";
 import SearchSlider from "../Component/SearchSlider";
-import TextFieldPays from "../Component/pageRecherche/TextFieldPays";
-import TextFieldPaysDISABLED from "../Component/pageRecherche/TextFieldPaysDISABLED";
-import RadioSearch from "../Component/pageRecherche/RadioSearch";
-import RadioSearchDISABLED from "../Component/pageRecherche/RadioSearchDISABLED";
-import DemandeChoix from "../Component/pageRecherche/DemandeChoix";
-import DemandeChoixDISABLE from "../Component/pageRecherche/DemandeChoixDISABLE";
-import DepartChoix from "../Component/pageRecherche/DepartChoix";
-import DepartChoixDISABLE from "../Component/pageRecherche/DepartChoixDISABLE";
-import {getSearchAdvance, getSearchName, getUniAll} from "../Request/uni_request";
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,12 +51,10 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(5),
         textAlign: 'center',
     },
-
     items: {
         margin: theme.spacing(1, 'auto'),
         textAlign: 'left',
     },
-
     switch: {
         textAlign: "right",
     },
@@ -78,21 +67,67 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const access = [{
+    value: '',
+    label: 'indifférent',
+},{
+    value: 'Low',
+    label: 'Demande Faible',
+}, {
+    value: 'Medium',
+    label: 'Demande Moyenne',
+}, {
+    value: 'High',
+    label: 'Demande Forte',
+}];
 
+const departments = [{
+    value: 'TC',
+    label: 'Télécomunications, Services et Usages',
+}, {
+    value: 'BIM',
+    label: 'Biosciences BIM',
+}, {
+    value: 'BB',
+    label: 'Biosciences BB',
+}, {
+    value: 'GCU',
+    label: 'Génie Civil et Urbanisme',
+}, {
+    value: 'GEn',
+    label: 'Génie Energétique et Environnement',
+}, {
+    value: 'GM',
+    label: 'Génie Mécanique',
+}, {
+    value: 'IF',
+    label: 'Informatique',
+}, {
+    value: 'GE',
+    label: 'Génie Electrique',
+}, {
+    value: 'GI',
+    label: 'Génie Industriel',
+}, {
+    value: 'SGM',
+    label: 'Science et Génie des Matériaux',
+},
+];
+
+// Provide default form values
+// You HAVE to do it for Material not to whine about controlled components
+const defaultValues = {
+    country: "",
+    outside_europe: true,
+    access: "",
+    department: "TC"
+};
 
 function Rechercher() {
     const classes = useStyles();
-
-    // Uni name for first search form
+    const { handleSubmit, control } = useForm({defaultValues});
     const [name, setName] = useState("");
-    //setName("Alice");
 
-    // Switch states for second form
-    const sliders = ['Note globale', 'Sécurité', 'Cout de la vie', 'Vie culturelle', 'Vie nocturne'];
-    const [swActivated, setSwActivated] = useState(Array(sliders.length).fill(false));
-    const [sliderValues, setSliderValues] = useState(Array(sliders.length).fill(0));
-
-    // University results
     const [uniList, setUniList] = useState([]);
     const [rechercheDone, setRecherDone] = useState(false);
 
@@ -105,39 +140,27 @@ function Rechercher() {
         });
     }, []);
 
-
     // First form submission
-    const searchName = () => {
-        getSearchName(name).then(res => {
-            setUniList(res.data);
-            setRecherDone(true);
-        });
+    const searchName = (e) => {
+        e.preventDefault();
+        console.log(name);
+
+        // Back not ready for now, uncomment later
+        // getSearchName(name).then(res => {
+        //     setUniList(res.data);
+        //     setRecherDone(true);
+        // });
     };
 
     // Second form submission
-    const searchAdvanced = () => {
-        let form = {};
-        for (let i = 0; i < sliders.length; i++) {
-            if (swActivated[i]) {
-                form[sliders[i]] = sliderValues[i];
+    const searchAdvanced = (form) => {
+        console.log(form);
 
-            }
-        }
-
-        getSearchAdvance(form).then(res => {
-            setUniList(res.data);
-            setRecherDone(true);
-        });
-    };
-    const [state, setState] = React.useState({
-        checkedF: false,
-        checkedG: false,
-        checkedH: false,
-        checkedI: false,
-    });
-
-    const handleSwitch = (event) => {
-        setState({...state, [event.target.name]: event.target.checked});
+        // Back not ready for now, uncomment later
+        // getSearchAdvance(form).then(res => {
+        //     setUniList(res.data);
+        //     setRecherDone(true);
+        // });
     };
 
     return (
@@ -151,10 +174,10 @@ function Rechercher() {
                         <Grid item xs={12}>
                             <Typography variant={'h5'}>Rechercher par nom</Typography>
                             <form onSubmit={searchName}>
-                                <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal" value={name}
+                                <TextField id="outlined-basic" label="Nom d'université" variant="filled" value={name}
                                     onChange={(e) => setName(e.target.value)}/>
                                 <Grid item xs={12} className={classes.searchUni}>
-                                    <Button variant="contained" color='theme.palette.primary.light' type="submit">
+                                    <Button variant="contained" color='primary' type="submit">
                                         Rechercher
                                     </Button>
                                 </Grid>
@@ -166,82 +189,94 @@ function Rechercher() {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <form onSubmit={searchAdvanced}>
+                            <form onSubmit={handleSubmit(searchAdvanced)}>
                                 <Grid container className={classes.items}>
 
                                     <Grid item xs={6}>
-                                        <SearchSlider name={"checkedA"} titre={"Note globale"} activated={swActivated}
-                                            number={1} setActivated={setSwActivated} sliderValues={sliderValues}
-                                            setSliderValues={setSliderValues}/>
-                                        <SearchSlider name={"checkedB"} titre={"Sécurité"} activated={swActivated}
-                                            number={2} setActivated={setSwActivated}/>
-                                        <SearchSlider name={"checkedC"} titre={"Coût de la vie"} activated={swActivated}
-                                            number={3} setActivated={setSwActivated}/>
-                                        <SearchSlider name={"checkedD"} titre={"Vie nocturne"} activated={swActivated}
-                                            number={4} setActivated={setSwActivated}/>
-                                        <SearchSlider name={"checkedE"} titre={"Vie culturelle"} activated={swActivated}
-                                            number={5} setActivated={setSwActivated}/>
+                                        <SearchSlider titre={"Note globale minimale"} control={control} name={"note"} />
+                                        <SearchSlider titre={"Note coût de la vie minimale"} control={control} name={"cost_of_living"} />
+                                        <SearchSlider titre={"Note vie nocturne minimale"} control={control} name={"night_life_grade"} />
+                                        <SearchSlider titre={"Note vie culturelle minimale"} control={control} name={"cultural_life_grade"} />
                                     </Grid>
 
                                     <Grid item xs={6}>
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3} className={classes.switch}>
-                                                <Switch checked={state.checkedF} onChange={handleSwitch} name="checkedF"
-                                                    color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
-                                            </Grid>
                                             <Grid item xs={3}>
                                                 <Typography variant={'h6'}>Pays</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
-                                                {state.checkedF ? <TextFieldPays/> : <TextFieldPaysDISABLED/>}
-                                            </Grid>
-                                        </Grid>
-                                        <Grid container className={classes.items}>
-                                            <Grid item xs={3} className={classes.switch}>
-                                                <Switch checked={state.checkedG} onChange={handleSwitch} name="checkedG"
-                                                    color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
-                                            </Grid>
-                                            <Grid item xs={3}>
-                                                <Typography variant={'h6'}>Hors Europe</Typography>
-                                            </Grid>
-                                            <Grid item xs={6}>
-                                                <div>
-                                                    <FormControl component="fieldset">
-                                                        {state.checkedG ? <RadioSearch/> : <RadioSearchDISABLED/>}
-                                                    </FormControl>
-                                                </div>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid container className={classes.items}>
-                                            <Grid item xs={3} className={classes.switch}>
-                                                <Switch checked={state.checkedH} onChange={handleSwitch} name="checkedH"
-                                                    color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
-                                            </Grid>
-                                            <Grid item xs={3}>
-                                                <Typography variant={'h6'}>Demande</Typography>
-                                            </Grid>
-                                            <Grid item xs={6}>
-                                                {state.checkedH ? <DemandeChoix/> : <DemandeChoixDISABLE/>}
+                                                <Controller
+                                                    render={({ field }) =>
+                                                        <TextField id="outlined-basic" label="Pays" variant="filled" size="small" {...field} />
+                                                    }
+                                                    name="country"
+                                                    control={control}
+                                                />
                                             </Grid>
                                         </Grid>
 
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3} className={classes.switch}>
-                                                <Switch checked={state.checkedI} onChange={handleSwitch} name="checkedI"
-                                                    color="primary" inputProps={{'aria-label': 'secondary checkbox'}}/>
+                                            <Grid item xs={3}>
+                                                <Typography variant={'h6'}>Hors Europe</Typography>
                                             </Grid>
+                                            <Grid item xs={6}>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <RadioGroup row aria-label="outside_europe" {...field}>
+                                                            <FormControlLabel value="true" control={<Radio color="primary" />} label="Oui" />
+                                                            <FormControlLabel value="false" control={<Radio color="primary" />} label="Non" />
+                                                        </RadioGroup>
+                                                    )}
+                                                    name="outside_europe"
+                                                    control={control}
+                                                />
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid container className={classes.items}>
+                                            <Grid item xs={3}>
+                                                <Typography variant={'h6'}>Demande</Typography>
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <Select {...field}>
+                                                            {access.map((option) => (
+                                                                <MenuItem key={option.value} value={option.value}>
+                                                                    {option.label}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    )}
+                                                    name={'access'}
+                                                    control={control}/>
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid container className={classes.items}>
                                             <Grid item xs={3}>
                                                 <Typography variant={'h6'}>Département</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
-                                                {state.checkedI ? <DepartChoix/> : <DepartChoixDISABLE/>}
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <Select {...field}>
+                                                            {departments.map((option) => (
+                                                                <MenuItem key={option.value} value={option.value}>
+                                                                    {option.label}
+                                                                </MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    )}
+                                                    name={'department'}
+                                                    control={control}/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <Button variant="contained" color='theme.palette.primary.light' type="submit">
+                                    <Button variant="contained" color='primary' type="submit">
                                         Rechercher
                                     </Button>
                                 </Grid>
@@ -249,6 +284,7 @@ function Rechercher() {
                         </Grid>
                     </Grid>
                 </Paper>
+
                 <div className={classes.root}>
                     {rechercheDone &&
                     <TableContainer className={classes.container}>

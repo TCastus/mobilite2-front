@@ -55,8 +55,9 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1, 'auto'),
         textAlign: 'left',
     },
-    switch: {
-        textAlign: "right",
+    sliders: {
+        margin: theme.spacing(2.5, 'auto'),
+        textAlign: 'left',
     },
     searchUni: {
         margin: theme.spacing(1, 'auto'),
@@ -191,17 +192,24 @@ function Rechercher() {
                         <Grid item xs={12}>
                             <form onSubmit={handleSubmit(searchAdvanced)}>
                                 <Grid container className={classes.items}>
-
                                     <Grid item xs={6}>
-                                        <SearchSlider titre={"Note globale minimale"} control={control} name={"note"} />
-                                        <SearchSlider titre={"Note coût de la vie minimale"} control={control} name={"cost_of_living"} />
-                                        <SearchSlider titre={"Note vie nocturne minimale"} control={control} name={"night_life_grade"} />
-                                        <SearchSlider titre={"Note vie culturelle minimale"} control={control} name={"cultural_life_grade"} />
+                                        <Grid className={classes.sliders}>
+                                            <SearchSlider titre={"Note globale minimale"} control={control} name={"note"} />
+                                        </Grid>
+                                        <Grid className={classes.sliders}>
+                                            <SearchSlider titre={"Note coût de la vie minimale"} control={control} name={"cost_of_living"} />
+                                        </Grid>
+                                        <Grid className={classes.sliders}>
+                                            <SearchSlider titre={"Note vie nocturne minimale"} control={control} name={"night_life_grade"} />
+                                        </Grid>
+                                        <Grid className={classes.sliders}>
+                                            <SearchSlider titre={"Note vie culturelle minimale"} control={control} name={"cultural_life_grade"} />
+                                        </Grid>
                                     </Grid>
 
                                     <Grid item xs={6}>
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3}>
+                                            <Grid item xs={3} className={classes.items}>
                                                 <Typography variant={'h6'}>Pays</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
@@ -216,7 +224,7 @@ function Rechercher() {
                                         </Grid>
 
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3}>
+                                            <Grid item xs={3} className={classes.items}>
                                                 <Typography variant={'h6'}>Hors Europe</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
@@ -234,7 +242,7 @@ function Rechercher() {
                                         </Grid>
 
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3}>
+                                            <Grid item xs={3} className={classes.items}>
                                                 <Typography variant={'h6'}>Demande</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
@@ -254,7 +262,7 @@ function Rechercher() {
                                         </Grid>
 
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3}>
+                                            <Grid item xs={3} className={classes.items}>
                                                 <Typography variant={'h6'}>Département</Typography>
                                             </Grid>
                                             <Grid item xs={6}>

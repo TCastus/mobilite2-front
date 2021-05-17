@@ -27,7 +27,7 @@ export default function SearchSlider({titre, name, control}) {
     return(
         <Grid container className={classes.items}>
             <Grid item xs={6}>
-                <Typography variant={'body1'}>{titre}</Typography>
+                <Typography variant={'h6'}>{titre}</Typography>
             </Grid>
             <Grid item xs={6}>
                 <Controller

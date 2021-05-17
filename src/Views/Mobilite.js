@@ -16,12 +16,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
     },
-
     shareExp: {
         backgroundColor: 'black',
         color: '#c59b08',
         padding: 10,
-        margin: '20px',
+        margin: 20,
         borderWidth: '8px',
         borderRadius: '5px 5px 5px 5px',
         opacity: 0.75,
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     boxFAQ: {
         backgroundColor: 'whitesmoke',
         padding: 10,
+        margin: -10,
         textAlign: 'center',
         borderWidth: '8px',
         borderRadius: '5px 5px 5px 5px',
@@ -89,7 +89,7 @@ export default function Mobilite() {
 
                     </Grid>
                 </Grid>
-                <Grid container spacing={3}  >
+                <Grid container spacing={3}>
                     <Grid item xs={12} className={classes.boxFAQ}>
 
                         <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3075">
@@ -105,9 +105,6 @@ export default function Mobilite() {
                         </Button>
                     </Grid>
                 </Grid>
-
-
-
             </Box>
             <Box component="div" className={classes.shareExp}>
                 <Typography variant={'h4'}>PARTAGEZ VOTRE EXPERIENCE</Typography>
@@ -115,7 +112,7 @@ export default function Mobilite() {
 
                 <Grid container spacing={1}>
                     <Grid item xs={6} sm={7}>
-                        <Typography variant={'h6'}>
+                        <Typography variant={'h6'} className={classes.shareExp}>
                             Vous revenez d&apos;échange ? <br/>
                             Aidez les étudiants dans leur choix en<br/>
                             partageant votre expérience et en<br/>
@@ -123,7 +120,7 @@ export default function Mobilite() {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={6} sm ={2} >
+                    <Grid item xs={6} sm ={2} className={classes.shareExp}>
                         <Button variant="contained" color="primary" component={Link} to={"experience"}>
                             Donner mon avis
                             <BorderColorTwoToneIcon />

@@ -46,7 +46,11 @@ const useStyles = makeStyles((theme) =>
     })
 );
 
-
+/**
+ * Footer component, displaying an array of routes and links
+ * @param routes routes to be displayed on the left of the footer
+ * @returns {JSX.Element}
+ */
 function FooterAppBar({routes}) {
     const classes = useStyles();
     return (

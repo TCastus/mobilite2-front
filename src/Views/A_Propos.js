@@ -9,21 +9,16 @@ import PageHeader from "../Component/PageHeader";
 
 const useStyles = makeStyles((theme) =>
     ({
-        style:{
-            alignItems:"center",
-            font: 'small-caps bold 24px/1 sans-serif',
-        },
 
         content: {
-            backgroundColor: 'white',
-            color: '#c59b08',
+            backgroundColor: theme.palette.third.white,
+            color: theme.palette.third.gold,
             padding: 10,
             margin: '20px',
             borderWidth: '3px',
-            borderRadius: '5px 5px 5px 5px',
+            borderRadius: '5px',
             opacity: 0.75,
-            background: "whitesmoke",
-            font: 'small-caps bold 24px/1 sans-serif',
+            background: theme.palette.third.whitesmoke,
         },
     })
 );
@@ -39,7 +34,7 @@ function Apropos() {
             </PageHeader>
 
             <Box component= "div" className={classes.content}>
-                <Typography>
+                <Typography varient={'h3'}>
                     INFOS A COMPLETER
                 </Typography>
             </Box>

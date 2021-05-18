@@ -151,7 +151,7 @@ function Rechercher() {
                         <Grid item xs={12}>
                             <Typography variant={'h5'}>Rechercher par nom</Typography>
                             <form onSubmit={searchName}>
-                                <TextField id="outlined-basic" label="Nom d'université" variant="filled" size="normal" value={name}
+                                <TextField variant="filled"  id="outlined-basic" label="Nom d'université" size="normal" value={name}
                                     onChange={(e) => setName(e.target.value)}/>
                                 <Grid item xs={12} className={classes.searchUni}>
                                     <Button variant="contained" color='theme.palette.primary.light' type="submit">

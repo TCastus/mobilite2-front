@@ -9,30 +9,10 @@ import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {getUniAll} from "../Request/uni_request";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        minHeight: '100vh',
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-    },
 
-    title: {
-        height: '20vh',
-        color: theme.palette.primary.light,
-        background: 'rgba(100,100,100,100)',
-        margin: '0px',
-        padding: 2,
-        textAlign: 'center',
-    },
-    experience: {
-        height: '50vh',
-        color: 'black',
-        background: theme.palette.primary.light,
-        margin: '0px',
-        padding: theme.spacing(2),
-        textAlign: 'center',
-    },
+
     container: {
-        background: 'cadetblue',
+        background: theme.palette.third.cadetblue,
         width: "100%",
         paddingTop: theme.spacing(2),
         [theme.breakpoints.up['md']]: {
@@ -40,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         },
         textAlign: 'center',
     },
+
     map: {
         marginTop: theme.spacing(2),
         width: '100%',

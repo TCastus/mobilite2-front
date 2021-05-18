@@ -16,30 +16,32 @@ import RatingForm from "../Component/RatingForm";
 
 
 const useStyles = makeStyles((theme) => ({
+
+
     grid: {
-        border: '2px solid white',
         padding: 10,
-        margin: theme.spacing(1, 'auto'),
+        margin: theme.spacing(5),
         borderWidth: '3px',
-        borderRadius: '0px 0px 10px 0px',
+        borderRadius: '8px',
         opacity: 0.75,
-        background: "whitesmoke",
+        background: theme.palette.third.lightgrey,
+
 
     },
     ratingsGrid: {
         color: theme.palette.secondary,
         padding: 10,
-        margin: theme.spacing(1, 'auto'),
+        margin: theme.spacing(5),
         borderWidth: '3px',
-        borderRadius: '0px 0px 10px 0px',
+        borderRadius: '8px',
         opacity: 0.75,
-        background: "lightgrey",
+        background: theme.palette.third.lightgrey,
         textAlign: "center",
     },
     comment: {
         padding: 10,
         margin: theme.spacing(1, 'auto'),
-        background: "white",
+        background: theme.palette.third.white,
 
     },
     items:{
@@ -52,6 +54,7 @@ export default function Experience() {
 
     return (
         <>
+
             <PageHeader title={"Partagez votre expérience"}/>
 
             <Container maxWidth="md">
@@ -66,17 +69,17 @@ export default function Experience() {
                                         <Grid container spacing={1} className={classes.items}>
 
                                             <Grid item xs={12} spacing={3}>
-                                                <Typography> Prénom </Typography>
+                                                <Typography variant={'h6'}> Prénom </Typography>
                                                 <Input name="Prénom" type="text" id="prenom" placeholder="Votre prénom"/>
                                             </Grid>
 
                                             <Grid item xs={12} spacing={3}>
-                                                <Typography> Nom de famille </Typography>
+                                                <Typography variant={'h6'}> Nom de famille </Typography>
                                                 <Input name="Nom" type="text" id="nom" placeholder="Votre nom"/>
                                             </Grid>
 
                                             <Grid item xs={12} spacing={3}>
-                                                <Typography id="depart">Département</Typography>
+                                                <Typography variant={'h6'} id="depart">Département</Typography>
                                                 <Select labelId="depart" type="depart" id="select">
                                                     <MenuItem value="10">TC</MenuItem>
                                                     <MenuItem value="20">IF</MenuItem>
@@ -90,8 +93,8 @@ export default function Experience() {
                                                 </Select>
                                             </Grid>
                                             <Grid item xs={12} spacing={3}>
-                                                <Typography>Année d&apos;échange </Typography>
-                                                <Input type="number" name="Annee" id="Annee" placeholder="ex : 2016"/>
+                                                <Typography variant={'h6'} >Année d&apos;échange </Typography>
+                                                <Input name="Annee" id="Annee" placeholder="ex : 2016"/>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -99,15 +102,15 @@ export default function Experience() {
                                     <Grid item xs={6} spacing={3}>
                                         <Grid container>
                                             <Grid item xs={12}>
-                                                <Typography> Commentaire </Typography>
+                                                <Typography variant={'h6'} > Commentaire </Typography>
                                                 <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." hintText="Message Field" floatingLabelText="MultiLine and FloatingLabel" multiline rows={5}/>
                                             </Grid>
                                             <Grid item xs={12} spacing={3} className={classes.items}>
-                                                <Typography>Email</Typography>
+                                                <Typography variant={'h6'} >Email</Typography>
                                                 <Input type="email" name="Email" id="Email" placeholder="ex : toto@gmail.com"/>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography textAlign="center">
+                                                <Typography variant={'h6'} textAlign="center">
                                                     Souhaitez-vous que nous partagions votre e-mail<br/>
                                                     aux élèves intéressés par votre échange souhaitant vous poser des questions ?
                                                 </Typography>
@@ -125,8 +128,8 @@ export default function Experience() {
 
                         </Box>
 
-                        <Box component="div" maxWidth="sm">
-                            <Grid container className={classes.ratingsGrid}>
+                        <Box component="div" maxWidth="sm" className={classes.ratingsGrid}>
+                            <Grid container>
 
                                 <RatingForm title={"Sécurité"} Icon={SecurityIcon} />
                                 <RatingForm title={"Coût de la vie"} Icon={AttachMoneyIcon} />

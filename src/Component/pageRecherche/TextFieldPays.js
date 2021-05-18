@@ -7,8 +7,8 @@ export default function TextFieldPaysDISABLED () {
         <TextField
             id="outlined-basic"
             label="Pays"
-            variant="filled"
             size="small"
+            variant="filled"
         />
     );
 }

@@ -309,7 +309,7 @@ function Rechercher() {
                                 {uniList.map((row) => (
                                     <TableRow key={row.name}>
                                         <TableCell align="right" component="th" scope="row"> {row.name} </TableCell>
-                                        <TableCell align="right">{row.country}</TableCell>
+                                        <TableCell align="right">{row.country_name}</TableCell>
                                         <TableCell align="center">
                                             {[...new Set(row.placesDD
                                                 .map((res)=>res.department_availability.map((dep)=>dep.name))

@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import PageHeader from "../Component/PageHeader";
-import { getUniAll } from "../Request/uni_request";
+import { getUniAll} from "../Request/uni_request";
 import SearchSlider from "../Component/SearchSlider";
 
 
@@ -121,7 +121,7 @@ const defaultValues = {
     country: "",
     outside_europe: true,
     access: "",
-    department: "TC"
+    department_availability: "TC"
 };
 
 function Rechercher() {
@@ -147,10 +147,10 @@ function Rechercher() {
         console.log(name);
 
         // Back not ready for now, uncomment later
-        // getSearchName(name).then(res => {
-        //     setUniList(res.data);
-        //     setRecherDone(true);
-        // });
+        //getSearchName(name).then(res => {
+        //    setUniList(res.data);
+        //    setRecherDone(true);
+        //});
     };
 
     // Second form submission
@@ -194,16 +194,16 @@ function Rechercher() {
                                 <Grid container className={classes.items}>
                                     <Grid item xs={6}>
                                         <Grid className={classes.sliders}>
-                                            <SearchSlider titre={"Note globale minimale"} control={control} name={"note"} />
+                                            <SearchSlider titre={"Difficulté académique"} control={control} name={"course_difficulty"} />
                                         </Grid>
                                         <Grid className={classes.sliders}>
-                                            <SearchSlider titre={"Note coût de la vie minimale"} control={control} name={"cost_of_living"} />
+                                            <SearchSlider titre={"Note coût de la vie minimale"} control={control} name={"cost_living_grade_min"} />
                                         </Grid>
                                         <Grid className={classes.sliders}>
-                                            <SearchSlider titre={"Note vie nocturne minimale"} control={control} name={"night_life_grade"} />
+                                            <SearchSlider titre={"Note vie nocturne minimale"} control={control} name={"nightlife_min"} />
                                         </Grid>
                                         <Grid className={classes.sliders}>
-                                            <SearchSlider titre={"Note vie culturelle minimale"} control={control} name={"cultural_life_grade"} />
+                                            <SearchSlider titre={"Note vie culturelle minimale"} control={control} name={"uni_cultural_min"} />
                                         </Grid>
                                     </Grid>
 
@@ -276,7 +276,7 @@ function Rechercher() {
                                                             ))}
                                                         </Select>
                                                     )}
-                                                    name={'department'}
+                                                    name={'department_availability'}
                                                     control={control}/>
                                             </Grid>
                                         </Grid>
@@ -309,7 +309,7 @@ function Rechercher() {
                                 {uniList.map((row) => (
                                     <TableRow key={row.name}>
                                         <TableCell align="right" component="th" scope="row"> {row.name} </TableCell>
-                                        <TableCell align="right">{row.id}</TableCell>
+                                        <TableCell align="right">{row.country}</TableCell>
                                         <TableCell align="center">
                                             {[...new Set(row.placesDD
                                                 .map((res)=>res.department_availability.map((dep)=>dep.name))

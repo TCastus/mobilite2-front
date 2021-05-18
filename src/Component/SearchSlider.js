@@ -1,14 +1,13 @@
-import {Grid, Slider, Switch, Typography} from "@material-ui/core";
+import {Grid, Slider, Typography} from "@material-ui/core";
 import React from "react";
 import * as PropTypes from "prop-types";
+import { Controller } from "react-hook-form";
 import {makeStyles} from "@material-ui/core/styles";
 
 SearchSlider.propTypes = {
-    name: PropTypes.string.isRequired,
     titre: PropTypes.string.isRequired,
-    activated: PropTypes.array.isRequired,
-    number: PropTypes.number.isRequired,
-    setActivated: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    control: PropTypes.object.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -22,39 +21,30 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SearchSlider({name, titre, activated, number, setActivated}) {
+export default function SearchSlider({titre, name, control}) {
     const classes = useStyles();
-
-    const handleSwitch = () => {
-        const a2 = [...activated];
-        a2[number] = !a2[number];
-        setActivated(a2);
-    };
 
     return(
         <Grid container className={classes.items}>
-            <Grid item xs={3} className={classes.switch}>
-                <Switch
-                    checked={activated[number]}
-                    onChange={handleSwitch}
-                    name={name}
-                    color="primary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                />
-            </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6}>
                 <Typography variant={'h6'}>{titre}</Typography>
             </Grid>
             <Grid item xs={6}>
-                <Slider
+                <Controller
+                    name={name}
+                    control={control}
                     defaultValue={0}
-                    aria-labelledby="discrete-slider"
-                    valueLabelDisplay="auto"
-                    step={1}
-                    min={0}
-                    max={5}
-                    marks
-                    disabled={!activated[number]}
+                    render={({ field }) => (
+                        <Slider
+                            {...field}
+                            onChange={(_, value) => {
+                                field.onChange(value);
+                            }}
+                            valueLabelDisplay="auto"
+                            max={5}
+                            step={1}
+                        />
+                    )}
                 />
             </Grid>
         </Grid>

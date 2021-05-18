@@ -1,28 +1,29 @@
 import React,{useState} from 'react';
-import {Button} from "@material-ui/core";
+import {Button, PropTypes, Typography} from "@material-ui/core";
 
-function TypeLogement(props) {
+TypeLogement.propTypes = {
+    textApercu: PropTypes.string.isRequired,
+    textComplet: PropTypes.string.isRequired,
+};
 
-    // eslint-disable-next-line react/prop-types
-    const [description,setDescription] = useState(props.textApercu);
+function TypeLogement({textApercu, textComplet}) {
+
+    const [description,setDescription] = useState(textApercu);
     const [isExpanded,setIsExpanded] = useState(false);
 
     const handleClick = () => {
-        // eslint-disable-next-line react/prop-types
-        setDescription(props.textComplet);
+        setDescription(textComplet);
         setIsExpanded(true);
     };
 
     const handleClickMoins = () => {
-        // eslint-disable-next-line react/prop-types
-        setDescription(props.textApercu);
+        setDescription(textApercu);
         setIsExpanded(false);
     };
 
     return (<>
-        {/* eslint-disable-next-line react/prop-types */}
-        <h4>Logement</h4>
-        <p>{description}</p>
+        <Typography variant={"h4"}>Logement</Typography>
+        <Typography variant={"body1"}>{description}</Typography>
         {
             !isExpanded ? (
                 <Button onClick={handleClick} variant="contained">Voir plus</Button>

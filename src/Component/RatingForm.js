@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * A genereic rating form element in a box
+ * @param title rating label
+ * @param Icon label icon
+ */
 export default function RatingForm({title, Icon}) {
     const classes = useStyles();
 

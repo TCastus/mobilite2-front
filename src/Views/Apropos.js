@@ -52,10 +52,10 @@ function Apropos() {
 
     return (
         <Box component="div" >
-            <PageHeader title={<InfoIcon> </InfoIcon>} subtitle="A PROPOS">
-            </PageHeader>
+            <PageHeader title={"A PROPOS"} subtitle={"Qu'est-ce que c'est que ce site ?"} />
             <Box component= "div" width="75%" mx="auto" >
                 <Typography variant={'h3'} className={classes.title}>
+                    Mobilité, une application par les étudiants, pour les étudiants <br /> <br />
                     Notre objectif ? <br/>
                     Aider les étudiants à choisir l’échange qui leur correspond le mieux, afin de leur garantir un voyage inoubliable.
                 </Typography>
@@ -79,12 +79,13 @@ function Apropos() {
                     Qui sommes-nous ?
                 </Typography>
                 <Typography variant={'h6'} className={classes.content}>
-                    Nous sommes une équipe de 6 étudiants du département Télécommunications Services et Usage en 3ème année à l’INSA de Lyon, qui avons
-                    repris un ancien projet WEB visant à faire un site pour s’y retrouver plus simplement lors des mobilités internationales à l’INSA de Lyon.
-                    Nous réalisons ce site pour la responsable des relations internationales en TC, Oana Iova, dans le cadre de notre projet WEB de 3ème année.
+                    Nous sommes une équipe de 6 étudiants du département Télécommunications Services et Usages en 3ème année à l’INSA Lyon, et avons
+                    repris l&apos;idée d&apos;un Projet Web lancé deux ans plus tôt par l&apos;ASTUS.
+                    Nous réalisons ce site pour la responsable des relations internationales en TC, Oana Iova, dans le cadre de notre Projet Web de 3ème année.
                     Nous sommes évidemment accompagnés de nos professeurs avec qui nous avons fait des points réguliers sur l’avancement du site, et qui nous
                     ont aidé tout au long du processus de création de ce site.
                 </Typography>
+
                 <Grid container className={classes.content} alignItems="center">
                     <Grid item xs={5} >
                         <img src={louis} alt={"photo de louis - responsable du projet"}/>
@@ -93,7 +94,7 @@ function Apropos() {
                         <Typography variant={'h6'}>
                             Toujours à l’écoute, Louis a su être un véritable pilier pour son équipe en les aidant à chaque difficulté rencontrée,
                             en divisant le travail de manière structurée et organisée, et en poussant ses équipiers vers le haut. Avec lui, le code
-                            doit être propre, tout doit être carré. C’est grâce à ses talents de leader, de développeur et ses grandes capacités
+                            doit être propre et concis. C’est grâce à ses talents de leader, de développeur et ses grandes capacités
                             d’organisation que toute l’équipe a pu avancer ensemble de manière régulière.
                         </Typography>
                     </Grid>
@@ -135,8 +136,8 @@ function Apropos() {
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant={'h6'}>
-                            Avançant de pair avec Louis et la team front-end, ces as du Python Django ont également énormément appris de leur côté,
-                            pour vous assurer un site fonctionnel, maintenable et durable dans le temps !
+                            Avançant de pair avec Louis et la team front-end, ces as du Python ont également énormément appris de leur côté,
+                            pour vous assurer un site fonctionnel, maintenable et durable !
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>

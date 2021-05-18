@@ -9,7 +9,7 @@ import Home from "../Views/Home";
 import Experience from "../Views/Experience";
 import Finance from "../Views/Finance";
 import Mobilite from "../Views/Mobilite";
-import Apropos from "../Views/A_Propos";
+import Apropos from "../Views/Apropos";
 import Contact from "../Views/Contact";
 import MentionsLegales from "../Views/MentionsLegales";
 import UniDetail from "../Views/UniDetail";

@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) =>
     })
 );
 
+
 function Contact() {
 
     const classes = useStyles();

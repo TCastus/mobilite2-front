@@ -46,6 +46,7 @@ export const theme = createMuiTheme({
 
 });
 
+
 theme.typography.h1 = {
     fontSize: '2.5em',
     [theme.breakpoints.up('md')]: {

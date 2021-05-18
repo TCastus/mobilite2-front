@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 
+
 function MentionLegales() {
 
     const classes = useStyles();

@@ -10,6 +10,7 @@ PageHeader.propTypes = {
     subtitle: PropTypes.string,
 };
 
+
 const useStyles = makeStyles((theme) => ({
     header: {
         backgroundImage: `url(${backgroundMapImg})`,

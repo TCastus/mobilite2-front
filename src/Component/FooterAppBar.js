@@ -90,5 +90,4 @@ function FooterAppBar({routes}) {
     );
 }
 
-
 export default FooterAppBar;

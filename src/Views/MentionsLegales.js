@@ -44,4 +44,5 @@ function MentionLegales() {
     );
 }
 
+
 export default MentionLegales;

@@ -44,10 +44,6 @@ export const theme = createMuiTheme({
 
     },
 
-
-
-
-
 });
 
 theme.typography.h1 = {

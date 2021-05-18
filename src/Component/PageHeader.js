@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(5),
         fontVariantCaps: 'small-caps',
-        color: 'white'
+        color: theme.palette.third.white,
     },
     title: {
         fontWeight: 'bold',

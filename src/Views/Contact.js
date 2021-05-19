@@ -9,12 +9,12 @@ import EmailIcon from '@material-ui/icons/Email';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import HomeIcon from '@material-ui/icons/Home';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import louis from "../Assets/Contact/1.png";
-import estelle from "../Assets/Contact/2.png";
-import esther from "../Assets/Contact/3.png";
-import alice from "../Assets/Contact/4.png";
-import bastien from "../Assets/Contact/5.png";
-import thomas from "../Assets/Contact/6.png";
+import louis from "../Assets/Contact/louis.png";
+import estelle from "../Assets/Contact/estelle.png";
+import esther from "../Assets/Contact/esther.png";
+import alice from "../Assets/Contact/alice.png";
+import bastien from "../Assets/Contact/bastien.png";
+import thomas from "../Assets/Contact/thomas.png";
 
 
 
@@ -66,7 +66,7 @@ function Contact() {
                 <Typography  className={classes.content}>
                     <Grid container>
                         <Grid item xs>
-                            <EmailIcon> </EmailIcon>
+                            <EmailIcon />
                             <br/><br/>ASTUS : astus.insalyon@gmail.com
                             <br/>DRI : dri@insa-lyon.fr
                         </Grid>
@@ -105,54 +105,54 @@ function Contact() {
                             <img src={louis} alt={"photo de louis - responsable du projet"} />
                             <br/>
                             <Button target= "_blank" href="https://www.linkedin.com/in/louis-gombert-92830a209/">
-                                <LinkedInIcon> </LinkedInIcon>
+                                <LinkedInIcon />
                             </Button>
                             <Button target= "_blank" href="mailto:louis.gombert@insa-lyon.fr">
-                                <EmailIcon> </EmailIcon>
+                                <EmailIcon />
                             </Button>
                         </Grid>
                         <Grid item xs >
                             <img src={esther} alt={"photo de esther - team front end"}/>
                             <br/>
                             <Button target= "_blank" href="mailto:esther.allain@insa-lyon.fr">
-                                <EmailIcon> </EmailIcon>
+                                <EmailIcon />
                             </Button>
                         </Grid>
                         <Grid item xs >
                             <img src={alice} alt={"photo de alice - team front end"}/>
                             <br/>
                             <Button target= "_blank" href="https://www.linkedin.com/in/alice-gangneux-05ab16196/">
-                                <LinkedInIcon> </LinkedInIcon>
+                                <LinkedInIcon />
                             </Button>
                             <Button target= "_blank" href="mailto:alice.gangneux@insa-lyon.fr">
-                                <EmailIcon> </EmailIcon>
+                                <EmailIcon />
                             </Button>
                         </Grid>
                         <Grid item xs >
                             <img src={estelle} alt={"photo de estelle - team front end"}/>
                             <br/>
                             <Button target= "_blank" href="https://www.linkedin.com/in/estelle-monier/">
-                                <LinkedInIcon> </LinkedInIcon>
+                                <LinkedInIcon />
                             </Button>
                             <Button target= "_blank" href="mailto:estelle.monier@insa-lyon.fr">
-                                <EmailIcon> </EmailIcon>
+                                <EmailIcon />
                             </Button>
                         </Grid>
                         <Grid item xs >
                             <img src={thomas} alt={"photo de thomas - team back end"}/>
                             <br/>
                             <Button target= "_blank" href="mailto:thomas.lorrain@insa-lyon.fr">
-                                <EmailIcon> </EmailIcon>
+                                <EmailIcon />
                             </Button>
                         </Grid>
                         <Grid item xs >
                             <img src={bastien} alt={"photo de bastien - team back end"}/>
                             <br/>
                             <Button target= "_blank" href="https://www.linkedin.com/in/bastien-fontaine-a9a96b196/">
-                                <LinkedInIcon> </LinkedInIcon>
+                                <LinkedInIcon />
                             </Button>
                             <Button target= "_blank" href="mailto:bastien.fontaine@insa-lyon.fr">
-                                <EmailIcon> </EmailIcon>
+                                <EmailIcon />
                             </Button>
                         </Grid>
                     </Grid>

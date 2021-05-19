@@ -2,7 +2,6 @@ import React from 'react';
 import '../Assets/Style/App.css';
 import {Box, Typography} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-//import InfoIcon from '@material-ui/icons/Info';
 import PageHeader from "../Component/PageHeader";
 import Grid from "@material-ui/core/Grid";
 import louis from "../Assets/aPropos/louis.png";
@@ -21,7 +20,6 @@ const useStyles = makeStyles((theme) =>
             alignItems:"center",
             font: 'small-caps bold 24px/1 sans-serif',
         },
-
         title: {
             color: '#c59b08',
             padding: 20,

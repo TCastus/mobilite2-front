@@ -1,9 +1,20 @@
 import React from 'react';
 import '../Assets/Style/App.css';
-import {Box, Typography} from "@material-ui/core";
+import {Box, Button, Typography} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
 import PageHeader from "../Component/PageHeader";
+import Grid from "@material-ui/core/Grid";
+import EmailIcon from '@material-ui/icons/Email';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import HomeIcon from '@material-ui/icons/Home';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import louis from "../Assets/Contact/1.png";
+import estelle from "../Assets/Contact/2.png";
+import esther from "../Assets/Contact/3.png";
+import alice from "../Assets/Contact/4.png";
+import bastien from "../Assets/Contact/5.png";
+import thomas from "../Assets/Contact/6.png";
 
 
 
@@ -14,16 +25,25 @@ const useStyles = makeStyles((theme) =>
             font: 'small-caps bold 24px/1 sans-serif',
         },
 
-        content: {
-            backgroundColor: 'white',
+        title: {
+            color: '#c59b08',
+            padding: 20,
+            margin: '40px',
+            font: 'small-caps bold 35px/1 sans-serif',
+        },
+        title2: {
             color: '#c59b08',
             padding: 10,
-            margin: '20px',
+            font: 'small-caps bold 24px/1 sans-serif',
+        },
+        content: {
+            backgroundColor: 'white',
+            padding: 30,
+            margin: theme.spacing(1, 'auto'),
             borderWidth: '3px',
             borderRadius: '5px 5px 5px 5px',
-            opacity: 0.75,
             background: "whitesmoke",
-            font: 'small-caps bold 24px/1 sans-serif',
+            textAlign: 'center',
         },
     })
 );
@@ -35,13 +55,114 @@ function Contact() {
 
     return (
         <Box component="div">
-            <PageHeader title={<ContactPhoneIcon></ContactPhoneIcon>} subtitle="CONTACT">
+            <PageHeader title={<ContactPhoneIcon> </ContactPhoneIcon>} subtitle="CONTACT">
             </PageHeader>
 
-            <Box component= "div" className={classes.content}>
-                <Typography>
-                    INFOS A COMPLETER
+            <Box component= "div"  width="75%" mx="auto" >
+                <Typography variant={'h4'} className={classes.title2}>
+                    <br/>
+                    Nous trouver
                 </Typography>
+                <Typography  className={classes.content}>
+                    <Grid container>
+                        <Grid item xs>
+                            <EmailIcon> </EmailIcon>
+                            <br/><br/>ASTUS : astus.insalyon@gmail.com
+                            <br/>DRI : dri@insa-lyon.fr
+                        </Grid>
+
+                        <Grid item xs >
+                            <HomeIcon> </HomeIcon>
+                            <br/>ASTUS :
+                            <br/>Bâtiment Claude Chappe - INSA Lyon
+                            <br/>6 avenue des arts 69621
+                            <br/>Villeurbanne cedex
+                            <br/>
+                            <br/>DRI :
+                            <br/>20 avenue Albert Einstein
+                            <br/>69621 Villeurbanne cedex
+                        </Grid>
+
+                        <Grid item xs >
+                            <GitHubIcon> </GitHubIcon>
+                            <br/><br/>
+                            <Button variant="contained" target = "_blank" href="https://github.com/TCastus/mobilite2-front">
+                                Découvrir notre GitHub front-end
+                            </Button>
+                            <br/><br/>
+                            <Button variant="contained" target = "_blank" href="https://github.com/TCastus/mobilite2-back">
+                                Découvrir notre GitHub back-end
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Typography>
+                <Typography variant={'h4'} className={classes.title2}>
+                    Contacter l&apos;équipe
+                </Typography>
+                <Typography  className={classes.content}>
+                    <Grid container>
+                        <Grid item xs >
+                            <img src={louis} alt={"photo de louis - responsable du projet"} />
+                            <br/>
+                            <Button target= "_blank" href="https://www.linkedin.com/in/louis-gombert-92830a209/">
+                                <LinkedInIcon> </LinkedInIcon>
+                            </Button>
+                            <Button target= "_blank" href="mailto:louis.gombert@insa-lyon.fr">
+                                <EmailIcon> </EmailIcon>
+                            </Button>
+                        </Grid>
+                        <Grid item xs >
+                            <img src={esther} alt={"photo de esther - team front end"}/>
+                            <br/>
+                            <Button target= "_blank" href="mailto:esther.allain@insa-lyon.fr">
+                                <EmailIcon> </EmailIcon>
+                            </Button>
+                        </Grid>
+                        <Grid item xs >
+                            <img src={alice} alt={"photo de alice - team front end"}/>
+                            <br/>
+                            <Button target= "_blank" href="https://www.linkedin.com/in/alice-gangneux-05ab16196/">
+                                <LinkedInIcon> </LinkedInIcon>
+                            </Button>
+                            <Button target= "_blank" href="mailto:alice.gangneux@insa-lyon.fr">
+                                <EmailIcon> </EmailIcon>
+                            </Button>
+                        </Grid>
+                        <Grid item xs >
+                            <img src={estelle} alt={"photo de estelle - team front end"}/>
+                            <br/>
+                            <Button target= "_blank" href="https://www.linkedin.com/in/estelle-monier/">
+                                <LinkedInIcon> </LinkedInIcon>
+                            </Button>
+                            <Button target= "_blank" href="mailto:estelle.monier@insa-lyon.fr">
+                                <EmailIcon> </EmailIcon>
+                            </Button>
+                        </Grid>
+                        <Grid item xs >
+                            <img src={thomas} alt={"photo de thomas - team back end"}/>
+                            <br/>
+                            <Button target= "_blank" href="mailto:thomas.lorrain@insa-lyon.fr">
+                                <EmailIcon> </EmailIcon>
+                            </Button>
+                        </Grid>
+                        <Grid item xs >
+                            <img src={bastien} alt={"photo de bastien - team back end"}/>
+                            <br/>
+                            <Button target= "_blank" href="https://www.linkedin.com/in/bastien-fontaine-a9a96b196/">
+                                <LinkedInIcon> </LinkedInIcon>
+                            </Button>
+                            <Button target= "_blank" href="mailto:bastien.fontaine@insa-lyon.fr">
+                                <EmailIcon> </EmailIcon>
+                            </Button>
+                        </Grid>
+                    </Grid>
+
+
+
+
+
+                </Typography>
+                <br/>
             </Box>
         </Box>
 

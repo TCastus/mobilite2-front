@@ -3,19 +3,23 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     Box, Grid, MenuItem, Typography,
     RadioGroup, FormControlLabel, Radio, Select,
-    Container, TextField, Button
+    Container, TextField, Button, Checkbox
 } from "@material-ui/core";
 import {
     Security as SecurityIcon,
     AccountBox as AccountBoxIcon,
     AttachMoney as AttachMoneyIcon,
     EmojiPeople as EmojiPeopleIcon,
-    Send as SendIcon
+    Send as SendIcon,
+    MenuBook as MenuBookIcon,
+    Chat as ChatIcon,
+    AccountBalance as AccountBalanceIcon
 } from '@material-ui/icons';
 
 import PageHeader from "../Component/PageHeader";
 import RatingForm from "../Component/RatingForm";
 import {useForm, Controller} from "react-hook-form";
+import {getUniAll, postReview} from "../Request/uni_request";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +65,8 @@ const departments = [
     "TC"
 ];
 
+const semesters = ['4A-S1', '4A-S2', '5A-S1', '5A-S2', '4A', '5A'];
+
 const defaultValues = {
     surname: "",
     name: "",
@@ -76,13 +82,13 @@ const defaultValues = {
 
     // MISSING FROM THE FORM
     mobility_type: "DD",
-    univ_appartment: "false",
-    rent: 0,
-    visa: "false",
+    univ_appartment: false,
+    rent: 500,
+    visa: false,
     courses_difficulty: 0,
     student_proximity: 0,
     courses_interest: 0,
-    university: 0,
+    university: 1,
     semester: "4A-S1"
 };
 
@@ -90,8 +96,18 @@ export default function Experience() {
     const classes = useStyles();
     const { handleSubmit, control } = useForm({defaultValues});
 
+    const [uni, setUni] = React.useState([]);
+
+    React.useEffect(() => {
+        getUniAll().then((res) => {
+            setUni(res.data);
+        });
+    }, []);
+
     const submitForm = (form) => {
-        console.log(form);
+        postReview(form).then((res)=> {
+            console.log(res);
+        });
     };
 
     return (
@@ -139,12 +155,38 @@ export default function Experience() {
                                                     control={control}
                                                 />
                                             </Grid>
+
+                                            <Grid item xs={12}>
+                                                <Typography id="depart">Semestre/année d&apos;échange</Typography>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <Select {...field}>
+                                                            {semesters.map((sem) => <MenuItem key={sem} value={sem}>{sem}</MenuItem>)}
+                                                        </Select>
+                                                    )}
+                                                    name="semester"
+                                                    control={control}
+                                                />
+                                            </Grid>
+
                                             <Grid item xs={12}>
                                                 <Typography>Année d&apos;échange </Typography>
                                                 <Controller
                                                     render={({ field }) =>
                                                         <TextField type="number" {...field} />}
                                                     name="year"
+                                                    control={control}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography>Université</Typography>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <Select {...field}>
+                                                            {uni.map((elem) => <MenuItem key={elem.id} value={elem.id}>{elem.name}</MenuItem>)}
+                                                        </Select>
+                                                    )}
+                                                    name="university"
                                                     control={control}
                                                 />
                                             </Grid>
@@ -190,6 +232,57 @@ export default function Experience() {
                                                     control={control}
                                                 />
                                             </Grid>
+
+                                            <Grid item sm={4}>
+                                                <Typography>Type de contrat</Typography>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <RadioGroup aria-label="gender" {...field}>
+                                                            <FormControlLabel value="E" control={<Radio />} label="Echange"/>
+                                                            <FormControlLabel value="DD" control={<Radio />} label="Double Diplôme" />
+                                                        </RadioGroup>
+                                                    )}
+                                                    name="mobility_type"
+                                                    control={control}
+                                                />
+                                            </Grid>
+
+                                            <Grid item sm={6}>
+                                                <Typography>Logé à l&apos;université ?</Typography>
+                                                <Controller
+                                                    name="univ_appartment"
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <Checkbox
+                                                            onChange={(e) => field.onChange(e.target.checked)}
+                                                            checked={field.value}
+                                                        />
+                                                    )}
+                                                />
+                                            </Grid>
+
+                                            <Grid item sm={6}>
+                                                <Typography>Loyer moyen payé (€)</Typography>
+                                                <Controller
+                                                    render={({ field }) => <TextField type={"number"} {...field} />}
+                                                    name="rent"
+                                                    control={control}
+                                                />
+                                            </Grid>
+
+                                            <Grid item sm={6}>
+                                                <Typography>Visa demandé pour l&apos;échange ?</Typography>
+                                                <Controller
+                                                    name="visa"
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <Checkbox
+                                                            onChange={(e) => field.onChange(e.target.checked)}
+                                                            checked={field.value}
+                                                        />
+                                                    )}
+                                                />
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -204,7 +297,9 @@ export default function Experience() {
                                 <RatingForm control={control} title="Coût de la vie" name="cost_of_living" Icon={AttachMoneyIcon} />
                                 <RatingForm control={control} title="Vie culturelle" name="culture" Icon={AccountBoxIcon} />
                                 <RatingForm control={control} title="Vie nocturne" name="night_life" Icon={EmojiPeopleIcon} />
-
+                                <RatingForm control={control} title="Difficulté des cours" name="courses_difficulty" Icon={MenuBookIcon} />
+                                <RatingForm control={control} title="Contact avec les étudiants" name="student_proximity" Icon={ChatIcon} />
+                                <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
 
                                 <Grid item xs={12} className={classes.items}>
                                     <Button variant="contained" color="secondary" type="submit">

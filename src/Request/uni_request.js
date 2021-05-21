@@ -45,6 +45,13 @@ export const getUniAll = () => {
         }).catch(rematchError);
 };
 
+export const postReview = (form) => {
+    return client.post('/api/review/', form)
+        .then(res=> {
+            return res;
+        }).catch(rematchError);
+};
+
 /**
  * Performs a get request to search university by name
  * @returns {Promise<AxiosResponse<any>>}

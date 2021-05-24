@@ -1,18 +1,25 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {blueGrey} from "@material-ui/core/colors";
-import {Box, Grid, MenuItem, Typography, FormControl,
-    RadioGroup, FormControlLabel, Radio, InputLabel, Select,
-    Input, Container, TextField} from "@material-ui/core";
-import Rating from '@material-ui/lab/Rating';
-import { Security as SecurityIcon,
+import {
+    Box, Grid, MenuItem, Typography,
+    RadioGroup, FormControlLabel, Radio, Select,
+    Container, TextField, Button, Checkbox
+} from "@material-ui/core";
+import {
+    Security as SecurityIcon,
     AccountBox as AccountBoxIcon,
     AttachMoney as AttachMoneyIcon,
     EmojiPeople as EmojiPeopleIcon,
-    Send as SendIcon } from '@material-ui/icons';
+    Send as SendIcon,
+    MenuBook as MenuBookIcon,
+    Chat as ChatIcon,
+    AccountBalance as AccountBalanceIcon
+} from '@material-ui/icons';
 
 import PageHeader from "../Component/PageHeader";
 import RatingForm from "../Component/RatingForm";
+import {useForm, Controller} from "react-hook-form";
+import {getUniAll, postReview} from "../Request/uni_request";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,14 +34,12 @@ const useStyles = makeStyles((theme) => ({
 
     },
     ratingsGrid: {
-        color: theme.palette.secondary,
         padding: 10,
         margin: theme.spacing(1, 'auto'),
         borderWidth: '3px',
         borderRadius: '0px 0px 10px 0px',
         opacity: 0.75,
         background: "lightgrey",
-        textAlign: "center",
     },
     comment: {
         padding: 10,
@@ -47,15 +52,70 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const departments = [
+    "BB",
+    "BIM",
+    "GCU",
+    "GE",
+    "GEN",
+    "GI",
+    "GM",
+    "IF",
+    "SGM",
+    "TC"
+];
+
+const semesters = ['4A-S1', '4A-S2', '5A-S1', '5A-S2', '4A', '5A'];
+
+const defaultValues = {
+    surname: "",
+    name: "",
+    department: "BB",
+    year: 2020,
+    comment:"",
+    contact: "false",
+    email: "",
+    security: 0,
+    cost_of_living: 0,
+    culture: 0,
+    night_life: 0,
+
+    // MISSING FROM THE FORM
+    mobility_type: "DD",
+    univ_appartment: false,
+    rent: 500,
+    visa: false,
+    courses_difficulty: 0,
+    student_proximity: 0,
+    courses_interest: 0,
+    university: 1,
+    semester: "4A-S1"
+};
+
 export default function Experience() {
     const classes = useStyles();
+    const { handleSubmit, control } = useForm({defaultValues});
+
+    const [uni, setUni] = React.useState([]);
+
+    React.useEffect(() => {
+        getUniAll().then((res) => {
+            setUni(res.data);
+        });
+    }, []);
+
+    const submitForm = (form) => {
+        postReview(form).then((res)=> {
+            console.log(res);
+        });
+    };
 
     return (
         <>
             <PageHeader title={"Partagez votre expérience"}/>
 
             <Container maxWidth="md">
-                <form>
+                <form onSubmit={handleSubmit(submitForm)}>
                     <Box component="div" className="header">
                         <Box component="div">
                             <Grid component="div" className={classes.grid} >
@@ -65,58 +125,163 @@ export default function Experience() {
                                     <Grid item xs={6}>
                                         <Grid container spacing={1} className={classes.items}>
 
-                                            <Grid item xs={12} spacing={3}>
+                                            <Grid item xs={12}>
                                                 <Typography> Prénom </Typography>
-                                                <Input name="Prénom" type="text" id="prenom" placeholder="Votre prénom"/>
+                                                <Controller
+                                                    render={({ field }) => <TextField placeholder="Éric" {...field} />}
+                                                    name="surname"
+                                                    control={control}
+                                                />
                                             </Grid>
 
-                                            <Grid item xs={12} spacing={3}>
+                                            <Grid item xs={12}>
                                                 <Typography> Nom de famille </Typography>
-                                                <Input name="Nom" type="text" id="nom" placeholder="Votre nom"/>
+                                                <Controller
+                                                    render={({ field }) => <TextField placeholder="Maurincomme" {...field} />}
+                                                    name="name"
+                                                    control={control}
+                                                />
                                             </Grid>
 
-                                            <Grid item xs={12} spacing={3}>
+                                            <Grid item xs={12}>
                                                 <Typography id="depart">Département</Typography>
-                                                <Select labelId="depart" type="depart" id="select">
-                                                    <MenuItem value="10">TC</MenuItem>
-                                                    <MenuItem value="20">IF</MenuItem>
-                                                    <MenuItem value="30">BS</MenuItem>
-                                                    <MenuItem value="40">SGM</MenuItem>
-                                                    <MenuItem value="50">GCU</MenuItem>
-                                                    <MenuItem value="60">GE</MenuItem>
-                                                    <MenuItem value="70">GEN</MenuItem>
-                                                    <MenuItem value="80">GI</MenuItem>
-                                                    <MenuItem value="90">GM</MenuItem>
-                                                </Select>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <Select {...field}>
+                                                            {departments.map((dep) => <MenuItem key={dep} value={dep}>{dep}</MenuItem>)}
+                                                        </Select>
+                                                    )}
+                                                    name="department"
+                                                    control={control}
+                                                />
                                             </Grid>
-                                            <Grid item xs={12} spacing={3}>
+
+                                            <Grid item xs={12}>
+                                                <Typography id="depart">Semestre/année d&apos;échange</Typography>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <Select {...field}>
+                                                            {semesters.map((sem) => <MenuItem key={sem} value={sem}>{sem}</MenuItem>)}
+                                                        </Select>
+                                                    )}
+                                                    name="semester"
+                                                    control={control}
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12}>
                                                 <Typography>Année d&apos;échange </Typography>
-                                                <Input type="number" name="Annee" id="Annee" placeholder="ex : 2016"/>
+                                                <Controller
+                                                    render={({ field }) =>
+                                                        <TextField type="number" {...field} />}
+                                                    name="year"
+                                                    control={control}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography>Université</Typography>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <Select {...field}>
+                                                            {uni.map((elem) => <MenuItem key={elem.id} value={elem.id}>{elem.name}</MenuItem>)}
+                                                        </Select>
+                                                    )}
+                                                    name="university"
+                                                    control={control}
+                                                />
                                             </Grid>
                                         </Grid>
                                     </Grid>
 
-                                    <Grid item xs={6} spacing={3}>
+                                    <Grid item xs={6}>
                                         <Grid container>
                                             <Grid item xs={12}>
                                                 <Typography> Commentaire </Typography>
-                                                <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." hintText="Message Field" floatingLabelText="MultiLine and FloatingLabel" multiline rows={5}/>
+                                                <Controller
+                                                    render={({ field }) =>
+                                                        <TextField className={classes.comment} style={{textAlign: 'left'}}
+                                                            placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..."
+                                                            multiline rows={5} {...field} />}
+                                                    name="comment"
+                                                    control={control}
+                                                />
                                             </Grid>
-                                            <Grid item xs={12} spacing={3} className={classes.items}>
+                                            <Grid item xs={12} className={classes.items}>
                                                 <Typography>Email</Typography>
-                                                <Input type="email" name="Email" id="Email" placeholder="ex : toto@gmail.com"/>
+                                                <Controller
+                                                    render={({ field }) =>
+                                                        <TextField type="email" {...field} />}
+                                                    name="email"
+                                                    placeholder="eric.maurincomme@insa-lyon.fr"
+                                                    control={control}
+                                                />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography textAlign="center">
+                                                <Typography>
                                                     Souhaitez-vous que nous partagions votre e-mail<br/>
                                                     aux élèves intéressés par votre échange souhaitant vous poser des questions ?
                                                 </Typography>
-                                                <FormControl component="fieldset">
-                                                    <RadioGroup row aria-label="position" name="position" defaultValue="end">
-                                                        <FormControlLabel value="end" control={<Radio color="primary" value="a" name="radio-button-demo" inputProps={{ 'aria-label': 'A' }}/>} label="Oui" />
-                                                        <FormControlLabel value="end" control={<Radio color="primary" value="b" name="radio-button-demo" inputProps={{ 'aria-label': 'B' }}/>} label="Non" />
-                                                    </RadioGroup>
-                                                </FormControl>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <RadioGroup aria-label="contact" {...field}>
+                                                            <FormControlLabel value={"false"} control={<Radio color="primary"/>} label="Non"/>
+                                                            <FormControlLabel value={"true"} control={<Radio color="primary"/>} label="Oui"/>
+                                                        </RadioGroup>
+                                                    )}
+                                                    name="contact"
+                                                    control={control}
+                                                />
+                                            </Grid>
+
+                                            <Grid item sm={4}>
+                                                <Typography>Type de contrat</Typography>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <RadioGroup aria-label="gender" {...field}>
+                                                            <FormControlLabel value="E" control={<Radio />} label="Echange"/>
+                                                            <FormControlLabel value="DD" control={<Radio />} label="Double Diplôme" />
+                                                        </RadioGroup>
+                                                    )}
+                                                    name="mobility_type"
+                                                    control={control}
+                                                />
+                                            </Grid>
+
+                                            <Grid item sm={6}>
+                                                <Typography>Logé à l&apos;université ?</Typography>
+                                                <Controller
+                                                    name="univ_appartment"
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <Checkbox
+                                                            onChange={(e) => field.onChange(e.target.checked)}
+                                                            checked={field.value}
+                                                        />
+                                                    )}
+                                                />
+                                            </Grid>
+
+                                            <Grid item sm={6}>
+                                                <Typography>Loyer moyen payé (€)</Typography>
+                                                <Controller
+                                                    render={({ field }) => <TextField type={"number"} {...field} />}
+                                                    name="rent"
+                                                    control={control}
+                                                />
+                                            </Grid>
+
+                                            <Grid item sm={6}>
+                                                <Typography>Visa demandé pour l&apos;échange ?</Typography>
+                                                <Controller
+                                                    name="visa"
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <Checkbox
+                                                            onChange={(e) => field.onChange(e.target.checked)}
+                                                            checked={field.value}
+                                                        />
+                                                    )}
+                                                />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -128,27 +293,18 @@ export default function Experience() {
                         <Box component="div" maxWidth="sm">
                             <Grid container className={classes.ratingsGrid}>
 
-                                <RatingForm title={"Sécurité"} Icon={SecurityIcon} />
-                                <RatingForm title={"Coût de la vie"} Icon={AttachMoneyIcon} />
-                                <RatingForm title={"Vie culturelle"} Icon={AccountBoxIcon} />
-                                <RatingForm title={"Vie nocturne"} Icon={EmojiPeopleIcon} />
+                                <RatingForm control={control} title="Sécurité" name="security" Icon={SecurityIcon} />
+                                <RatingForm control={control} title="Coût de la vie" name="cost_of_living" Icon={AttachMoneyIcon} />
+                                <RatingForm control={control} title="Vie culturelle" name="culture" Icon={AccountBoxIcon} />
+                                <RatingForm control={control} title="Vie nocturne" name="night_life" Icon={EmojiPeopleIcon} />
+                                <RatingForm control={control} title="Difficulté des cours" name="courses_difficulty" Icon={MenuBookIcon} />
+                                <RatingForm control={control} title="Contact avec les étudiants" name="student_proximity" Icon={ChatIcon} />
+                                <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
 
-
-                                <Grid item xs={12}>
-                                    <Typography variant={'h4'}>
-                                        Note globale
-                                        <Grid item xs={12}>
-                                            <Rating id="note" name="hover-feedback5" precision={0.5} color={blueGrey}/>
-                                        </Grid>
-                                    </Typography>
-                                </Grid>
                                 <Grid item xs={12} className={classes.items}>
-                                    <Box component="div">
-                                        <Input aria-label="submit" variant="contained" edge="start" color="secondary" component="span" type="submit">
-                                            <InputLabel> Submit </InputLabel>
-                                            <SendIcon/>
-                                        </Input>
-                                    </Box>
+                                    <Button variant="contained" color="secondary" type="submit">
+                                        Envoyer  <SendIcon fontSize={"small"}/>
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Box>

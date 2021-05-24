@@ -2,12 +2,16 @@ import React from "react";
 import * as PropTypes from "prop-types";
 import { Container, Grid, Typography } from "@material-ui/core";
 import '../Assets/Style/App.css';
-import {makeStyles} from "@material-ui/core/styles";import Rating from "@material-ui/lab/Rating";
+import {makeStyles} from "@material-ui/core/styles";
+import Rating from "@material-ui/lab/Rating";
 import {blueGrey} from "@material-ui/core/colors";
+import {Controller} from "react-hook-form";
 
 RatingForm.propTypes = {
     title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     Icon: PropTypes.elementType.isRequired,
+    control: PropTypes.object.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0px 0px 10px 0px',
         opacity: 0.75,
         background: "whitesmoke",
-
     },
 }));
 
@@ -28,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
  * @param title rating label
  * @param Icon label icon
  */
-export default function RatingForm({title, Icon}) {
+export default function RatingForm({title, Icon, name, control}) {
     const classes = useStyles();
 
     return (
@@ -43,7 +46,14 @@ export default function RatingForm({title, Icon}) {
                             {title}
                         </Grid>
                         <Grid item xs={12}>
-                            <Rating id="cout" name="hover-feedback2" precision={0.5} color={blueGrey}/>
+                            <Controller
+                                render={({ field }) => (
+                                    <Rating {...field} precision={0.5} color={blueGrey}
+                                        onChange={(_, value) => field.onChange(value)}/>
+                                )}
+                                name={name}
+                                control={control}
+                            />
                         </Grid>
                     </Grid>
                 </Typography>

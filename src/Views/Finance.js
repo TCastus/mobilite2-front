@@ -17,7 +17,7 @@ function Finance() {
                     Le cumul des dispositifs de bourses ne sera possible que dans la limite des crédits
                     attribués à l’INSA par les financeurs.<br/>
                     <br/>
-                    6.1 LA BOURSE RÉGION - BRMIE - (BOURSE RÉGION MOBILITÉ
+                    LA BOURSE RÉGION - BRMIE - (BOURSE RÉGION MOBILITÉ
                     INTERNATIONALE ETUDIANTS)<br/>
                     Destination : Tout pays étranger autre que son pays d’origine<br/>
                     Source : Conseil Régional Auvergne-Rhône-Alpes<br/>
@@ -40,7 +40,7 @@ function Finance() {
                     couvre pas la totalité du séjour.<br/>
                     Contact INSA : bourse.region@insa-lyon.fr<br/>
                     <br/>
-                    6.2 LA BOURSE ERASMUS+<br/>
+                    LA BOURSE ERASMUS+<br/>
                     Destination : Pays de l’Union Européenne agréés par la Commission Européenne, de
                     l’AELE et la Turquie (Hors Suisse).<br/>
                     Source : Agence Erasmus+<br/>
@@ -69,7 +69,7 @@ function Finance() {
                     des étudiants concernés.<br/>
                     Contact INSA : scolerasmus@insa-lyon.fr<br/>
                     <br/>
-                    6.3 LA BOURSE AMI - AIDE À LA MOBILITÉ INTERNATIONALE<br/>
+                    LA BOURSE AMI - AIDE À LA MOBILITÉ INTERNATIONALE<br/>
                     Destination : Toutes<br/>
                     Source : Ministère de l’Enseignement Supérieur et de la Recherche
                     Critères d’éligibilité (sous réserve de modifications) :<br/>
@@ -90,7 +90,7 @@ function Finance() {
                     supérieure à 3600€ (stages et études cumulés)<br/>
                     Contact INSA : mobilitesortante@insa-lyon.fr<br/>
                     <br/>
-                    6.4 LA BOURSE FSI - FONDS DE SOUTIEN POUR L’INTERNATIONAL<br/>
+                    LA BOURSE FSI - FONDS DE SOUTIEN POUR L’INTERNATIONAL<br/>
                     Destination : Toutes<br/>
                     Source : Financement interne à partir des Frais de Dossier Mobilité Internationale
                     (FDMI) payés par tous les candidats à la mobilité sortante
@@ -100,7 +100,7 @@ function Finance() {
                     Montant : 800€ en 2019-2020<br/>
                     Contact INSA : mobilitesortante@insa-lyon.fr<br/>
                     <br/>
-                    6.5 AIDES FINANCIÈRES DES PROGRAMMES FITEC<br/>
+                    AIDES FINANCIÈRES DES PROGRAMMES FITEC<br/>
                     Destination : Les établissements FITEC partenaires en Argentine, au Brésil et
                     au Mexique.<br/>
                     Source : Ministère de l’Europe et des Affaires étrangères, le ministère de l’Enseignement Supérieur, de la Recherche et de l’Innovation et les ministères des
@@ -115,7 +115,7 @@ function Finance() {
                     Contact INSA : haridian.melgar-perez@insa-lyon.fr<br/>
                     Chargée de Projet Amérique Latine<br/>
                     <br/>
-                    6.6 AIDES FINANCIÈRES DU PROGRAMME UNITECH<br/>
+                    AIDES FINANCIÈRES DU PROGRAMME UNITECH<br/>
                     Les étudiants sélectionnés pour le programme UNITECH bénéficieront d’une aide
                     à la mobilité de 1000€, cumulable avec une bourse Erasmus+.<br/>
                     <br/>
@@ -127,7 +127,7 @@ function Finance() {
                     • Rotary, AMOPA...<br/>
                     • Bourses IGB (exemple : BB2)<br/>
                     • Bourse de la fondation <br/>
-
+                    <br/>
                     Informations extraites du Passeport JI 2020 : https://moodle.insa-lyon.fr/pluginfile.php/142587/mod_resource/content/2/Passeport-JI-2020.pdf
                 </Typography>
             </Box>

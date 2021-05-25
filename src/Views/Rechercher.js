@@ -311,7 +311,7 @@ function Rechercher() {
                                         <TableCell align="right" component="th" scope="row"> {row.name} </TableCell>
                                         <TableCell align="right">{row.country_name}</TableCell>
                                         <TableCell align="center">
-                                            {[...new Set(row.placesDD
+                                            {row.placesDD.length + row.placesExchange.length !== 0 && [...new Set((row.placesExchange.concat(row.placesDD))
                                                 .map((res)=>res.department_availability.map((dep)=>dep.name))
                                                 .reduce((list1, list2)=>list1.concat(list2)))]
                                                 .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}

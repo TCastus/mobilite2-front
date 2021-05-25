@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0px 0px 10px 0px',
         opacity: 0.75,
         background: "lightgrey",
+
     },
     comment: {
         padding: 10,
@@ -84,7 +85,7 @@ const defaultValues = {
     mobility_type: "DD",
     univ_appartment: false,
     rent: 500,
-    visa: false,
+    visa: "",
     courses_difficulty: 0,
     student_proximity: 0,
     courses_interest: 0,
@@ -190,6 +191,16 @@ export default function Experience() {
                                                     control={control}
                                                 />
                                             </Grid>
+
+                                            <Grid item sm={12}>
+                                                <Typography>Visa demandé pour l&apos;échange ?</Typography>
+                                                <Controller
+                                                    render={({ field }) =>
+                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : Comme je suis de nationalité ... je ai du faire un visa..." multiline rows={5} {...field} />}
+                                                    name="visa"
+                                                    control={control}
+                                                />
+                                            </Grid>
                                         </Grid>
                                     </Grid>
 
@@ -199,11 +210,35 @@ export default function Experience() {
                                                 <Typography> Commentaire </Typography>
                                                 <Controller
                                                     render={({ field }) =>
-                                                        <TextField className={classes.comment} style={{textAlign: 'left'}}
-                                                            placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..."
-                                                            multiline rows={5} {...field} />}
+                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." multiline rows={5} {...field} />}
                                                     name="comment"
                                                     control={control}
+                                                />
+                                            </Grid>
+                                            <Grid item sm={6}>
+                                                <Typography>Type de contrat</Typography>
+                                                <Controller
+                                                    render={({ field }) => (
+                                                        <RadioGroup aria-label="gender" {...field}>
+                                                            <FormControlLabel value="E" control={<Radio />} label="Echange"/>
+                                                            <FormControlLabel value="DD" control={<Radio />} label="Double Diplôme" />
+                                                        </RadioGroup>
+                                                    )}
+                                                    name="mobility_type"
+                                                    control={control}
+                                                />
+                                            </Grid>
+                                            <Grid item sm={6}>
+                                                <Typography>Logé à l&apos;université ?</Typography>
+                                                <Controller
+                                                    name="univ_appartment"
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <Checkbox
+                                                            onChange={(e) => field.onChange(e.target.checked)}
+                                                            checked={field.value}
+                                                        />
+                                                    )}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} className={classes.items}>
@@ -232,55 +267,12 @@ export default function Experience() {
                                                     control={control}
                                                 />
                                             </Grid>
-
-                                            <Grid item sm={4}>
-                                                <Typography>Type de contrat</Typography>
-                                                <Controller
-                                                    render={({ field }) => (
-                                                        <RadioGroup aria-label="gender" {...field}>
-                                                            <FormControlLabel value="E" control={<Radio />} label="Echange"/>
-                                                            <FormControlLabel value="DD" control={<Radio />} label="Double Diplôme" />
-                                                        </RadioGroup>
-                                                    )}
-                                                    name="mobility_type"
-                                                    control={control}
-                                                />
-                                            </Grid>
-
-                                            <Grid item sm={6}>
-                                                <Typography>Logé à l&apos;université ?</Typography>
-                                                <Controller
-                                                    name="univ_appartment"
-                                                    control={control}
-                                                    render={({ field }) => (
-                                                        <Checkbox
-                                                            onChange={(e) => field.onChange(e.target.checked)}
-                                                            checked={field.value}
-                                                        />
-                                                    )}
-                                                />
-                                            </Grid>
-
-                                            <Grid item sm={6}>
+                                            <Grid item sm={12}>
                                                 <Typography>Loyer moyen payé (€)</Typography>
                                                 <Controller
                                                     render={({ field }) => <TextField type={"number"} {...field} />}
                                                     name="rent"
                                                     control={control}
-                                                />
-                                            </Grid>
-
-                                            <Grid item sm={6}>
-                                                <Typography>Visa demandé pour l&apos;échange ?</Typography>
-                                                <Controller
-                                                    name="visa"
-                                                    control={control}
-                                                    render={({ field }) => (
-                                                        <Checkbox
-                                                            onChange={(e) => field.onChange(e.target.checked)}
-                                                            checked={field.value}
-                                                        />
-                                                    )}
                                                 />
                                             </Grid>
                                         </Grid>
@@ -292,7 +284,6 @@ export default function Experience() {
 
                         <Box component="div" maxWidth="sm">
                             <Grid container className={classes.ratingsGrid}>
-
                                 <RatingForm control={control} title="Sécurité" name="security" Icon={SecurityIcon} />
                                 <RatingForm control={control} title="Coût de la vie" name="cost_of_living" Icon={AttachMoneyIcon} />
                                 <RatingForm control={control} title="Vie culturelle" name="culture" Icon={AccountBoxIcon} />
@@ -300,7 +291,6 @@ export default function Experience() {
                                 <RatingForm control={control} title="Difficulté des cours" name="courses_difficulty" Icon={MenuBookIcon} />
                                 <RatingForm control={control} title="Contact avec les étudiants" name="student_proximity" Icon={ChatIcon} />
                                 <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
-
                                 <Grid item xs={12} className={classes.items}>
                                     <Button variant="contained" color="secondary" type="submit">
                                         Envoyer  <SendIcon fontSize={"small"}/>

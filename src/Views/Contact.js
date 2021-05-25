@@ -61,14 +61,13 @@ function Contact() {
             <Box component= "div"  width="75%" mx="auto" >
                 <Typography variant={'h4'} className={classes.title2}>
                     <br/>
-                    Nous trouver
+                    Contacter l&apos;équipe technique du site
                 </Typography>
                 <Typography  className={classes.content}>
                     <Grid container>
                         <Grid item xs>
                             <EmailIcon />
-                            <br/><br/>ASTUS : astus.insalyon@gmail.com
-                            <br/>DRI : dri@insa-lyon.fr
+                            <br/><br/>astus.insalyon@gmail.com
                         </Grid>
 
                         <Grid item xs >
@@ -77,10 +76,6 @@ function Contact() {
                             <br/>Bâtiment Claude Chappe - INSA Lyon
                             <br/>6 avenue des arts 69621
                             <br/>Villeurbanne cedex
-                            <br/>
-                            <br/>DRI :
-                            <br/>20 avenue Albert Einstein
-                            <br/>69621 Villeurbanne cedex
                         </Grid>
 
                         <Grid item xs >
@@ -97,7 +92,41 @@ function Contact() {
                     </Grid>
                 </Typography>
                 <Typography variant={'h4'} className={classes.title2}>
-                    Contacter l&apos;équipe
+                    <br/>
+                    Contacter les responsables des échanges à l&apos;international
+                </Typography>
+                <Typography  className={classes.content}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <EmailIcon />
+                            <br/>
+                        </Grid>
+                        <Grid item xs>
+                            <br/>TC : <br/>Oana IOVA, oana.iova@insa-lyon.fr
+                            <br/>
+                            <br/> BS : <br/>ri-bs@insa-lyon.fr
+                            <br/>
+                            <br/> GM : <br/>4GM : M’hamed Boutaous, mhamed.boutaous@insa-lyon.fr <br/> 5GM : Lionel Manin, lionel.manin@insa-lyon.fr
+                            <br/>
+                            <br/> SGM : <br/>5SGM et PFE : Alain Fave, alain.fave@insa-lyon.fr <br/> 4SGM : Lucile Joly-Pottuz, lucile.joly-pottuz@insa-lyon.fr
+                            <br/>
+                            <br/> GE : <br/>ge-ri@insa-lyon.fr
+
+                        </Grid>
+                        <Grid item xs>
+                            <br/> IF : <br/>Egyed-Zsigmond Elod, elod.egyed-zsigmond@insa-lyon.fr <br/> Gelan Jerome,
+                            jerome.gelan@insa-lyon.fr <br/> Servigne Sylvie, sylvie.servigne@insa-lyon.fr
+                            <br/>
+                            <br/> GCU : <br/>Christian Obrecht, christian.obrecht@insa-lyon.fr
+                            <br/>
+                            <br/> GEN : <br/>Gaëlle DUCOM, gaelle.ducom@insa-lyon.fr
+                            <br/>
+                            <br/> GI : <br/>4GI: Anne-Laure Ladier, anne-laure.ladier@insa-lyon.fr <br/>5GI: Lorraine Trilling, lorraine.trilling@insa-lyon.fr
+                        </Grid>
+                    </Grid>
+                </Typography>
+                <Typography variant={'h4'} className={classes.title2}>
+                    Contacter les créateurs du site
                 </Typography>
                 <Typography  className={classes.content}>
                     <Grid container>

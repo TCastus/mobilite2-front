@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Box, Grid, MenuItem, Typography,
@@ -15,12 +15,18 @@ import {
     Chat as ChatIcon,
     AccountBalance as AccountBalanceIcon
 } from '@material-ui/icons';
+import * as PropTypes from "prop-types";
 
 import PageHeader from "../Component/PageHeader";
 import RatingForm from "../Component/RatingForm";
 import {useForm, Controller} from "react-hook-form";
 import {getUniAll, postReview} from "../Request/uni_request";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import {getDefaultErrorMessage} from "../Request/error_handling";
 
+Experience.propTypes = {
+    errorHandler: PropTypes.func.isRequired,
+};
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -92,22 +98,35 @@ const defaultValues = {
     semester: "4A-S1"
 };
 
-export default function Experience() {
+export default function Experience({errorHandler}) {
     const classes = useStyles();
     const { handleSubmit, control } = useForm({defaultValues});
 
+    const [captchaToken, setCaptchaToken] = useState("");
     const [uni, setUni] = React.useState([]);
 
     React.useEffect(() => {
         getUniAll().then((res) => {
             setUni(res.data);
+        }).catch( err => {
+            errorHandler(getDefaultErrorMessage(err));
         });
-    }, []);
+    }, [errorHandler]);
 
     const submitForm = (form) => {
-        postReview(form).then((res)=> {
-            console.log(res);
-        });
+        const form2 = {...form};
+
+        if (captchaToken != "") {
+            form2['h-captcha-response'] = captchaToken;
+            postReview(form2).then((res)=> {
+                console.log(res);
+            });
+        }
+    };
+
+    const handleVerificationSuccess = (token, ekey) => {
+        setCaptchaToken(token);
+        console.log(token, ekey);
     };
 
     return (
@@ -300,6 +319,11 @@ export default function Experience() {
                                 <RatingForm control={control} title="Difficulté des cours" name="courses_difficulty" Icon={MenuBookIcon} />
                                 <RatingForm control={control} title="Contact avec les étudiants" name="student_proximity" Icon={ChatIcon} />
                                 <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
+
+                                <HCaptcha onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)} languageOverride="fr"
+                                    sitekey="10000000-ffff-ffff-ffff-000000000001"
+                                    theme="light"
+                                />
 
                                 <Grid item xs={12} className={classes.items}>
                                     <Button variant="contained" color="secondary" type="submit">

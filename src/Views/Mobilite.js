@@ -12,17 +12,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
     },
-    shareExp: {
-        backgroundColor: 'black',
-        color: '#c59b08',
-        padding: 10,
-        margin: 20,
-        borderWidth: '8px',
-        borderRadius: '5px 5px 5px 5px',
-        opacity: 0.75,
-        background: "whitesmoke",
-        font: 'small-caps bold 24px/1 sans-serif',
-    },
+
     boxFAQ: {
         backgroundColor: 'whitesmoke',
         padding: 10,

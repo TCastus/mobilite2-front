@@ -50,13 +50,10 @@ function Finance() {
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>La Bourse Région BRMIE <br/> (Bourse Région Mobilité
+                    <Typography className={classes.title} align={'center'}>LA BOURSE REGION BRMIE <br/> (Bourse Région Mobilité
                         Internationale Etudiants)</Typography>
-                    <br/>
-
                     <Typography className={classes.title2}>Destination :</Typography>
                     <Typography variant={'h6'} className={classes.content}>Tout pays étranger autre que son pays d’origine<br/> </Typography>
-
                     <Typography className={classes.title2}>Source :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         <Button target= "_blank" href="https://www.auvergnerhonealpes.fr/aide/73/89-se-former-a-l-etranger-avec-la-bourse-regionale-mobilite-internationale-etudiant-enseignement-superieur-recherche-innovation.htm">
@@ -64,7 +61,6 @@ function Finance() {
                         </Button>
                         <br/>
                     </Typography>
-
                     <Typography className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Effectuer un séjour prévu dans le règlement des études et attesté par l’établissement
@@ -95,159 +91,182 @@ function Finance() {
                     <Typography className={classes.title2}>Contact INSA :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         bourse.region@insa-lyon.fr
-                        <br/>
                     </Typography>
                 </Typography>
 
+                <Typography align="left" variant={'h6'}  className={classes.grid}>
+                    <Typography className={classes.title} align={'center'}>
+                        LA BOURSE ERASMUS+
+                    </Typography>
+                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        Pays de l’Union Européenne agréés par la Commission Européenne, de
+                        l’AELE et la Turquie (Hors Suisse).
+                        <br/>
+                    </Typography>
+                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        <Button target= "_blank" href="https://www.generation-erasmus.fr/sejour-bourse-erasmus-etudiant">
+                            Agence Erasmus+
+                        </Button>
+                        <br/>
+                    </Typography>
+                    <Typography className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        La bourse Erasmus+ est versée :
+                        <br/>
+                        - pour une mobilité d’études de 3 mois minimum chez un partenaire Erasmus+
+                        de l’INSA Lyon
+                        <br/>
+                        - pour un stage de 2 mois minimum.
+                        <br/>
+                        Les étudiants en double-diplôme chez un partenaire Erasmus+ sont éligibles pour
+                        les 2 années. Les étudiants non européens inscrits à l’INSA Lyon peuvent également
+                        prétendre à cette bourse.
+                        <br/>
+                    </Typography>
+                    <Typography className={classes.title2}>Montant : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        Le montant de la bourse est décidé chaque année en fonction du
+                        montant de la subvention annuelle versée à l’INSA Lyon par l’Agence Erasmus+
+                        France, de la durée du séjour, du pays de destination et du type de mobilité.
+                        <br/>
+                        Le montant actuel en mobilité d’étude se situe :
+                        <br/>
+                        - entre 810€ et 1110€ par semestre en échanges,
+                        <br/>
+                        - entre 1170€ et 1603€ par semestre pour les double-diplômes (et entre
+                        2070€ et 2837€ si départ pour l’année).
+                        <br/>
+                        Le montant actuel de la bourse de stage se situe entre 420€ et 520€ par
+                        mois.
+                        <br/>
+                        Un montant complémentaire pourra être reversé en fonction de la durée
+                        exacte de votre mobilité et du reliquat de la subvention, à votre retour.
+                        Les informations exactes sur les montants d’allocation ainsi que les formalités
+                        Erasmus+ à remplir seront communiquées par mail courant juin, à l’ensemble
+                        des étudiants concernés.
+                        <br/>
+                    </Typography>
+                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>scolerasmus@insa-lyon.fr</Typography>
+                </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    LA BOURSE ERASMUS+
-                    <br/>
-                    Destination : Pays de l’Union Européenne agréés par la Commission Européenne, de
-                    l’AELE et la Turquie (Hors Suisse).
-                    <br/>
-                    Source : Agence Erasmus+
-                    <br/>
-                    www.generation-erasmus.fr/sejour-bourse-erasmus-etudiant
-                    <br/>
-                    Critères d’éligibilité (sous réserve de modifications) :
-                    <br/>
-                    La bourse Erasmus+ est versée :
-                    <br/>
-                    - pour une mobilité d’études de 3 mois minimum chez un partenaire Erasmus+
-                    de l’INSA Lyon
-                    <br/>
-                    - pour un stage de 2 mois minimum.
-                    <br/>
-                    Les étudiants en double-diplôme chez un partenaire Erasmus+ sont éligibles pour
-                    les 2 années. Les étudiants non européens inscrits à l’INSA Lyon peuvent également
-                    prétendre à cette bourse.
-                    <br/>
-                    Montant : Le montant de la bourse est décidé chaque année en fonction du
-                    montant de la subvention annuelle versée à l’INSA Lyon par l’Agence Erasmus+
-                    France, de la durée du séjour, du pays de destination et du type de mobilité.
-                    <br/>
-                    Le montant actuel en mobilité d’étude se situe :
-                    <br/>
-                    - entre 810€ et 1110€ par semestre en échanges,
-                    <br/>
-                    - entre 1170€ et 1603€ par semestre pour les double-diplômes (et entre
-                    2070€ et 2837€ si départ pour l’année).
-                    <br/>
-                    Le montant actuel de la bourse de stage se situe entre 420€ et 520€ par
-                    mois.
-                    <br/>
-                    Un montant complémentaire pourra être reversé en fonction de la durée
-                    exacte de votre mobilité et du reliquat de la subvention, à votre retour.
-                    Les informations exactes sur les montants d’allocation ainsi que les formalités
-                    Erasmus+ à remplir seront communiquées par mail courant juin, à l’ensemble
-                    des étudiants concernés.
-                    <br/>
-                    Contact INSA : scolerasmus@insa-lyon.fr
-                    <br/>
+                    <Typography className={classes.title} align={'center'}>LA BOURSE AMI - AIDE À LA MOBILITÉ INTERNATIONALE</Typography>
+                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>Toutes</Typography>
+                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>Ministère de l’Enseignement Supérieur et de la Recherche</Typography>
+                    <Typography className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        • Effectuer une mobilité d’études ou de stage d’une durée minimale de 2 mois
+                        à l’étranger.
+                        <br/>
+                        • Bénéficier d’une bourse du CROUS pour l’année de la mobilité ou allocation
+                        annuelle accordée dans le cadre du dispositif des aides spécifiques.
+                        <br/>
+                        • Préparer un diplôme national.
+                        <br/>
+                        L’aide est accordée en prenant en compte la durée du séjour et certaines spécificités (échange, double-diplôme, stage). Un mail est envoyé en juin aux étudiants
+                        pour leur expliquer les démarches.
+                        <br/>
+                    </Typography>
+                    <Typography className={classes.title2}>Montant : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        Voici à titre indicatif les montants accordés par étudiant en 2019-2020 :
+                        <br/>
+                        • 1 semestre d’échange : 800€
+                        <br/>
+                        • 1 semestre en double-diplôme : 1200€
+                        <br/>
+                        • 1 an d’échange : 1600€
+                        <br/>
+                        • 1 an en double-diplôme : 2400€
+                        <br/>
+                        • 2e année en double-diplôme : 1200€
+                        <br/>
+                        NB : au cours de sa scolarité, l’étudiant ne pourra percevoir une aide AMI
+                        supérieure à 3600€ (stages et études cumulés)
+                        <br/>
+                    </Typography>
+                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>mobilitesortante@insa-lyon.fr</Typography>
                 </Typography>
+
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    LA BOURSE AMI - AIDE À LA MOBILITÉ INTERNATIONALE
-                    <br/>
-                    Destination : Toutes
-                    <br/>
-                    Source : Ministère de l’Enseignement Supérieur et de la Recherche
-                    <br/>
-                    Critères d’éligibilité (sous réserve de modifications) :
-                    <br/>
-                    • Effectuer une mobilité d’études ou de stage d’une durée minimale de 2 mois
-                    à l’étranger.
-                    <br/>
-                    • Bénéficier d’une bourse du CROUS pour l’année de la mobilité ou allocation
-                    annuelle accordée dans le cadre du dispositif des aides spécifiques.
-                    <br/>
-                    • Préparer un diplôme national.
-                    <br/>
-                    L’aide est accordée en prenant en compte la durée du séjour et certaines spécificités (échange, double-diplôme, stage). Un mail est envoyé en juin aux étudiants
-                    pour leur expliquer les démarches.
-                    <br/>
-                    Montant : Voici à titre indicatif les montants accordés par étudiant en 2019-2020 :
-                    <br/>
-                    • 1 semestre d’échange : 800€
-                    <br/>
-                    • 1 semestre en double-diplôme : 1200€
-                    <br/>
-                    • 1 an d’échange : 1600€
-                    <br/>
-                    • 1 an en double-diplôme : 2400€
-                    <br/>
-                    • 2e année en double-diplôme : 1200€
-                    <br/>
-                    NB : au cours de sa scolarité, l’étudiant ne pourra percevoir une aide AMI
-                    supérieure à 3600€ (stages et études cumulés)
-                    <br/>
-                    Contact INSA : mobilitesortante@insa-lyon.fr
-                    <br/>
+                    <Typography className={classes.title} align={'center'}>LA BOURSE FSI - FONDS DE SOUTIEN POUR L’INTERNATIONAL</Typography>
+                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>Toutes</Typography>
+                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        Financement interne à partir des Frais de Dossier Mobilité Internationale
+                        (FDMI) payés par tous les candidats à la mobilité sortante
+                        Critères d’éligibilité (sous réserve de modifications) :
+                        Tout élève en échange académique s’étant acquitté du FDMI, sur présentation
+                        d’une demande d’aide financière exceptionnelle.
+                    </Typography>
+                    <Typography className={classes.title2}>Montant :</Typography>
+                    <Typography variant={'h6'} className={classes.content}>800€ en 2019-2020</Typography>
+                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>mobilitesortante@insa-lyon.fr</Typography>
                 </Typography>
+
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    LA BOURSE FSI - FONDS DE SOUTIEN POUR L’INTERNATIONAL
+                    <Typography className={classes.title} align={'center'}>AIDES FINANCIÈRES DES PROGRAMMES FITEC</Typography>
+                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>Les établissements FITEC partenaires en Argentine, au Brésil et au Mexique.</Typography>
                     <br/>
-                    Destination : Toutes
+                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        Ministère de l’Europe et des Affaires étrangères, le ministère de l’Enseignement Supérieur, de la Recherche et de l’Innovation et les ministères des pays concernés
+                    </Typography>
                     <br/>
-                    Source : Financement interne à partir des Frais de Dossier Mobilité Internationale
-                    (FDMI) payés par tous les candidats à la mobilité sortante
-                    Critères d’éligibilité (sous réserve de modifications) :
-                    Tout élève en échange académique s’étant acquitté du FDMI, sur présentation
-                    d’une demande d’aide financière exceptionnelle.
-                    <br/>
-                    Montant : 800€ en 2019-2020
-                    <br/>
-                    Contact INSA : mobilitesortante@insa-lyon.fr
-                    <br/>
+                    <Typography className={classes.title2}>Critères d’éligibilité : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        Tout élève ingénieur en échange académique (suivi ou
+                        non d’un stage) ayant postulé pour un de ces établissements.
+                        Les dossiers de candidature sont automatiquement envoyés par la Direction
+                        des Relations Internationales aux étudiants autorisés à faire un échange et
+                        admis dans un établissement partenaire FITEC. Ces étudiants renvoient alors
+                        les justificatifs liés à leur mobilité. Les aides sont versées pendant ou à l’issue
+                        de la mobilité.
+                    </Typography>
+                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.content}>haridian.melgar-perez@insa-lyon.fr - Chargée de Projet Amérique Latine</Typography>
                 </Typography>
+
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    AIDES FINANCIÈRES DES PROGRAMMES FITEC
-                    <br/>
-                    Destination : Les établissements FITEC partenaires en Argentine, au Brésil et
-                    au Mexique.
-                    <br/>
-                    Source : Ministère de l’Europe et des Affaires étrangères, le ministère de l’Enseignement Supérieur, de la Recherche et de l’Innovation et les ministères des
-                    pays concernés
-                    <br/>
-                    Critères d’éligibilité : Tout élève ingénieur en échange académique (suivi ou
-                    non d’un stage) ayant postulé pour un de ces établissements.
-                    Les dossiers de candidature sont automatiquement envoyés par la Direction
-                    des Relations Internationales aux étudiants autorisés à faire un échange et
-                    admis dans un établissement partenaire FITEC. Ces étudiants renvoient alors
-                    les justificatifs liés à leur mobilité. Les aides sont versées pendant ou à l’issue
-                    de la mobilité.
-                    <br/>
-                    Contact INSA : haridian.melgar-perez@insa-lyon.fr
-                    <br/>
-                    Chargée de Projet Amérique Latine
-                    <br/>
+                    <Typography className={classes.title} align={'center'}>AIDES FINANCIÈRES DU PROGRAMME UNITECH</Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        Les étudiants sélectionnés pour le programme UNITECH bénéficieront d’une aide
+                        à la mobilité de 1000€, cumulable avec une bourse Erasmus+.
+                    </Typography>
                 </Typography>
+
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    AIDES FINANCIÈRES DU PROGRAMME UNITECH
-                    <br/>
-                    Les étudiants sélectionnés pour le programme UNITECH bénéficieront d’une aide
-                    à la mobilité de 1000€, cumulable avec une bourse Erasmus+.
-                    <br/>
-                </Typography>
-                <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    AUTRES BOURSES ÉVENTUELLES : RENSEIGNEZ-VOUS !
-                    <br/>
-                    • Conseil Régional ou commune d’origine
-                    <br/>
-                    • L’université d’accueil
-                    <br/>
-                    • Les services consulaires, en France, du pays d’accueil
-                    <br/>
-                    • Comités d’Entreprise
-                    <br/>
-                    • Rotary, AMOPA...
-                    <br/>
-                    • Bourses IGB (exemple : BB2)
-                    <br/>
-                    • Bourse de la fondation
-                    <br/>
-                    <br/>
-                    Informations extraites du Passeport JI 2020 : https://moodle.insa-lyon.fr/pluginfile.php/142587/mod_resource/content/2/Passeport-JI-2020.pdf
+                    <Typography className={classes.title} align={'center'}>AUTRES BOURSES ÉVENTUELLES : RENSEIGNEZ-VOUS !</Typography>
+                    <Typography variant={'h6'} className={classes.content}>
+                        • Conseil Régional ou commune d’origine
+                        <br/>
+                        • L’université d’accueil
+                        <br/>
+                        • Les services consulaires, en France, du pays d’accueil
+                        <br/>
+                        • Comités d’Entreprise
+                        <br/>
+                        • Rotary, AMOPA...
+                        <br/>
+                        • Bourses IGB (exemple : BB2)
+                        <br/>
+                        • Bourse de la fondation
+                    </Typography>
+                    <Typography variant={'h6'} className={classes.content} align={"right"}>
+                        <Button target= "_blank" href="https://moodle.insa-lyon.fr/pluginfile.php/142587/mod_resource/content/2/Passeport-JI-2020.pdf">
+                            Informations extraites du Passeport JI 2020
+                        </Button>
+                        <br/>
+                    </Typography>
                 </Typography>
             </Box>
         </Box>

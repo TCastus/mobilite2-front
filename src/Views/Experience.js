@@ -196,7 +196,7 @@ export default function Experience() {
                                                 <Typography>Visa demandé pour l&apos;échange ?</Typography>
                                                 <Controller
                                                     render={({ field }) =>
-                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : Comme je suis de nationalité ... je ai du faire un visa..." multiline rows={5} {...field} />}
+                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : Comme je suis de nationalité ... j&apos;ai dû faire un visa..." multiline rows={5} {...field} />}
                                                     name="visa"
                                                     control={control}
                                                 />

@@ -23,6 +23,7 @@ import {useForm, Controller} from "react-hook-form";
 import {getUniAll, postReview} from "../Request/uni_request";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import {getDefaultErrorMessage} from "../Request/error_handling";
+import config from "../config.json";
 
 Experience.propTypes = {
     errorHandler: PropTypes.func.isRequired,
@@ -116,10 +117,12 @@ export default function Experience({errorHandler}) {
     const submitForm = (form) => {
         const form2 = {...form};
 
-        if (captchaToken != "") {
+        if (captchaToken !== "") {
             form2['h-captcha-response'] = captchaToken;
             postReview(form2).then((res)=> {
                 console.log(res);
+            }).catch( err => {
+                errorHandler(getDefaultErrorMessage(err));
             });
         }
     };
@@ -321,7 +324,7 @@ export default function Experience({errorHandler}) {
                                 <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
 
                                 <HCaptcha onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)} languageOverride="fr"
-                                    sitekey="10000000-ffff-ffff-ffff-000000000001"
+                                    sitekey={config.HCAPTCHA_SITEKEY}
                                     theme="light"
                                 />
 

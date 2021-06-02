@@ -22,7 +22,13 @@ import {CircularProgress} from "@material-ui/core";
 import PageHeader from "../Component/PageHeader";
 import NotePaper from "../Component/NotePaper";
 import {Link, useParams} from "react-router-dom";
+import * as PropTypes from "prop-types";
+import {getDefaultErrorMessage} from "../Request/error_handling";
 
+
+UniDetail.propTypes = {
+    errorHandler: PropTypes.func.isRequired,
+};
 
 const useStyles = makeStyles((theme) => ({
     map: {
@@ -61,41 +67,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-/*const continent = {
-    "AS" : "Asie",
-    "AF" : "Afrique",
-    "AdN" : "Amerique du Nord",
-    "AdS" : "Amerique du Sud",
-    "EU" : "Europe",
-    "OC" : "Oceanie"
-};
-
-const mobitype = {
-    "DD" : "Double Diplôme",
-    "E" : "Echange"
-};
-
-const period = {
-    "Hebdo" : "Hebdomadaire",
-    "Mensuel" :  "Mensuel",
-    "Trim" : "Trimestriel",
-    "Sem" : "Semestriel",
-    "An" : "Annuel"
-};
-
-const access = {
-    "High" : "Demande forte",
-    "Medium" : "Demande normale",
-    "Low" : "Demande faible"
-};
-
-const languages = {
-    "TOEIC" : "TOEIC",
-    "INC" : "INCONNU",
-    "AUCUN" : "AUCUN"
-};*/
-
-export default function UniDetail() {
+export default function UniDetail({errorHandler}) {
     const classes = useStyles();
 
     const [loaded, setLoaded] = useState(false); // true if API content is loaded
@@ -109,9 +81,10 @@ export default function UniDetail() {
             console.log(res.data);
             setUni(res.data);
             setLoaded(true);
+        }).catch( err => {
+            errorHandler(getDefaultErrorMessage(err));
         });
-
-    }, [id]);
+    }, [id, errorHandler]);
 
     return (loaded ?
         (<>
@@ -119,17 +92,22 @@ export default function UniDetail() {
             <Container className={classes.presGen} maxWidth={"lg"}>
                 <Grid container spacing={5}>
                     <Grid item sm={6} xs={12}>
-                        <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={8} scrollWheelZoom={false} className={classes.map}>
-                            <TileLayer
-                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                            <Marker position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
-                                <Popup>
-                                    {uni.name}
-                                </Popup>
-                            </Marker>
-                        </MapContainer>
+                        {uni.latitude && uni.longitude &&
+                            <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={8}
+                                scrollWheelZoom={false} className={classes.map}>
+
+                                <TileLayer
+                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+
+                                <Marker position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
+                                    <Popup>
+                                        {uni.name}
+                                    </Popup>
+                                </Marker>
+                            </MapContainer>
+                        }
                     </Grid>
 
                     <Grid item sm={6} xs={12}>
@@ -161,7 +139,7 @@ export default function UniDetail() {
                             <Typography variant={"body1"}>Départements concernés en DD :</Typography>
 
                             {/* Oui j'en suis fier*/}
-                            {[...new Set(uni.placesDD
+                            {uni.placesDD.length > 0 && [...new Set(uni.placesDD
                                 .map((res)=>res.department_availability.map((dep)=>dep.name))
                                 .reduce((list1, list2)=>list1.concat(list2)))]
                                 .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}

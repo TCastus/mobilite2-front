@@ -15,6 +15,7 @@ import { Controller, useForm } from "react-hook-form";
 import PageHeader from "../Component/PageHeader";
 import { getUniAll} from "../Request/uni_request";
 import SearchSlider from "../Component/SearchSlider";
+import * as PropTypes from "prop-types";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -124,7 +125,11 @@ const defaultValues = {
     department_availability: "TC"
 };
 
-function Rechercher() {
+Rechercher.propTypes = {
+    errorHandler: PropTypes.func.isRequired,
+};
+
+function Rechercher({errorHandler}) {
     const classes = useStyles();
     const { handleSubmit, control } = useForm({defaultValues});
     const [name, setName] = useState("");

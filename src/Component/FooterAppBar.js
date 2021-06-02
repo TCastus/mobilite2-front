@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) =>
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems:"center",
-            font: 'small-caps bold 24px/1 sans-serif',
+            fontVariantCaps: theme.fontVariantCaps.smallCaps,
+
 
         },
         shareExp: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) =>
             padding: theme.spacing(3),
             display: "flex",
             alignItems: "center",
+            fontVariantCaps: theme.fontVariantCaps.smallCaps,
         },
         avisButton: {
             marginTop: theme.spacing(3),
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme) =>
         link: {
             color: theme.palette.primary.dark,
         },
+
     })
 );
 
@@ -58,14 +61,16 @@ function FooterAppBar({routes}) {
             <Box component="div" className={classes.shareExp}>
                 <Grid container spacing={1}>
                     <Grid item sm={6} style={{display: "flex", alignItems:"center", textAlign:"center", fontVariantCaps: 'small-caps', textDecoration:'underline'}}>
-                        <Typography component={Link} to={"experience"} variant={'h4'} style={{color: '#c59b08', margin:'0 auto'}}>Partagez votre expérience <BorderColorTwoToneIcon/></Typography>
-                    </Grid>
+                        <Typography component={Link} to={"experience"} variant={'h5'} style={{color: '#c59b08', margin:'0 auto'}}>Partagez votre expérience
+                        </Typography>
+                    </Grid >
 
                     <Grid item sm={6}>
                         <Typography variant={'h6'} style={{textAlign: 'left'}}>
-                            Vous êtes partis en d&apos;échange ? Aidez les étudiants dans leur choix en partageant votre expérience et en répondant à leurs questions.
+                            Vous êtes partis en échange ? Aidez les étudiants dans leur choix en partageant votre expérience et en répondant à leurs questions.
                         </Typography>
                     </Grid>
+
                 </Grid>
             </Box>
 
@@ -81,7 +86,7 @@ function FooterAppBar({routes}) {
                 <Typography variant={"h6"}>TC INSA Lyon, 2021</Typography>
 
                 <div className={classes.github}>
-                    <a href={"https://github.com/TCastus/mobilite2-front"}><Typography className={classes.github} variant={"body1"}> Voir sur
+                    <a href={"https://github.com/TCastus/mobilite2-front"}><Typography className={classes.github} variant={"h6"}> Voir sur
                         Github <GitHubIcon/> </Typography></a>
                 </div>
             </Box>

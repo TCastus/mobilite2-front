@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
         align: "center",
     },
     presGen: {
-        background:'white',
+        background:theme.palette.third.white,
         marginBottom: theme.spacing(5),
     },
     avis: {
-        fontWeight: 'bold',
+        fontWeight: theme.fontType.bold,
         paddingTop:'0.5em',
         paddingBottom:'0.3em',
     },
@@ -133,7 +133,7 @@ export default function UniDetail() {
                     </Grid>
 
                     <Grid item sm={6} xs={12}>
-                        <Typography variant={"h4"} className={classes.avis}>Les avis des étudiants</Typography>
+                        <Typography variant={"h4"} className={classes.avis} style={{fontVariantCaps: 'small-caps'}}>Les avis des étudiants</Typography>
 
                         <Grid container spacing={2}>
                             <NotePaper IconOn={StarIcon} IconOff={StarBorderIcon} title={"Note globale"} note={3} cols={12} />
@@ -176,7 +176,7 @@ export default function UniDetail() {
                             <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
                             <Typography variant={"body1"}>Le campus : </Typography>
                         </div>
-                        <Button variant="contained" color="secondary" component={Link} to="/experience">
+                        <Button variant="contained" color="primary" component={Link} to="/experience">
                             Je suis allé(e) ici !
                         </Button>
                     </Grid>
@@ -187,7 +187,7 @@ export default function UniDetail() {
                             uni.reviews.length === 0 ? (
                                 <div>
                                     <Typography variant={"body1"}>Pas de commentaire pour cette université</Typography>
-                                    <Button variant="contained" color="secondary" component={Link} to="/experience">
+                                    <Button variant="contained" color="primary" component={Link} to="/experience">
                                         Donner mon avis
                                     </Button>
                                 </div>

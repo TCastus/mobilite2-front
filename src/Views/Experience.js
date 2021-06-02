@@ -24,22 +24,23 @@ import {getUniAll, postReview} from "../Request/uni_request";
 
 const useStyles = makeStyles((theme) => ({
     grid: {
-        border: '2px solid white',
         padding: 10,
-        margin: theme.spacing(1, 'auto'),
-        borderWidth: '3px',
-        borderRadius: '0px 0px 10px 0px',
-        opacity: 0.75,
-        background: "whitesmoke",
+        margin: theme.spacing(5, 'auto'),
+        borderRadius: '8px',
+        background: theme.palette.third.lightgrey,
 
     },
     ratingsGrid: {
         padding: 10,
         margin: theme.spacing(1, 'auto'),
+
         borderWidth: '3px',
         borderRadius: '0px 0px 10px 0px',
         opacity: 0.75,
-        background: "lightgrey",
+        width: "100%",
+        [theme.breakpoints.up('md')]: {
+            width: '90%',
+        }
     },
     comment: {
         padding: 10,
@@ -49,7 +50,25 @@ const useStyles = makeStyles((theme) => ({
     },
     items:{
         margin: theme.spacing(1, 'auto'),
+
     },
+
+    textFieldSize:{
+        width: "70%",
+        [theme.breakpoints.up('md')]: {
+            width: '50%',
+        }
+    },
+
+    startRatingSize:{
+        width: "30%",
+        [theme.breakpoints.up('md')]: {
+            width: '70%',
+        }
+    },
+
+
+
 }));
 
 const departments = [
@@ -119,32 +138,32 @@ export default function Experience() {
                     <Box component="div" className="header">
                         <Box component="div">
                             <Grid component="div" className={classes.grid} >
-                                <Typography variant={'h4'} className={classes.items}>Vous revenez d&apos;échange ?</Typography>
-                                <Typography variant={'h5'} className={classes.items}>Remplissez le formulaire ci-dessous et aidez les futures<br/> générations à faire leur choix !</Typography>
+                                <Typography variant={'h4'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Vous revenez d&apos;échange ?</Typography>
+                                <Typography variant={'h5'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Remplissez le formulaire ci-dessous et aidez les futures<br/> générations à faire leur choix !</Typography>
                                 <Grid container className={classes.items}>
                                     <Grid item xs={6}>
                                         <Grid container spacing={1} className={classes.items}>
 
                                             <Grid item xs={12}>
-                                                <Typography> Prénom </Typography>
+                                                <Typography variant={"h6"} > Prénom </Typography>
                                                 <Controller
-                                                    render={({ field }) => <TextField placeholder="Éric" {...field} />}
+                                                    render={({ field }) => <TextField placeholder="Éric" {...field} className={classes.textFieldSize} />}
                                                     name="surname"
                                                     control={control}
                                                 />
                                             </Grid>
 
                                             <Grid item xs={12}>
-                                                <Typography> Nom de famille </Typography>
+                                                <Typography variant={"h6"}> Nom de famille </Typography>
                                                 <Controller
-                                                    render={({ field }) => <TextField placeholder="Maurincomme" {...field} />}
+                                                    render={({ field }) => <TextField placeholder="Maurincomme" {...field} className={classes.textFieldSize} />}
                                                     name="name"
                                                     control={control}
                                                 />
                                             </Grid>
 
                                             <Grid item xs={12}>
-                                                <Typography id="depart">Département</Typography>
+                                                <Typography variant={"h6"} id="depart">Département</Typography>
                                                 <Controller
                                                     render={({ field }) => (
                                                         <Select {...field}>
@@ -157,7 +176,7 @@ export default function Experience() {
                                             </Grid>
 
                                             <Grid item xs={12}>
-                                                <Typography id="depart">Semestre/année d&apos;échange</Typography>
+                                                <Typography variant={"h6"} id="depart">Semestre/année d&apos;échange</Typography>
                                                 <Controller
                                                     render={({ field }) => (
                                                         <Select {...field}>
@@ -170,16 +189,16 @@ export default function Experience() {
                                             </Grid>
 
                                             <Grid item xs={12}>
-                                                <Typography>Année d&apos;échange </Typography>
+                                                <Typography variant={"h6"} >Année d&apos;échange </Typography>
                                                 <Controller
                                                     render={({ field }) =>
-                                                        <TextField type="number" {...field} />}
+                                                        <TextField type="number" {...field} className={classes.textFieldSize} />}
                                                     name="year"
                                                     control={control}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography>Université</Typography>
+                                                <Typography variant={"h6"} >Université</Typography>
                                                 <Controller
                                                     render={({ field }) => (
                                                         <Select {...field}>
@@ -196,7 +215,7 @@ export default function Experience() {
                                     <Grid item xs={6}>
                                         <Grid container>
                                             <Grid item xs={12}>
-                                                <Typography> Commentaire </Typography>
+                                                <Typography variant={"h6"} > Commentaire </Typography>
                                                 <Controller
                                                     render={({ field }) =>
                                                         <TextField className={classes.comment} style={{textAlign: 'left'}}
@@ -207,7 +226,7 @@ export default function Experience() {
                                                 />
                                             </Grid>
                                             <Grid item xs={12} className={classes.items}>
-                                                <Typography>Email</Typography>
+                                                <Typography variant={"h6"} >Email</Typography>
                                                 <Controller
                                                     render={({ field }) =>
                                                         <TextField type="email" {...field} />}
@@ -217,7 +236,7 @@ export default function Experience() {
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Typography>
+                                                <Typography variant={"h6"}>
                                                     Souhaitez-vous que nous partagions votre e-mail<br/>
                                                     aux élèves intéressés par votre échange souhaitant vous poser des questions ?
                                                 </Typography>
@@ -234,7 +253,7 @@ export default function Experience() {
                                             </Grid>
 
                                             <Grid item sm={4}>
-                                                <Typography>Type de contrat</Typography>
+                                                <Typography variant={"h6"}>Type de contrat</Typography>
                                                 <Controller
                                                     render={({ field }) => (
                                                         <RadioGroup aria-label="gender" {...field}>
@@ -248,7 +267,7 @@ export default function Experience() {
                                             </Grid>
 
                                             <Grid item sm={6}>
-                                                <Typography>Logé à l&apos;université ?</Typography>
+                                                <Typography variant={"h6"}>Logé à l&apos;université ?</Typography>
                                                 <Controller
                                                     name="univ_appartment"
                                                     control={control}
@@ -262,16 +281,16 @@ export default function Experience() {
                                             </Grid>
 
                                             <Grid item sm={6}>
-                                                <Typography>Loyer moyen payé (€)</Typography>
+                                                <Typography variant={"h6"}>Loyer moyen payé (€)</Typography>
                                                 <Controller
-                                                    render={({ field }) => <TextField type={"number"} {...field} />}
+                                                    render={({ field }) => <TextField type={"number"} {...field} className={classes.textFieldSize} />}
                                                     name="rent"
                                                     control={control}
                                                 />
                                             </Grid>
 
                                             <Grid item sm={6}>
-                                                <Typography>Visa demandé pour l&apos;échange ?</Typography>
+                                                <Typography variant={"h6"}>Visa demandé pour l&apos;échange ?</Typography>
                                                 <Controller
                                                     name="visa"
                                                     control={control}
@@ -290,10 +309,10 @@ export default function Experience() {
 
                         </Box>
 
-                        <Box component="div" maxWidth="sm">
-                            <Grid container className={classes.ratingsGrid}>
+                        <Box component="div" maxWidth="sm" className={classes.grid}>
+                            <Grid container className={classes.ratingsGrid} md={12}>
 
-                                <RatingForm control={control} title="Sécurité" name="security" Icon={SecurityIcon} />
+                                <RatingForm className={classes.startRatingSize} control={control} title="Sécurité" name="security" Icon={SecurityIcon} />
                                 <RatingForm control={control} title="Coût de la vie" name="cost_of_living" Icon={AttachMoneyIcon} />
                                 <RatingForm control={control} title="Vie culturelle" name="culture" Icon={AccountBoxIcon} />
                                 <RatingForm control={control} title="Vie nocturne" name="night_life" Icon={EmojiPeopleIcon} />
@@ -302,7 +321,7 @@ export default function Experience() {
                                 <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
 
                                 <Grid item xs={12} className={classes.items}>
-                                    <Button variant="contained" color="secondary" type="submit">
+                                    <Button variant="contained" color="primary" type="submit">
                                         Envoyer  <SendIcon fontSize={"small"}/>
                                     </Button>
                                 </Grid>

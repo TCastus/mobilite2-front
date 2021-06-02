@@ -35,7 +35,7 @@ export default function RatingForm({title, Icon, name, control}) {
     const classes = useStyles();
 
     return (
-        <Grid item xs={3}>
+        <Grid item xs={12} md={6}>
             <Container maxWidth="sm">
                 <Typography variant={'h6'} className={classes.ratingBox}>
                     <Grid container>

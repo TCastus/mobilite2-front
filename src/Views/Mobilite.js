@@ -12,32 +12,39 @@ import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minHeight : '100vh',
+        minHeight : '80vh',
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
     },
     shareExp: {
-        backgroundColor: 'black',
-        color: '#c59b08',
+        backgroundColor: theme.palette.primary.dark,
+        color: theme.palette.third.gold,
         padding: 10,
         margin: 20,
         borderWidth: '8px',
         borderRadius: '5px 5px 5px 5px',
         opacity: 0.75,
-        background: "whitesmoke",
-        font: 'small-caps bold 24px/1 sans-serif',
+        background: theme.palette.third.white,
+        fontVariantCaps: theme.fontVariantCaps.smallCaps,
+
     },
     boxFAQ: {
-        backgroundColor: 'whitesmoke',
-        padding: 10,
-        margin: -10,
+        backgroundColor: theme.palette.third.white,
+        padding: 20,
+        margin: -5,
         textAlign: 'center',
         borderWidth: '8px',
         borderRadius: '5px 5px 5px 5px',
         '& > *': {
-            margin: theme.spacing(1),
+            margin: theme.spacing(1, 'auto'),
+            //padding: theme.spacing(1, 'auto')
         },
+        fontVariantCaps: theme.fontVariantCaps.smallCaps,
+        alignItems: 'center',
     },
+
+
+
 }));
 
 
@@ -45,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Mobilite() {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <Box component= "div" className={classes.root}>
 
             <PageHeader title={"Se rensigner sur les mobilités"}/>
 
@@ -56,6 +63,8 @@ export default function Mobilite() {
                 <Typography variant={'h5'}>
                     Consulte les informations spécifiques données par ton département
                 </Typography>
+            </Box>
+            <Box component={"div"}>
 
                 <Grid container spacing={3}>
                     <Grid item xs={12} className={classes.boxFAQ}>
@@ -106,29 +115,8 @@ export default function Mobilite() {
                     </Grid>
                 </Grid>
             </Box>
-            <Box component="div" className={classes.shareExp}>
-                <Typography variant={'h4'}>PARTAGEZ VOTRE EXPERIENCE</Typography>
-                <PlaneIcon />
 
-                <Grid container spacing={1}>
-                    <Grid item xs={6} sm={7}>
-                        <Typography variant={'h6'} className={classes.shareExp}>
-                            Vous revenez d&apos;échange ? <br/>
-                            Aidez les étudiants dans leur choix en<br/>
-                            partageant votre expérience et en<br/>
-                            répondant à leurs questions.
-                        </Typography>
-                    </Grid>
-
-                    <Grid item xs={6} sm ={2} className={classes.shareExp}>
-                        <Button variant="contained" color="primary" component={Link} to={"experience"}>
-                            Donner mon avis
-                            <BorderColorTwoToneIcon />
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Box>
-        </div>
+        </Box>
 
     );
 }

@@ -32,11 +32,11 @@ const useStyles = makeStyles((theme) => {
             [theme.breakpoints.up("md")] : {
                 marginRight: theme.spacing(6)
             },
-            fontWeight: "bold",
-            color: "white",
+            fontWeight: theme.fontType.bold,
+            color: theme.palette.third.white,
         },
         link: {
-            color: 'white',
+            color: theme.palette.third.white,
             fontSize : 16,
             textDecoration: 'none',
             lineHeight: 1,

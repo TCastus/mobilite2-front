@@ -37,13 +37,16 @@ const useStyles = makeStyles((theme) =>
             font: 'small-caps bold 24px/1 sans-serif',
         },
         content: {
-            backgroundColor: 'white',
             padding: 30,
             margin: theme.spacing(1, 'auto'),
-            borderWidth: '3px',
-            borderRadius: '5px 5px 5px 5px',
-            background: "whitesmoke",
+
             textAlign: 'center',
+        },
+
+        width:{
+            [theme.breakpoints.up('md')]: {
+                width: '100%',
+            }
         },
     })
 );
@@ -58,12 +61,12 @@ function Contact() {
             <PageHeader title={<ContactPhoneIcon> </ContactPhoneIcon>} subtitle="CONTACT">
             </PageHeader>
 
-            <Box component= "div"  width="75%" mx="auto" >
+            <Box component= "div"  mx="auto" >
                 <Typography variant={'h4'} className={classes.title2}>
                     <br/>
                     Nous trouver
                 </Typography>
-                <Typography  className={classes.content}>
+                <Typography variant={'h7'} className={classes.content}>
                     <Grid container>
                         <Grid item xs>
                             <EmailIcon />
@@ -99,64 +102,65 @@ function Contact() {
                 <Typography variant={'h4'} className={classes.title2}>
                     Contacter l&apos;équipe
                 </Typography>
-                <Typography  className={classes.content}>
-                    <Grid container>
-                        <Grid item xs >
-                            <img src={louis} alt={"photo de louis - responsable du projet"} />
-                            <br/>
-                            <Button target= "_blank" href="https://www.linkedin.com/in/louis-gombert-92830a209/">
-                                <LinkedInIcon />
-                            </Button>
-                            <Button target= "_blank" href="mailto:louis.gombert@insa-lyon.fr">
-                                <EmailIcon />
-                            </Button>
+                <Typography  className={classes.content} >
+                    <Box component="div">
+                        <Grid container>
+                            <Grid item xs>
+                                <img src={louis} className={classes.width} alt={"photo de louis - responsable du projet"} />
+                                <br/>
+                                <Button width={"100%"} target= "_blank" href="https://www.linkedin.com/in/louis-gombert-92830a209/">
+                                    <LinkedInIcon />
+                                </Button>
+                                <Button target= "_blank" href="mailto:louis.gombert@insa-lyon.fr">
+                                    <EmailIcon />
+                                </Button>
+                            </Grid>
+                            <Grid item xs >
+                                <img src={esther} className={classes.width} alt={"photo de esther - team front end"}/>
+                                <br/>
+                                <Button target= "_blank" href="mailto:esther.allain@insa-lyon.fr">
+                                    <EmailIcon />
+                                </Button>
+                            </Grid>
+                            <Grid item xs >
+                                <img src={alice} className={classes.width} alt={"photo de alice - team front end"}/>
+                                <br/>
+                                <Button target= "_blank" href="https://www.linkedin.com/in/alice-gangneux-05ab16196/">
+                                    <LinkedInIcon />
+                                </Button>
+                                <Button target= "_blank" href="mailto:alice.gangneux@insa-lyon.fr">
+                                    <EmailIcon />
+                                </Button>
+                            </Grid>
+                            <Grid item xs >
+                                <img src={estelle} className={classes.width} alt={"photo de estelle - team front end"}/>
+                                <br/>
+                                <Button target= "_blank" href="https://www.linkedin.com/in/estelle-monier/">
+                                    <LinkedInIcon />
+                                </Button>
+                                <Button target= "_blank" href="mailto:estelle.monier@insa-lyon.fr">
+                                    <EmailIcon />
+                                </Button>
+                            </Grid>
+                            <Grid item xs >
+                                <img src={thomas} className={classes.width} alt={"photo de thomas - team back end"}/>
+                                <br/>
+                                <Button target= "_blank" href="mailto:thomas.lorrain@insa-lyon.fr">
+                                    <EmailIcon />
+                                </Button>
+                            </Grid>
+                            <Grid item xs >
+                                <img src={bastien} className={classes.width} alt={"photo de bastien - team back end"}/>
+                                <br/>
+                                <Button target= "_blank" href="https://www.linkedin.com/in/bastien-fontaine-a9a96b196/">
+                                    <LinkedInIcon />
+                                </Button>
+                                <Button target= "_blank" href="mailto:bastien.fontaine@insa-lyon.fr">
+                                    <EmailIcon />
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Grid item xs >
-                            <img src={esther} alt={"photo de esther - team front end"}/>
-                            <br/>
-                            <Button target= "_blank" href="mailto:esther.allain@insa-lyon.fr">
-                                <EmailIcon />
-                            </Button>
-                        </Grid>
-                        <Grid item xs >
-                            <img src={alice} alt={"photo de alice - team front end"}/>
-                            <br/>
-                            <Button target= "_blank" href="https://www.linkedin.com/in/alice-gangneux-05ab16196/">
-                                <LinkedInIcon />
-                            </Button>
-                            <Button target= "_blank" href="mailto:alice.gangneux@insa-lyon.fr">
-                                <EmailIcon />
-                            </Button>
-                        </Grid>
-                        <Grid item xs >
-                            <img src={estelle} alt={"photo de estelle - team front end"}/>
-                            <br/>
-                            <Button target= "_blank" href="https://www.linkedin.com/in/estelle-monier/">
-                                <LinkedInIcon />
-                            </Button>
-                            <Button target= "_blank" href="mailto:estelle.monier@insa-lyon.fr">
-                                <EmailIcon />
-                            </Button>
-                        </Grid>
-                        <Grid item xs >
-                            <img src={thomas} alt={"photo de thomas - team back end"}/>
-                            <br/>
-                            <Button target= "_blank" href="mailto:thomas.lorrain@insa-lyon.fr">
-                                <EmailIcon />
-                            </Button>
-                        </Grid>
-                        <Grid item xs >
-                            <img src={bastien} alt={"photo de bastien - team back end"}/>
-                            <br/>
-                            <Button target= "_blank" href="https://www.linkedin.com/in/bastien-fontaine-a9a96b196/">
-                                <LinkedInIcon />
-                            </Button>
-                            <Button target= "_blank" href="mailto:bastien.fontaine@insa-lyon.fr">
-                                <EmailIcon />
-                            </Button>
-                        </Grid>
-                    </Grid>
-
+                    </Box>
 
 
 

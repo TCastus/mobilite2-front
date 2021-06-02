@@ -42,8 +42,12 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         background: 'lightgrey',
-        margin: theme.spacing(5),
-        padding: theme.spacing(5),
+        margin: theme.spacing(1),
+        padding: theme.spacing(1),
+        [theme.breakpoints.up("sm")] : {
+            padding: theme.spacing(5),
+            margin: theme.spacing(5),
+        },
         textAlign: 'center',
     },
     paper2: {
@@ -57,8 +61,11 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left',
     },
     sliders: {
-        margin: theme.spacing(2.5, 'auto'),
+        margin: theme.spacing(3, 'auto'),
         textAlign: 'left',
+        [theme.breakpoints.up("sm")] : {
+            margin: theme.spacing(2.5, 'auto'),
+        },
     },
     searchUni: {
         margin: theme.spacing(1, 'auto'),
@@ -85,34 +92,34 @@ const access = [{
 
 const departments = [{
     value: 'TC',
-    label: 'Télécomunications, Services et Usages',
+    label: 'TC',
 }, {
     value: 'BIM',
-    label: 'Biosciences BIM',
+    label: 'BS BIM',
 }, {
     value: 'BB',
-    label: 'Biosciences BB',
+    label: 'BS BB',
 }, {
     value: 'GCU',
-    label: 'Génie Civil et Urbanisme',
+    label: 'GCU',
 }, {
     value: 'GEn',
-    label: 'Génie Energétique et Environnement',
+    label: 'GEn',
 }, {
     value: 'GM',
-    label: 'Génie Mécanique',
+    label: 'GM',
 }, {
     value: 'IF',
-    label: 'Informatique',
+    label: 'IF',
 }, {
     value: 'GE',
-    label: 'Génie Electrique',
+    label: 'GE',
 }, {
     value: 'GI',
-    label: 'Génie Industriel',
+    label: 'GI',
 }, {
     value: 'SGM',
-    label: 'Science et Génie des Matériaux',
+    label: 'SGM',
 },
 ];
 
@@ -193,7 +200,7 @@ function Rechercher() {
                         <Grid item xs={12}>
                             <form onSubmit={handleSubmit(searchAdvanced)}>
                                 <Grid container className={classes.items}>
-                                    <Grid item xs={6}>
+                                    <Grid item sm={6}>
                                         <Grid className={classes.sliders}>
                                             <SearchSlider titre={"Difficulté académique"} control={control} name={"course_difficulty"} />
                                         </Grid>
@@ -208,7 +215,7 @@ function Rechercher() {
                                         </Grid>
                                     </Grid>
 
-                                    <Grid item xs={6}>
+                                    <Grid item sm={6}>
                                         <Grid container className={classes.items}>
                                             <Grid item xs={3} className={classes.items}>
                                                 <Typography variant={'h6'}>Pays</Typography>
@@ -243,7 +250,7 @@ function Rechercher() {
                                         </Grid>
 
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3} className={classes.items}>
+                                            <Grid item xs={6} md={3} className={classes.items}>
                                                 <Typography variant={'h6'}>Demande</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
@@ -263,7 +270,7 @@ function Rechercher() {
                                         </Grid>
 
                                         <Grid container className={classes.items}>
-                                            <Grid item xs={3} className={classes.items}>
+                                            <Grid item xs={6} md={3} className={classes.items}>
                                                 <Typography variant={'h6'}>Département</Typography>
                                             </Grid>
                                             <Grid item xs={6}>

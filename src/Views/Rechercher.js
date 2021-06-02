@@ -16,6 +16,7 @@ import PageHeader from "../Component/PageHeader";
 import { getUniAll} from "../Request/uni_request";
 import SearchSlider from "../Component/SearchSlider";
 import * as PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -313,7 +314,11 @@ function Rechercher({errorHandler}) {
                             <TableBody>
                                 {uniList.map((row) => (
                                     <TableRow key={row.name}>
-                                        <TableCell align="right" component="th" scope="row"> {row.name} </TableCell>
+                                        <TableCell align="right" component="th" scope="row">
+                                            <Link to={"/universite/"+row.id}>
+                                                {row.name}
+                                            </Link>
+                                        </TableCell>
                                         <TableCell align="right">{row.country_name}</TableCell>
                                         <TableCell align="center">
                                             {row.placesDD.length + row.placesExchange.length !== 0 && [...new Set((row.placesExchange.concat(row.placesDD))

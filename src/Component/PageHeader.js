@@ -3,7 +3,6 @@ import * as PropTypes from "prop-types";
 import {Box, Typography} from "@material-ui/core";
 import '../Assets/Style/App.css';
 import {makeStyles} from "@material-ui/core/styles";
-import backgroundMapImg from "../Assets/images/map_background.png";
 
 PageHeader.propTypes = {
     title: PropTypes.string.isRequired,

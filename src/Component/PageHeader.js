@@ -12,7 +12,7 @@ PageHeader.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
     header: {
-        backgroundImage: `url(${backgroundMapImg})`,
+        backgroundImage: "url(https://i.imgur.com/K2RvqLE.png)",
         backgroundClip: 'border-box',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',

@@ -92,6 +92,7 @@ export default function Home({errorHandler}) {
                                     <Link to={"/universite/"+uni.id}>{uni.name}</Link>
                                 </Popup>
                             </Marker>
+
                         )}
                     </MapContainer>
                 </Box>

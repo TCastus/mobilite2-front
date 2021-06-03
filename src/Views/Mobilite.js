@@ -9,21 +9,41 @@ import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        minHeight : '80vh',
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+    },
+    shareExp: {
+        backgroundColor: theme.palette.primary.dark,
+        color: theme.palette.third.gold,
+        padding: 10,
+        margin: 20,
+        borderWidth: '8px',
+        borderRadius: '5px 5px 5px 5px',
+        opacity: 0.75,
+        background: theme.palette.third.white,
+        fontVariantCaps: theme.fontVariantCaps.smallCaps,
+
+    },
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
     },
 
     boxFAQ: {
-        backgroundColor: 'whitesmoke',
-        padding: 10,
-        margin: -10,
+        backgroundColor: theme.palette.third.white,
+        padding: 20,
+        margin: -5,
         textAlign: 'center',
         borderWidth: '8px',
         borderRadius: '5px 5px 5px 5px',
         '& > *': {
-            margin: theme.spacing(1),
+            margin: theme.spacing(1, 'auto'),
+            //padding: theme.spacing(1, 'auto')
         },
+        fontVariantCaps: theme.fontVariantCaps.smallCaps,
+        alignItems: 'center',
     },
+
 }));
 
 
@@ -31,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Mobilite() {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <Box component= "div" className={classes.root}>
 
             <PageHeader title={"Se renseigner sur les mobilités"}/>
 
@@ -42,6 +62,8 @@ export default function Mobilite() {
                 <Typography variant={'h5'}>
                     Consulte les informations spécifiques données par ton département
                 </Typography>
+            </Box>
+            <Box component={"div"}>
 
                 <Grid container spacing={3}>
                     <Grid item xs={12} className={classes.boxFAQ}>
@@ -92,9 +114,7 @@ export default function Mobilite() {
                     </Grid>
                 </Grid>
             </Box>
-
-        </div>
-
+        </Box>
     );
 }
 

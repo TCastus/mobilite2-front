@@ -10,6 +10,7 @@ import alice from "../Assets/aPropos/alice.png";
 import estelle from "../Assets/aPropos/estelle.png";
 import thomas from "../Assets/aPropos/thomas.png";
 import bastien from "../Assets/aPropos/bastien.png";
+import {theme} from "../Theme";
 
 
 
@@ -21,25 +22,51 @@ const useStyles = makeStyles((theme) =>
             font: 'small-caps bold 24px/1 sans-serif',
         },
         title: {
-            color: '#c59b08',
-            padding: 20,
-            margin: '40px',
-            font: 'small-caps bold 35px/1 sans-serif',
+            color: theme.palette.third.gold,
+            padding: 5,
+            margin: 15,
+            font: theme.typography,
+            fontVariantCaps: theme.fontVariantCaps.smallCaps,
+            fontWeight: theme.fontType.bold,
+
         },
         title2: {
-            color: '#c59b08',
+            color: theme.palette.third.gold,
             padding: 10,
-            font: 'small-caps bold 24px/1 sans-serif',
+            font: theme.typography,
+            fontVariantCaps: theme.fontVariantCaps.smallCaps,
+            fontWeight: theme.fontType.bold,
+
         },
         content: {
-            backgroundColor: 'white',
+            backgroundColor: theme.palette.third.white,
+            color: theme.palette.third.darkGrey,
             padding: 30,
             margin: theme.spacing(1, 'auto'),
             borderWidth: '3px',
             borderRadius: '5px 5px 5px 5px',
-            background: "whitesmoke",
-            textAlign: 'center',
+            background: theme.palette.third.white,
+            textAlign: 'justify',
+
         },
+
+        contentMembers: {
+            backgroundColor: theme.palette.third.white,
+            color: theme.palette.third.darkGrey,
+            padding: 30,
+            margin: theme.spacing(1, 'auto'),
+            borderWidth: '3px',
+            borderRadius: '5px 5px 5px 5px',
+            background: theme.palette.third.white,
+            textAlign: 'center',
+
+        },
+
+
+
+        BoxType:{
+            background: theme.palette.third.lightgray,
+        }
     })
 );
 
@@ -49,16 +76,18 @@ function Apropos() {
     const classes = useStyles();
 
     return (
-        <Box component="div" >
-            <PageHeader title={"A PROPOS"} subtitle={"Qu'est-ce que c'est que ce site ?"} />
+        <Box component="div" className= {classes.BoxType}>
+            <PageHeader title={"A propos"} subtitle={"Qu'est-ce que c'est que ce site ?"} />
             <Box component= "div" width="75%" mx="auto" >
-                <Typography variant={'h3'} className={classes.title}>
-                    Mobilité, une application par les étudiants, pour les étudiants <br /> <br />
-                    Notre objectif ? <br/>
-                    Aider les étudiants à choisir l’échange qui leur correspond le mieux, afin de leur garantir un voyage inoubliable.
-                </Typography>
+                <Box component="div" className={classes.title}>
+                    <Typography variant={'h3'} >
+                        Mobilité, une application par les étudiants, pour les étudiants <br /> <br />
+                        Notre objectif ? <br/>
+                        Aider les étudiants à choisir l’échange qui leur correspond le mieux, afin de leur garantir un voyage inoubliable.
+                    </Typography>
+                </Box>
 
-                <Typography className={classes.title2}>
+                <Typography variant={"h2"} className={classes.title2}>
                     L&apos;Histoire
                 </Typography>
 
@@ -73,7 +102,7 @@ function Apropos() {
                     sur les bourses auxquelles ils ont accès ou encore sur les informations spécifiques à leur département. Combiné avec le site Move On,
                     trouver son échange devient un véritable jeu d’enfant.
                 </Typography>
-                <Typography className={classes.title2}>
+                <Typography variant={"h2"} className={classes.title2}>
                     Qui sommes-nous ?
                 </Typography>
                 <Typography variant={'h6'} className={classes.content}>
@@ -83,10 +112,12 @@ function Apropos() {
                     Nous sommes évidemment accompagnés de nos professeurs avec qui nous avons fait des points réguliers sur l’avancement du site, et qui nous
                     ont aidé tout au long du processus de création de ce site.
                 </Typography>
+            </Box>
 
-                <Grid container className={classes.content} alignItems="center">
-                    <Grid item xs={5} >
-                        <img src={louis} alt={"photo de louis - responsable du projet"}/>
+            <Box component="div" mx="auto" width="95%" >
+                <Grid container className={classes.contentMembers} alignItems="center" width >
+                    <Grid item xs={6} >
+                        <img src={louis} height="85%" width="85%" alt={"photo de louis - responsable du projet"}/>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant={'h6'}>
@@ -103,10 +134,10 @@ function Apropos() {
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <img src={esther} alt={"photo de esther - team front end"}/>
+                        <img src={esther} height="85%" width="85%" alt={"photo de esther - team front end"}/>
                     </Grid>
-                    <Grid item xs={5}>
-                        <img src={alice} alt={"photo de alice - team front end"}/>
+                    <Grid item xs={6}>
+                        <img src={alice} height="85%" width="85%" alt={"photo de alice - team front end"}/>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant={'h6'}>
@@ -121,10 +152,10 @@ function Apropos() {
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <img src={estelle} alt={"photo de estelle - team front end"}/>
+                        <img src={estelle} height="85%" width="85%" alt={"photo de estelle - team front end"}/>
                     </Grid>
-                    <Grid item xs={5}>
-                        <img src={thomas} alt={"photo de thomas - team back end"}/>
+                    <Grid item xs={6}>
+                        <img src={thomas} height="85%" width="85%" alt={"photo de thomas - team back end"}/>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant={'h6'}>
@@ -139,10 +170,12 @@ function Apropos() {
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <img src={bastien} alt={"photo de bastien - team back end"}/>
+                        <img src={bastien} height="85%" width="85%" alt={"photo de bastien - team back end"}/>
                     </Grid>
                 </Grid>
-                <Typography className={classes.title2}>
+            </Box>
+            <Box component="div" mx="auto" width="70%">
+                <Typography variant={"h2"} className={classes.title2}>
                     Nos projets pour la suite ?
                 </Typography>
                 <Typography variant={'h6'} className={classes.content}>

@@ -79,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
 
     },
-
     textWeight: {
         fontWeight: 'normal',
     }
@@ -194,6 +193,7 @@ export default function UniDetail({errorHandler}) {
                             <Typography variant={"h6"} className={classes.textWeight}> Aides proposées :</Typography>
 
                         </Box>
+
                         <Button variant="contained" color="primary" component={Link} to="/experience">
                             Je suis allé(e) ici !
                         </Button>

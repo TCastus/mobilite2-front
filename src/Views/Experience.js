@@ -13,7 +13,7 @@ import {
     Send as SendIcon,
     MenuBook as MenuBookIcon,
     Chat as ChatIcon,
-    AccountBalance as AccountBalanceIcon
+    AccountBalance as AccountBalanceIcon, MusicNote as MusicNoteIcon, Public as PublicIcon
 } from '@material-ui/icons';
 import * as PropTypes from "prop-types";
 
@@ -308,8 +308,8 @@ export default function Experience({errorHandler}) {
                             <Grid container className={classes.ratingsGrid}>
                                 <RatingForm control={control} title="Sécurité" name="security" Icon={SecurityIcon} />
                                 <RatingForm control={control} title="Coût de la vie" name="cost_of_living" Icon={AttachMoneyIcon} />
-                                <RatingForm control={control} title="Vie culturelle" name="culture" Icon={AccountBoxIcon} />
-                                <RatingForm control={control} title="Vie nocturne" name="night_life" Icon={EmojiPeopleIcon} />
+                                <RatingForm control={control} title="Vie culturelle" name="culture" Icon={PublicIcon} />
+                                <RatingForm control={control} title="Vie nocturne" name="night_life" Icon={MusicNoteIcon} />
                                 <RatingForm control={control} title="Difficulté des cours" name="courses_difficulty" Icon={MenuBookIcon} />
                                 <RatingForm control={control} title="Contact avec les étudiants" name="student_proximity" Icon={ChatIcon} />
                                 <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />

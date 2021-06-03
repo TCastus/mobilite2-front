@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
     experience: {
         height: '50vh',
-        color: 'black',
+        color: theme.palette.primary.dark,
         background: theme.palette.primary.light,
         margin: '0px',
         padding: theme.spacing(2),
@@ -37,20 +37,20 @@ const useStyles = makeStyles((theme) => ({
     },
     search: {
         height: '50vh',
-        color: 'black',
-        background: 'white',
+        color: theme.palette.primary.dark,
+        background: theme.palette.third.white,
         margin: '0px',
         padding: theme.spacing(2),
         textAlign: 'center',
     },
     paper: {
-        background: 'lightgrey',
+        background: theme.palette.third.lightgrey,
         margin: theme.spacing(5),
         padding: theme.spacing(5),
         textAlign: 'center',
     },
     paper2: {
-        background: 'whitesmoke',
+        background: theme.palette.third.whitesmoke,
         margin: theme.spacing(5),
         padding: theme.spacing(5),
         textAlign: 'center',
@@ -193,7 +193,7 @@ function Rechercher({errorHandler}) {
                 <Paper elevation={3} className={classes.paper}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <Typography variant={'h5'}>Rechercher par nom</Typography>
+                            <Typography variant={'h5'} style={{fontVariantCaps: 'small-caps'}}>Rechercher par nom</Typography>
                             <form onSubmit={searchName}>
                                 <TextField id="outlined-basic" label="Nom d'université" variant="filled" value={name}
                                     onChange={(e) => setName(e.target.value)}/>
@@ -206,7 +206,7 @@ function Rechercher({errorHandler}) {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Typography variant={'h5'}>Filtrer</Typography>
+                            <Typography variant={'h5'} style={{fontVariantCaps: 'small-caps'}} >Filtrer</Typography>
                         </Grid>
 
                         <Grid item xs={12}>

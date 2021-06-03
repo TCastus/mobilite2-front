@@ -7,6 +7,12 @@ import {Link} from "react-router-dom";
 import PageHeader from "../Component/PageHeader";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {getUniAll} from "../Request/uni_request";
+import {getDefaultErrorMessage} from "../Request/error_handling";
+import * as PropTypes from "prop-types";
+
+Home.propTypes = {
+    errorHandler: PropTypes.func.isRequired,
+};
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Home() {
+export default function Home({errorHandler}) {
     const classes = useStyles();
 
     const [uniA, setUniA] = React.useState({});
@@ -58,8 +64,10 @@ export default function Home() {
             setUniA(res.data);
             setLoaded(true);
             console.log(res.data);
+        }).catch( err => {
+            errorHandler(getDefaultErrorMessage(err));
         });
-    }, []);
+    }, [errorHandler]);
 
     return (
         <Box component="div" className="note">
@@ -78,6 +86,7 @@ export default function Home() {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
 
                         {uniA.map((uni) =>
+                            uni.latitude && uni.longitude &&
                             <Marker key={uni.id} position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
                                 <Popup>
                                     <Link to={"/universite/"+uni.id}>{uni.name}</Link>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import '../Assets/Style/App.css';
 import {makeStyles} from "@material-ui/core/styles";
 import {
@@ -12,9 +12,13 @@ import {
     Typography
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
+import { Element, scroller } from "react-scroll";
 import PageHeader from "../Component/PageHeader";
-import { getUniAll} from "../Request/uni_request";
+import {getSearchAdvance, postSearchName} from "../Request/uni_request";
 import SearchSlider from "../Component/SearchSlider";
+import * as PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import {getDefaultErrorMessage} from "../Request/error_handling";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
     experience: {
         height: '50vh',
-        color: 'black',
+        color: theme.palette.primary.dark,
         background: theme.palette.primary.light,
         margin: '0px',
         padding: theme.spacing(2),
@@ -33,20 +37,20 @@ const useStyles = makeStyles((theme) => ({
     },
     search: {
         height: '50vh',
-        color: 'black',
-        background: 'white',
+        color: theme.palette.primary.dark,
+        background: theme.palette.third.white,
         margin: '0px',
         padding: theme.spacing(2),
         textAlign: 'center',
     },
     paper: {
-        background: 'lightgrey',
+        background: theme.palette.third.lightgrey,
         margin: theme.spacing(5),
         padding: theme.spacing(5),
         textAlign: 'center',
     },
     paper2: {
-        background: 'whitesmoke',
+        background: theme.palette.third.whitesmoke,
         margin: theme.spacing(5),
         padding: theme.spacing(5),
         textAlign: 'center',
@@ -83,8 +87,11 @@ const access = [{
 }];
 
 const departments = [{
+    value: 'all',
+    label: 'Tous'
+}, {
     value: 'TC',
-    label: 'Télécomunications, Services et Usages',
+    label: 'Télécommunications, Services et Usages',
 }, {
     value: 'BIM',
     label: 'Biosciences BIM',
@@ -96,7 +103,7 @@ const departments = [{
     label: 'Génie Civil et Urbanisme',
 }, {
     value: 'GEn',
-    label: 'Génie Energétique et Environnement',
+    label: 'Génie Énergétique et Environnement',
 }, {
     value: 'GM',
     label: 'Génie Mécanique',
@@ -105,7 +112,7 @@ const departments = [{
     label: 'Informatique',
 }, {
     value: 'GE',
-    label: 'Génie Electrique',
+    label: 'Génie Électrique',
 }, {
     value: 'GI',
     label: 'Génie Industriel',
@@ -119,12 +126,16 @@ const departments = [{
 // You HAVE to do it for Material not to whine about controlled components
 const defaultValues = {
     country: "",
-    outside_europe: true,
+    outside_europe: "true",
     access: "",
-    department_availability: "TC"
+    department_availability: "all"
 };
 
-function Rechercher() {
+Rechercher.propTypes = {
+    errorHandler: PropTypes.func.isRequired,
+};
+
+function Rechercher({errorHandler}) {
     const classes = useStyles();
     const { handleSubmit, control } = useForm({defaultValues});
     const [name, setName] = useState("");
@@ -132,36 +143,45 @@ function Rechercher() {
     const [uniList, setUniList] = useState([]);
     const [rechercheDone, setRecherDone] = useState(false);
 
-    // Temporary, to replace search
-    useEffect(() => {
-        getUniAll().then((res) => {
-            setUniList(res.data);
-            setRecherDone(true);
-            console.log(res.data);
-        });
-    }, []);
-
     // First form submission
     const searchName = (e) => {
         e.preventDefault();
-        console.log(name);
 
-        // Back not ready for now, uncomment later
-        //getSearchName(name).then(res => {
-        //    setUniList(res.data);
-        //    setRecherDone(true);
-        //});
+        postSearchName(name).then(res => {
+            setUniList(res.data);
+            setRecherDone(true);
+
+            if (!rechercheDone) {
+                scroller.scrollTo('scrollResults', {
+                    duration: 500,
+                    smooth: true,
+                });
+            }
+
+        }).catch((err) => {
+            errorHandler(getDefaultErrorMessage(err));
+        });
     };
 
     // Second form submission
     const searchAdvanced = (form) => {
         console.log(form);
 
-        // Back not ready for now, uncomment later
-        // getSearchAdvance(form).then(res => {
-        //     setUniList(res.data);
-        //     setRecherDone(true);
-        // });
+        getSearchAdvance(form).then(res => {
+            setUniList(res.data);
+
+            if (!rechercheDone) {
+                scroller.scrollTo('scrollResults', {
+                    duration: 500,
+                    smooth: true,
+                });
+            }
+
+            setRecherDone(true);
+
+        }).catch((err) => {
+            errorHandler(getDefaultErrorMessage(err));
+        });
     };
 
     return (
@@ -173,7 +193,7 @@ function Rechercher() {
                 <Paper elevation={3} className={classes.paper}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <Typography variant={'h5'}>Rechercher par nom</Typography>
+                            <Typography variant={'h5'} style={{fontVariantCaps: 'small-caps'}}>Rechercher par nom</Typography>
                             <form onSubmit={searchName}>
                                 <TextField id="outlined-basic" label="Nom d'université" variant="filled" value={name}
                                     onChange={(e) => setName(e.target.value)}/>
@@ -186,7 +206,7 @@ function Rechercher() {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Typography variant={'h5'}>Filtrer</Typography>
+                            <Typography variant={'h5'} style={{fontVariantCaps: 'small-caps'}} >Filtrer</Typography>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -194,7 +214,7 @@ function Rechercher() {
                                 <Grid container className={classes.items}>
                                     <Grid item xs={6}>
                                         <Grid className={classes.sliders}>
-                                            <SearchSlider titre={"Difficulté académique"} control={control} name={"course_difficulty"} />
+                                            <SearchSlider titre={"Difficulté académique minimale"} control={control} name={"course_difficulty"} />
                                         </Grid>
                                         <Grid className={classes.sliders}>
                                             <SearchSlider titre={"Note coût de la vie minimale"} control={control} name={"cost_living_grade_min"} />
@@ -293,8 +313,12 @@ function Rechercher() {
                     </Grid>
                 </Paper>
 
+                <Element name="scrollResults" />
+
+                {rechercheDone &&
                 <div className={classes.root}>
-                    {rechercheDone &&
+                    <Typography
+                        variant={'h5'}>{uniList.length} université{uniList.length > 1 ? "s" : ""} trouvée{uniList.length > 1 ? "s" : ""}</Typography>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
@@ -308,13 +332,18 @@ function Rechercher() {
                             <TableBody>
                                 {uniList.map((row) => (
                                     <TableRow key={row.name}>
-                                        <TableCell align="right" component="th" scope="row"> {row.name} </TableCell>
+                                        <TableCell align="right" component="th" scope="row">
+                                            <Link to={"/universite/" + row.id}>
+                                                {row.name}
+                                            </Link>
+                                        </TableCell>
                                         <TableCell align="right">{row.country_name}</TableCell>
                                         <TableCell align="center">
                                             {row.placesDD.length + row.placesExchange.length !== 0 && [...new Set((row.placesExchange.concat(row.placesDD))
-                                                .map((res)=>res.department_availability.map((dep)=>dep.name))
-                                                .reduce((list1, list2)=>list1.concat(list2)))]
-                                                .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}
+                                                .map((res) => res.department_availability.map((dep) => dep.name))
+                                                .reduce((list1, list2) => list1.concat(list2)))]
+                                                .map((item) => <Chip className={classes.chip} key={item} size={"small"}
+                                                    label={item}/>)}
                                         </TableCell>
                                         <TableCell align="left">{row.access}</TableCell>
                                     </TableRow>
@@ -322,8 +351,8 @@ function Rechercher() {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    }
                 </div>
+                }
             </Container>
 
         </div>

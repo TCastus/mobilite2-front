@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Box, Grid, MenuItem, Typography,
@@ -13,14 +13,21 @@ import {
     Send as SendIcon,
     MenuBook as MenuBookIcon,
     Chat as ChatIcon,
-    AccountBalance as AccountBalanceIcon
+    AccountBalance as AccountBalanceIcon, MusicNote as MusicNoteIcon, Public as PublicIcon
 } from '@material-ui/icons';
+import * as PropTypes from "prop-types";
 
 import PageHeader from "../Component/PageHeader";
 import RatingForm from "../Component/RatingForm";
 import {useForm, Controller} from "react-hook-form";
 import {getUniAll, postReview} from "../Request/uni_request";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import {getDefaultErrorMessage} from "../Request/error_handling";
+import config from "../config.json";
 
+Experience.propTypes = {
+    errorHandler: PropTypes.func.isRequired,
+};
 
 const useStyles = makeStyles((theme) => ({
     grid: {
@@ -41,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             width: '90%',
         }
+        background: "lightgrey",
     },
     comment: {
         padding: 10,
@@ -103,7 +111,7 @@ const defaultValues = {
     mobility_type: "DD",
     univ_appartment: false,
     rent: 500,
-    visa: false,
+    visa: "",
     courses_difficulty: 0,
     student_proximity: 0,
     courses_interest: 0,
@@ -111,22 +119,37 @@ const defaultValues = {
     semester: "4A-S1"
 };
 
-export default function Experience() {
+export default function Experience({errorHandler}) {
     const classes = useStyles();
     const { handleSubmit, control } = useForm({defaultValues});
 
+    const [captchaToken, setCaptchaToken] = useState("");
     const [uni, setUni] = React.useState([]);
 
     React.useEffect(() => {
         getUniAll().then((res) => {
             setUni(res.data);
+        }).catch( err => {
+            errorHandler(getDefaultErrorMessage(err));
         });
-    }, []);
+    }, [errorHandler]);
 
     const submitForm = (form) => {
-        postReview(form).then((res)=> {
-            console.log(res);
-        });
+        const form2 = {...form};
+
+        if (captchaToken !== "") {
+            form2['h-captcha-response'] = captchaToken;
+            postReview(form2).then((res)=> {
+                console.log(res);
+            }).catch( err => {
+                errorHandler(getDefaultErrorMessage(err));
+            });
+        }
+    };
+
+    const handleVerificationSuccess = (token, ekey) => {
+        setCaptchaToken(token);
+        console.log(token, ekey);
     };
 
     return (
@@ -209,6 +232,16 @@ export default function Experience() {
                                                     control={control}
                                                 />
                                             </Grid>
+
+                                            <Grid item sm={12}>
+                                                <Typography>Visa demandé pour l&apos;échange ?</Typography>
+                                                <Controller
+                                                    render={({ field }) =>
+                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : Comme je suis de nationalité ... j&apos;ai dû faire un visa..." multiline rows={5} {...field} />}
+                                                    name="visa"
+                                                    control={control}
+                                                />
+                                            </Grid>
                                         </Grid>
                                     </Grid>
 
@@ -218,42 +251,13 @@ export default function Experience() {
                                                 <Typography variant={"h6"} > Commentaire </Typography>
                                                 <Controller
                                                     render={({ field }) =>
-                                                        <TextField className={classes.comment} style={{textAlign: 'left'}}
-                                                            placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..."
-                                                            multiline rows={5} {...field} />}
+                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." multiline rows={5} {...field} />}
                                                     name="comment"
                                                     control={control}
                                                 />
                                             </Grid>
-                                            <Grid item xs={12} className={classes.items}>
-                                                <Typography variant={"h6"} >Email</Typography>
-                                                <Controller
-                                                    render={({ field }) =>
-                                                        <TextField type="email" {...field} />}
-                                                    name="email"
-                                                    placeholder="eric.maurincomme@insa-lyon.fr"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"}>
-                                                    Souhaitez-vous que nous partagions votre e-mail<br/>
-                                                    aux élèves intéressés par votre échange souhaitant vous poser des questions ?
-                                                </Typography>
-                                                <Controller
-                                                    render={({ field }) => (
-                                                        <RadioGroup aria-label="contact" {...field}>
-                                                            <FormControlLabel value={"false"} control={<Radio color="primary"/>} label="Non"/>
-                                                            <FormControlLabel value={"true"} control={<Radio color="primary"/>} label="Oui"/>
-                                                        </RadioGroup>
-                                                    )}
-                                                    name="contact"
-                                                    control={control}
-                                                />
-                                            </Grid>
-
-                                            <Grid item sm={4}>
-                                                <Typography variant={"h6"}>Type de contrat</Typography>
+                                            <Grid item sm={6}>
+                                                <Typography>Type de contrat</Typography>
                                                 <Controller
                                                     render={({ field }) => (
                                                         <RadioGroup aria-label="gender" {...field}>
@@ -265,7 +269,6 @@ export default function Experience() {
                                                     control={control}
                                                 />
                                             </Grid>
-
                                             <Grid item sm={6}>
                                                 <Typography variant={"h6"}>Logé à l&apos;université ?</Typography>
                                                 <Controller
@@ -280,26 +283,39 @@ export default function Experience() {
                                                 />
                                             </Grid>
 
-                                            <Grid item sm={6}>
-                                                <Typography variant={"h6"}>Loyer moyen payé (€)</Typography>
+                                            <Grid item xs={12} className={classes.items}>
+                                                <Typography>Email</Typography>
                                                 <Controller
-                                                    render={({ field }) => <TextField type={"number"} {...field} className={classes.textFieldSize} />}
-                                                    name="rent"
+                                                    render={({ field }) =>
+                                                        <TextField type="email" {...field} />}
+                                                    name="email"
+                                                    placeholder="eric.maurincomme@insa-lyon.fr"
                                                     control={control}
                                                 />
                                             </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography>
+                                                    Souhaitez-vous que nous partagions votre e-mail<br/>
+                                                    aux élèves intéressés par votre échange souhaitant vous poser des questions ?
+                                                </Typography>
 
-                                            <Grid item sm={6}>
-                                                <Typography variant={"h6"}>Visa demandé pour l&apos;échange ?</Typography>
                                                 <Controller
-                                                    name="visa"
-                                                    control={control}
                                                     render={({ field }) => (
-                                                        <Checkbox
-                                                            onChange={(e) => field.onChange(e.target.checked)}
-                                                            checked={field.value}
-                                                        />
+                                                        <RadioGroup aria-label="contact" {...field}>
+                                                            <FormControlLabel value={"false"} control={<Radio color="primary"/>} label="Non"/>
+                                                            <FormControlLabel value={"true"} control={<Radio color="primary"/>} label="Oui"/>
+                                                        </RadioGroup>
                                                     )}
+                                                    name="contact"
+                                                    control={control}
+                                                />
+                                            </Grid>
+                                            <Grid item sm={12}>
+                                                <Typography>Loyer moyen payé (€)</Typography>
+                                                <Controller
+                                                    render={({ field }) => <TextField type={"number"} {...field} />}
+                                                    name="rent"
+                                                    control={control}
                                                 />
                                             </Grid>
                                         </Grid>
@@ -314,11 +330,16 @@ export default function Experience() {
 
                                 <RatingForm className={classes.startRatingSize} control={control} title="Sécurité" name="security" Icon={SecurityIcon} />
                                 <RatingForm control={control} title="Coût de la vie" name="cost_of_living" Icon={AttachMoneyIcon} />
-                                <RatingForm control={control} title="Vie culturelle" name="culture" Icon={AccountBoxIcon} />
-                                <RatingForm control={control} title="Vie nocturne" name="night_life" Icon={EmojiPeopleIcon} />
+                                <RatingForm control={control} title="Vie culturelle" name="culture" Icon={PublicIcon} />
+                                <RatingForm control={control} title="Vie nocturne" name="night_life" Icon={MusicNoteIcon} />
                                 <RatingForm control={control} title="Difficulté des cours" name="courses_difficulty" Icon={MenuBookIcon} />
                                 <RatingForm control={control} title="Contact avec les étudiants" name="student_proximity" Icon={ChatIcon} />
                                 <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
+
+                                <HCaptcha onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)} languageOverride="fr"
+                                    sitekey={config.HCAPTCHA_SITEKEY}
+                                    theme="light"
+                                />
 
                                 <Grid item xs={12} className={classes.items}>
                                     <Button variant="contained" color="primary" type="submit">

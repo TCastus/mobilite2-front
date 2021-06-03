@@ -1,11 +1,12 @@
 import '../Assets/Style/App.css';
-import React from 'react';
+import React, {useState} from 'react';
 import Navbar from '../Component/Navbar';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {routeIndex} from '../Route/route';
 import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
 import {theme} from "../Theme";
 import FooterAppBar from "../Component/FooterAppBar";
+import SnackBarComponent from "../Component/SnackBarComponent";
 
 /**
  * Main component of the mobilite app
@@ -15,19 +16,22 @@ import FooterAppBar from "../Component/FooterAppBar";
  * @constructor
  */
 function App() {
+    const [errorMessage, setError] = useState("");
+
     /* Generate a list of <Route> components using the description in route.js */
     const gen_routes = Object.keys(routeIndex).map((category, cat_index) => {
         return routeIndex[category].map((route, route_index) => {
             return <Route exact path={route.path}
                 key={"route_" + cat_index + "_" + route_index}
-                component={route.component}/>;
+                render={(props) => <route.component {...props} errorHandler={setError}/>} />;
         });
     });
 
     return (
         <div className="App">
-            <BrowserRouter>
-                <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={theme}>
+
+                <BrowserRouter>
                     <CssBaseline />
                     <Navbar routes={routeIndex.navigation}/>
 
@@ -35,9 +39,11 @@ function App() {
                         {gen_routes}
                     </Switch>
 
+                    {(errorMessage !== "") ? <SnackBarComponent type={"error"} message={errorMessage}/> : null}
                     <FooterAppBar routes={routeIndex.footer}/>
-                </MuiThemeProvider>
-            </BrowserRouter>
+                </BrowserRouter>
+
+            </MuiThemeProvider>
         </div>
     );
 }

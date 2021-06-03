@@ -2,10 +2,7 @@ import React from 'react';
 import '../Assets/Style/App.css';
 import {makeStyles} from "@material-ui/core/styles";
 import {Button, Grid, Typography} from "@material-ui/core";
-import PlaneIcon from "../Assets/Icon/PlaneIcon";
 import PageHeader from "../Component/PageHeader";
-import {Link} from "react-router-dom";
-import BorderColorTwoToneIcon from "@material-ui/icons/BorderColorTwoTone";
 import Box from "@material-ui/core/Box";
 
 
@@ -28,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
 
     },
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+    },
+
     boxFAQ: {
         backgroundColor: theme.palette.third.white,
         padding: 20,
@@ -43,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
 
-
-
 }));
 
 
@@ -54,7 +53,7 @@ export default function Mobilite() {
     return (
         <Box component= "div" className={classes.root}>
 
-            <PageHeader title={"Se rensigner sur les mobilités"}/>
+            <PageHeader title={"Se renseigner sur les mobilités"}/>
 
             <Box component="div" className={classes.boxFAQ}>
                 <Typography variant={'h4'}>
@@ -68,7 +67,7 @@ export default function Mobilite() {
 
                 <Grid container spacing={3}>
                     <Grid item xs={12} className={classes.boxFAQ}>
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/mod/page/view.php?id=12790">
+                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=2784">
                             TC
                         </Button>
 
@@ -115,9 +114,7 @@ export default function Mobilite() {
                     </Grid>
                 </Grid>
             </Box>
-
         </Box>
-
     );
 }
 

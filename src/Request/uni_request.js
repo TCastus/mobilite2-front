@@ -53,11 +53,11 @@ export const postReview = (form) => {
 };
 
 /**
- * Performs a get request to search university by name
+ * Performs a post request to search university by name
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const getSearchName = (name) => {
-    return client.get('/api/university/search?name='+name)
+export const postSearchName = (name) => {
+    return client.post('/api/search', {name:name})
         .then(res => {
             return res;
         }).catch(rematchError);
@@ -69,7 +69,7 @@ export const getSearchName = (name) => {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getSearchAdvance = (form) => {
-    return client.post('/api/university/search', form)
+    return client.post('/api/search', form)
         .then(res => {
             return res;
         }).catch(rematchError);

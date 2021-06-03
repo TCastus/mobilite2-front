@@ -6,8 +6,7 @@ import {
     AccountBalance as AccountBalanceIcon,
     AttachMoney as AttachMoneyIcon, Chat as ChatIcon,
     Language as LanguageIcon,
-    Lock as LockIcon,
-    LockOpen as LockOpenIcon, MenuBook as MenuBookIcon,
+    MenuBook as MenuBookIcon,
     MoneyOff as MoneyOffIcon,
     MusicNote as MusicNoteIcon,
     MusicOff as MusicOffIcon,
@@ -141,18 +140,18 @@ export default function UniDetail({errorHandler}) {
                             <NotePaper IconOn={ChatIcon} IconOff={SpeakerNotesOffIcon} title={"Contact avec les étudiants"} note={4} />
 
                         </Grid>
-                            {/* Oui j'en suis fier*/}
-                            {uni.placesDD.length > 0 && [...new Set(uni.placesDD
-                                .map((res)=>res.department_availability.map((dep)=>dep.name))
-                                .reduce((list1, list2)=>list1.concat(list2)))]
-                                .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}
 
-                            <Typography variant={"body1"}>Difficulte des cours : {uni.courses_difficulty+" /5"}</Typography>
-                            <Typography variant={"body1"}>Interet des cours : {uni.courses_interest+" /5"}</Typography>
+                        {uni.placesDD.length > 0 && [...new Set(uni.placesDD
+                            .map((res)=>res.department_availability.map((dep)=>dep.name))
+                            .reduce((list1, list2)=>list1.concat(list2)))]
+                            .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}
 
-                            <Typography variant={"h6"}>Logement</Typography>
-                            <Typography variant={"body1"}>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
-                            <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
+                        <Typography variant={"body1"}>Difficulte des cours : {uni.courses_difficulty+" /5"}</Typography>
+                        <Typography variant={"body1"}>Interet des cours : {uni.courses_interest+" /5"}</Typography>
+
+                        <Typography variant={"h6"}>Logement</Typography>
+                        <Typography variant={"body1"}>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
+                        <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
 
                         <Box component = { "div" } className={classes.infos}>
 

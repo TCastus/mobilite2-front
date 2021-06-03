@@ -5,8 +5,6 @@ import {Button, Grid, Typography} from "@material-ui/core";
 import PageHeader from "../Component/PageHeader";
 import Box from "@material-ui/core/Box";
 
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
         minHeight : '80vh',
@@ -23,12 +21,9 @@ const useStyles = makeStyles((theme) => ({
         opacity: 0.75,
         background: theme.palette.third.white,
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
-
-    },
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
     },
-
     boxFAQ: {
         backgroundColor: theme.palette.third.white,
         padding: 20,
@@ -38,15 +33,11 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '5px 5px 5px 5px',
         '& > *': {
             margin: theme.spacing(1, 'auto'),
-            //padding: theme.spacing(1, 'auto')
         },
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
         alignItems: 'center',
     },
-
 }));
-
-
 
 export default function Mobilite() {
     const classes = useStyles();

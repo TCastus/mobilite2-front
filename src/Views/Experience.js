@@ -7,9 +7,7 @@ import {
 } from "@material-ui/core";
 import {
     Security as SecurityIcon,
-    AccountBox as AccountBoxIcon,
     AttachMoney as AttachMoneyIcon,
-    EmojiPeople as EmojiPeopleIcon,
     Send as SendIcon,
     MenuBook as MenuBookIcon,
     Chat as ChatIcon,
@@ -47,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         [theme.breakpoints.up('md')]: {
             width: '90%',
-        }
+        },
         background: "lightgrey",
     },
     comment: {

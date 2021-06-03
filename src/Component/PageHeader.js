@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: '100% 100%',
         paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(5),
-        fontVariantCaps: 'small-caps',
-        color: 'white'
+        fontVariantCaps: theme.fontVariantCaps.smallCaps,
+        color: theme.palette.third.white,
     },
     title: {
-        fontWeight: 'bold',
+        fontWeight: theme.fontType.bold,
         paddingBottom: theme.spacing(1)
     },
 }));

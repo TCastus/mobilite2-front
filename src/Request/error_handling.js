@@ -9,7 +9,6 @@ export class Redirect extends Error {}
 
 // CREDITS TO HOMEPAGE-SIA WEBSITE
 // https://gitlab.com/sia-insa-lyon/dev/homepagesia/homepagesia-front
-// I BARELY KNOW WHAT THIS CODE DOES
 
 // Test Error matching
 export const rematchError = (error) => (

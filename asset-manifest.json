@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "./static/css/main.422dab5c.chunk.css",
-    "main.js": "./static/js/main.3c76e998.chunk.js",
-    "main.js.map": "./static/js/main.3c76e998.chunk.js.map",
+    "main.js": "./static/js/main.268f9e40.chunk.js",
+    "main.js.map": "./static/js/main.268f9e40.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.17c724ce.js",
     "runtime-main.js.map": "./static/js/runtime-main.17c724ce.js.map",
     "static/js/2.78eaa8fa.chunk.js": "./static/js/2.78eaa8fa.chunk.js",
@@ -22,7 +22,6 @@
     "static/media/esther.d6870783.png": "./static/media/esther.d6870783.png",
     "static/media/louis.2007b4df.png": "./static/media/louis.2007b4df.png",
     "static/media/louis.837f9a0c.png": "./static/media/louis.837f9a0c.png",
-    "static/media/map_background.f1c7347a.png": "./static/media/map_background.f1c7347a.png",
     "static/media/plane.1cf09d49.png": "./static/media/plane.1cf09d49.png",
     "static/media/thomas.0c5505c3.png": "./static/media/thomas.0c5505c3.png",
     "static/media/thomas.2da476ac.png": "./static/media/thomas.2da476ac.png"
@@ -31,6 +30,6 @@
     "static/js/runtime-main.17c724ce.js",
     "static/js/2.78eaa8fa.chunk.js",
     "static/css/main.422dab5c.chunk.css",
-    "static/js/main.3c76e998.chunk.js"
+    "static/js/main.268f9e40.chunk.js"
   ]
 }

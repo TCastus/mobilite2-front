@@ -4,42 +4,54 @@ import {Button, Typography} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import PageHeader from "../Component/PageHeader";
 import {makeStyles} from "@material-ui/core/styles";
+import {theme} from "../Theme";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
 
+
+
     },
     grid: {
         border: '2px solid white',
-        padding: 10,
-        margin: theme.spacing(1, 'auto'),
+        padding: theme.spacing(2),
+        margin: theme.spacing(5),
         borderWidth: '3px',
-        borderRadius: '0px 0px 10px 0px',
-        background: "whitesmoke",
+        borderRadius: '8px',
+        background: theme.palette.third.whitesmoke,
+        textAlign: 'justify',
+
     },
     title: {
-        color: '#c59b08',
+        color: theme.palette.third.gold,
         padding: 10,
-        font: 'small-caps bold 24px/1 sans-serif',
+        fontVariantCaps: theme.fontVariantCaps.smallCaps,
+
     },
     title2: {
-        color: '#c59b08',
+        color: theme.palette.third.gold,
         padding: 10,
-        font: 'small-caps bold 20px/1 sans-serif',
+        fontVariantCaps: theme.fontVariantCaps.smallCaps,
+
     },
     content : {
         padding: 10,
+        fontWeight: 'normal',
     },
+
+    center: {
+        alignItems: 'center',
+    }
 }));
 
 function Finance() {
     const classes = useStyles();
     return (
-        <Box component="div">
+        <Box component="div" classeName={classes.center}>
             <PageHeader title="Financer sa mobilité"/>
-            <Box component= "div"  width="65%" mx="auto">
+            <Box component= "div" mx="auto">
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
                     L’INSA Lyon est chargé de gérer et distribuer à ses étudiants les subventions
                     annuelles perçues par Erasmus+, la Région AURA et le Ministère de l’Enseignement
@@ -52,16 +64,16 @@ function Finance() {
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
                     <Typography className={classes.title} align={'center'}>LA BOURSE REGION BRMIE <br/> (Bourse Région Mobilité
                         Internationale Etudiants)</Typography>
-                    <Typography className={classes.title2}>Destination :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Destination :</Typography>
                     <Typography variant={'h6'} className={classes.content}>Tout pays étranger autre que son pays d’origine<br/> </Typography>
-                    <Typography className={classes.title2}>Source :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Source :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         <Button target= "_blank" href="https://www.auvergnerhonealpes.fr/aide/73/89-se-former-a-l-etranger-avec-la-bourse-regionale-mobilite-internationale-etudiant-enseignement-superieur-recherche-innovation.htm">
                             Conseil Régional Auvergne-Rhône-Alpes
                         </Button>
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Effectuer un séjour prévu dans le règlement des études et attesté par l’établissement
                         d’accueil, d’une durée minimum de 4 semaines pour un stage, de 8 semaines pour
@@ -71,7 +83,7 @@ function Finance() {
                         l’étranger.
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Calendrier de candidature à la bourse Région :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Calendrier de candidature à la bourse Région :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         • pour un échange académique au S1 ou à l’année N : inscription mai-juin année N-1
                         <br/>
@@ -81,14 +93,14 @@ function Finance() {
                         convention de stage
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Montant :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Montant :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
-                        sur la base de 95 € par semaine, le nombre de semaines financées
+                        Sur la base de 95 € par semaine, le nombre de semaines financées
                         est déterminé chaque année en fonction de l’enveloppe reçue par l’INSA. La BRMIE ne
                         couvre pas la totalité du séjour.
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Contact INSA :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Contact INSA :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         bourse.region@insa-lyon.fr
                     </Typography>
@@ -98,20 +110,20 @@ function Finance() {
                     <Typography className={classes.title} align={'center'}>
                         LA BOURSE ERASMUS+
                     </Typography>
-                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Destination : </Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Pays de l’Union Européenne agréés par la Commission Européenne, de
                         l’AELE et la Turquie (Hors Suisse).
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Source : </Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         <Button target= "_blank" href="https://www.generation-erasmus.fr/sejour-bourse-erasmus-etudiant">
                             Agence Erasmus+
                         </Button>
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         La bourse Erasmus+ est versée :
                         <br/>
@@ -125,7 +137,7 @@ function Finance() {
                         prétendre à cette bourse.
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Montant : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Montant : </Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Le montant de la bourse est décidé chaque année en fonction du
                         montant de la subvention annuelle versée à l’INSA Lyon par l’Agence Erasmus+
@@ -148,17 +160,17 @@ function Finance() {
                         des étudiants concernés.
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Contact INSA : </Typography>
                     <Typography variant={'h6'} className={classes.content}>scolerasmus@insa-lyon.fr</Typography>
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>LA BOURSE AMI - AIDE À LA MOBILITÉ INTERNATIONALE</Typography>
-                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.title} align={'center'}>LA BOURSE AMI - AIDE À LA MOBILITÉ INTERNATIONALE</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Destination : </Typography>
                     <Typography variant={'h6'} className={classes.content}>Toutes</Typography>
-                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Source : </Typography>
                     <Typography variant={'h6'} className={classes.content}>Ministère de l’Enseignement Supérieur et de la Recherche</Typography>
-                    <Typography className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Critères d’éligibilité (sous réserve de modifications) :</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         • Effectuer une mobilité d’études ou de stage d’une durée minimale de 2 mois
                         à l’étranger.
@@ -172,7 +184,7 @@ function Finance() {
                         pour leur expliquer les démarches.
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Montant : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Montant : </Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Voici à titre indicatif les montants accordés par étudiant en 2019-2020 :
                         <br/>
@@ -190,15 +202,15 @@ function Finance() {
                         supérieure à 3600€ (stages et études cumulés)
                         <br/>
                     </Typography>
-                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Contact INSA : </Typography>
                     <Typography variant={'h6'} className={classes.content}>mobilitesortante@insa-lyon.fr</Typography>
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>LA BOURSE FSI - FONDS DE SOUTIEN POUR L’INTERNATIONAL</Typography>
-                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.title} align={'center'}>LA BOURSE FSI - FONDS DE SOUTIEN POUR L’INTERNATIONAL</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Destination : </Typography>
                     <Typography variant={'h6'} className={classes.content}>Toutes</Typography>
-                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Source : </Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Financement interne à partir des Frais de Dossier Mobilité Internationale
                         (FDMI) payés par tous les candidats à la mobilité sortante
@@ -206,23 +218,23 @@ function Finance() {
                         Tout élève en échange académique s’étant acquitté du FDMI, sur présentation
                         d’une demande d’aide financière exceptionnelle.
                     </Typography>
-                    <Typography className={classes.title2}>Montant :</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Montant :</Typography>
                     <Typography variant={'h6'} className={classes.content}>800€ en 2019-2020</Typography>
-                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Contact INSA : </Typography>
                     <Typography variant={'h6'} className={classes.content}>mobilitesortante@insa-lyon.fr</Typography>
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>AIDES FINANCIÈRES DES PROGRAMMES FITEC</Typography>
-                    <Typography className={classes.title2}>Destination : </Typography>
+                    <Typography variant={'h6'} className={classes.title} align={'center'}>AIDES FINANCIÈRES DES PROGRAMMES FITEC</Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Destination : </Typography>
                     <Typography variant={'h6'} className={classes.content}>Les établissements FITEC partenaires en Argentine, au Brésil et au Mexique.</Typography>
                     <br/>
-                    <Typography className={classes.title2}>Source : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Source : </Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Ministère de l’Europe et des Affaires étrangères, le ministère de l’Enseignement Supérieur, de la Recherche et de l’Innovation et les ministères des pays concernés
                     </Typography>
                     <br/>
-                    <Typography className={classes.title2}>Critères d’éligibilité : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Critères d’éligibilité : </Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Tout élève ingénieur en échange académique (suivi ou
                         non d’un stage) ayant postulé pour un de ces établissements.
@@ -232,12 +244,12 @@ function Finance() {
                         les justificatifs liés à leur mobilité. Les aides sont versées pendant ou à l’issue
                         de la mobilité.
                     </Typography>
-                    <Typography className={classes.title2}>Contact INSA : </Typography>
+                    <Typography variant={'h6'} className={classes.title2}>Contact INSA : </Typography>
                     <Typography variant={'h6'} className={classes.content}>haridian.melgar-perez@insa-lyon.fr - Chargée de Projet Amérique Latine</Typography>
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>AIDES FINANCIÈRES DU PROGRAMME UNITECH</Typography>
+                    <Typography variant={'h6'} className={classes.title} align={'center'}>AIDES FINANCIÈRES DU PROGRAMME UNITECH</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         Les étudiants sélectionnés pour le programme UNITECH bénéficieront d’une aide
                         à la mobilité de 1000€, cumulable avec une bourse Erasmus+.
@@ -245,7 +257,7 @@ function Finance() {
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>AUTRES BOURSES ÉVENTUELLES : RENSEIGNEZ-VOUS !</Typography>
+                    <Typography variant={'h6'} className={classes.title} align={'center'}>AUTRES BOURSES ÉVENTUELLES : RENSEIGNEZ-VOUS !</Typography>
                     <Typography variant={'h6'} className={classes.content}>
                         • Conseil Régional ou commune d’origine
                         <br/>

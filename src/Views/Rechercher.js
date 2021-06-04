@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
         background: theme.palette.third.lightgrey,
         margin: theme.spacing(1),
         padding: theme.spacing(1),
-        [theme.breakpoints.up("sm")] : {
+        [theme.breakpoints.up("xs")] : {
             padding: theme.spacing(5),
             margin: theme.spacing(5),
         },

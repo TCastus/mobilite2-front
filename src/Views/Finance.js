@@ -22,23 +22,35 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '8px',
         background: theme.palette.third.whitesmoke,
         textAlign: 'justify',
+        [theme.breakpoints.up("xs")] : {
+            padding: theme.spacing(2),
+            margin: theme.spacing(2),
+        },
 
     },
     title: {
         color: theme.palette.third.gold,
         padding: 10,
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
+        [theme.breakpoints.up("xs")] : {
+            padding: 5,
+        },
 
     },
     title2: {
         color: theme.palette.third.gold,
         padding: 10,
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
-
+        [theme.breakpoints.up("xs")] : {
+            padding: 5,
+        },
     },
     content : {
         padding: 10,
         fontWeight: 'normal',
+        [theme.breakpoints.up("xs")] : {
+            padding: 5,
+        },
     },
 
     center: {

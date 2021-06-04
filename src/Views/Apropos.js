@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) =>
             font: theme.typography,
             fontVariantCaps: theme.fontVariantCaps.smallCaps,
             fontWeight: theme.fontType.bold,
+            [theme.breakpoints.up("xs")] : {
+                padding: 3,
+                margin : 5,
+            },
 
         },
         title2: {
@@ -36,6 +40,9 @@ const useStyles = makeStyles((theme) =>
             font: theme.typography,
             fontVariantCaps: theme.fontVariantCaps.smallCaps,
             fontWeight: theme.fontType.bold,
+            [theme.breakpoints.up("xs")] : {
+                padding: 5,
+            },
 
         },
         content: {
@@ -47,6 +54,10 @@ const useStyles = makeStyles((theme) =>
             borderRadius: '5px 5px 5px 5px',
             background: theme.palette.third.white,
             textAlign: 'justify',
+            [theme.breakpoints.up("xs")] : {
+                padding: 10,
+                margin: 1,
+            },
 
         },
 
@@ -59,6 +70,9 @@ const useStyles = makeStyles((theme) =>
             borderRadius: '5px 5px 5px 5px',
             background: theme.palette.third.white,
             textAlign: 'center',
+            [theme.breakpoints.up("xs")] : {
+                padding: 10,
+            },
 
         },
 

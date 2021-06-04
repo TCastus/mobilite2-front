@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     textCenter: {
+        padding: theme.spacing(2),
         textAlign: 'center',
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
 
@@ -104,7 +105,7 @@ export default function UniDetail({errorHandler}) {
 
     return (loaded ?
         (<>
-            <PageHeader title={uni.name} subtitle={"Ville, pays, continent"}/>
+            <PageHeader title={uni.name} subtitle={uni.city_name+", "+uni.country_name}/>
             <Container className={classes.presGen} maxWidth={"lg"}>
                 <Grid container spacing={5}>
                     <Grid item sm={6} xs={12}>
@@ -129,15 +130,16 @@ export default function UniDetail({errorHandler}) {
                     <Grid item sm={6} xs={12}>
                         <Typography variant={"h4"} className={classes.avis} style={{fontVariantCaps: 'small-caps'}}>Les avis des étudiants</Typography>
 
+                        <Typography variant={"body1"} className={classes.textCenter}>Nombre d étudiants ayant laissés leur avis : {uni.review_number} </Typography>
+
                         <Grid container spacing={2}>
-                            <NotePaper IconOn={StarIcon} IconOff={StarBorderIcon} title={"Note globale"} note={3} cols={12} />
-                            <NotePaper IconOn={AttachMoneyIcon} IconOff={MoneyOffIcon} title={"Coût de la vie"} note={4} />
-                            <NotePaper IconOn={SecurityIcon} IconOff={NoEncryptionIcon} title={"Sécurité"} note={4} />
-                            <NotePaper IconOn={MusicNoteIcon} IconOff={MusicOffIcon} title={"Vie nocturne"} note={4} />
-                            <NotePaper IconOn={PublicIcon} IconOff={LanguageIcon} title={"Vie culturelle"} note={4} />
-                            <NotePaper IconOn={MenuBookIcon} IconOff={ImportContactsIcon} title={"Difficulté des cours"} note={4} />
-                            <NotePaper IconOn={AccountBalanceIcon} IconOff={ClearIcon} title={"Intérêt dans les cours"} note={4} />
-                            <NotePaper IconOn={ChatIcon} IconOff={SpeakerNotesOffIcon} title={"Contact avec les étudiants"} note={4} />
+                            <NotePaper IconOn={AttachMoneyIcon} IconOff={MoneyOffIcon} title={"Coût de la vie"} note={uni.cost_of_living__avg} />
+                            <NotePaper IconOn={SecurityIcon} IconOff={NoEncryptionIcon} title={"Sécurité"} note={uni.security__avg} />
+                            <NotePaper IconOn={MusicNoteIcon} IconOff={MusicOffIcon} title={"Vie nocturne"} note={uni.night_life__avg} />
+                            <NotePaper IconOn={PublicIcon} IconOff={LanguageIcon} title={"Vie culturelle"} note={uni.culture__avg} />
+                            <NotePaper IconOn={MenuBookIcon} IconOff={ImportContactsIcon} title={"Difficulté des cours"} note={uni.courses_difficulty__avg} />
+                            <NotePaper IconOn={AccountBalanceIcon} IconOff={ClearIcon} title={"Intérêt dans les cours"} note={uni.courses_interest__avg} />
+                            <NotePaper IconOn={ChatIcon} IconOff={SpeakerNotesOffIcon} title={"Contact avec les étudiants"} note={uni.student_proximity__avg} />
 
                         </Grid>
 
@@ -146,12 +148,6 @@ export default function UniDetail({errorHandler}) {
                             .reduce((list1, list2)=>list1.concat(list2)))]
                             .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}
 
-                        <Typography variant={"body1"}>Difficulte des cours : {uni.courses_difficulty+" /5"}</Typography>
-                        <Typography variant={"body1"}>Interet des cours : {uni.courses_interest+" /5"}</Typography>
-
-                        <Typography variant={"h6"}>Logement</Typography>
-                        <Typography variant={"body1"}>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
-                        <Typography variant={"body1"}>Coût de la vie (approximatif) :</Typography>
 
                         <Box component = { "div" } className={classes.infos}>
 
@@ -163,38 +159,31 @@ export default function UniDetail({errorHandler}) {
 
                             <Typography variant={"h5"}  className={classes.textCenter}>Comment y acceder ?</Typography>
                             <Typography variant={"h6"} className={classes.textWeight}>
-                                <Typography>Duree de l echange : {"1 semestre"}</Typography>
-                                <Typography>Quand partir ? : {"4A S1"}</Typography>
-                                <Typography>Nombre de places en double diplomes : {"2"}</Typography>
-                                <Typography>Nombre de places en echange : {"2"}</Typography>
-                                <Typography>Demande : {"Demande forte"}</Typography>
-                                <Typography>Niveau d anglais requis : {"TOEIC"}</Typography>
+                                {/*<Typography>Duree de l echange : {"1 semestre"}</Typography>*/}
+                                {/*<Typography>Quand partir ? : {"4A S1"}</Typography>*/}
+                                <Typography>Nombre de places en double diplomes : {uni.placesDD}</Typography>
+                                <Typography>Nombre de places en echange : {uni.placesExchange}</Typography>
+                                <Typography>Demande : {uni.access}</Typography>
+                                {/*<Typography>Niveau d anglais requis : {"TOEIC"}</Typography>*/}
                             </Typography>
 
-                            <Typography variant={"h5"} className={classes.textCenter}>Les cours</Typography>
-                            <Typography variant={"h6"} className={classes.textWeight}>
-                                <Typography>Départements concernés en DD :</Typography>
-                                <Typography>Difficulte des cours : {uni.courses_difficulty+" /5"}</Typography>
-                                <Typography>Interet des cours : {uni.courses_interest+" /5"}</Typography>
-                            </Typography>
 
 
                             <Typography variant={"h5"} className={classes.textCenter}>Logement</Typography>
                             <Typography variant={"h6"} className={classes.textWeight}>
                                 <Typography>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
-                                <Typography>Coût de la vie (approximatif) :</Typography>
-
-                                <Typography>Coût de la vie (approximatif) :</Typography>
-                                <Typography>Le campus : </Typography>
+                                <Typography>Coût du logement (approximatif) : {uni.rent_average}</Typography>
+                                {/*<Typography>Le campus : </Typography>*/}
                             </Typography>
 
-                            <Typography variant={"h5"} className={classes.textCenter}>Aides Financières</Typography>
-                            <Typography variant={"h6"} className={classes.textWeight}> Aides proposées :</Typography>
+
+                            {/*<Typography variant={"h5"} className={classes.textCenter}>Aides Financières</Typography>
+                            <Typography variant={"h6"} className={classes.textWeight}>Aides proposées</Typography>*/}
 
                         </Box>
 
                         <Button variant="contained" color="primary" component={Link} to="/experience">
-                            Je suis allé(e) ici !
+                            Je suis allé.e ici !
                         </Button>
                     </Grid>
 

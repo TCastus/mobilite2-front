@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
     ratingsGrid: {
         padding: 10,
         margin: theme.spacing(1, 'auto'),
-
         borderWidth: '3px',
         borderRadius: '0px 0px 10px 0px',
         opacity: 0.75,
@@ -54,27 +53,21 @@ const useStyles = makeStyles((theme) => ({
         background: "white",
 
     },
-    items:{
-        margin: theme.spacing(1, 'auto'),
-
-    },
-
     textFieldSize:{
         width: "70%",
         [theme.breakpoints.up('md')]: {
             width: '50%',
         }
     },
-
     startRatingSize:{
         width: "30%",
         [theme.breakpoints.up('md')]: {
             width: '70%',
         }
     },
-
-
-
+    radio: {
+        paddingLeft: '20%',
+    },
 }));
 
 const departments = [
@@ -104,8 +97,6 @@ const defaultValues = {
     cost_of_living: 0,
     culture: 0,
     night_life: 0,
-
-    // MISSING FROM THE FORM
     mobility_type: "DD",
     univ_appartment: false,
     rent: 500,
@@ -158,169 +149,161 @@ export default function Experience({errorHandler}) {
                 <form onSubmit={handleSubmit(submitForm)}>
                     <Box component="div" className="header">
                         <Box component="div">
-                            <Grid component="div" className={classes.grid} >
-                                <Typography variant={'h4'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Vous revenez d&apos;échange ?</Typography>
-                                <Typography variant={'h5'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Remplissez le formulaire ci-dessous et aidez les futures<br/> générations à faire leur choix !</Typography>
-                                <Grid container className={classes.items}>
-                                    <Grid item xs={6}>
-                                        <Grid container spacing={1} className={classes.items}>
+                            <Typography variant={'h4'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Vous revenez d&apos;échange ?</Typography>
+                            <Typography variant={'h5'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Remplissez le formulaire ci-dessous et aidez les futures<br/> générations à faire leur choix !</Typography>
+                            <Grid container className={classes.items} spacing={3}>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"} > Prénom </Typography>
+                                    <Controller
+                                        render={({ field }) => <TextField placeholder="Gérard" {...field} className={classes.textFieldSize} />}
+                                        name="surname"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"} > Prénom </Typography>
-                                                <Controller
-                                                    render={({ field }) => <TextField placeholder="Éric" {...field} className={classes.textFieldSize} />}
-                                                    name="surname"
-                                                    control={control}
-                                                />
-                                            </Grid>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"}> Nom </Typography>
+                                    <Controller
+                                        render={({ field }) => <TextField placeholder="Depardieu" {...field} className={classes.textFieldSize} />}
+                                        name="name"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"}> Nom de famille </Typography>
-                                                <Controller
-                                                    render={({ field }) => <TextField placeholder="Maurincomme" {...field} className={classes.textFieldSize} />}
-                                                    name="name"
-                                                    control={control}
-                                                />
-                                            </Grid>
+                                <Grid item md={6} xs={12} className={classes.items}>
+                                    <Typography>Email</Typography>
+                                    <Controller
+                                        render={({ field }) =>
+                                            <TextField placeholder="gerard.depardieu@gmail.com" type="email" {...field} />}
+                                        name="email"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"} id="depart">Département</Typography>
-                                                <Controller
-                                                    render={({ field }) => (
-                                                        <Select {...field}>
-                                                            {departments.map((dep) => <MenuItem key={dep} value={dep}>{dep}</MenuItem>)}
-                                                        </Select>
-                                                    )}
-                                                    name="department"
-                                                    control={control}
-                                                />
-                                            </Grid>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"} id="depart">Département</Typography>
+                                    <Controller
+                                        render={({ field }) => (
+                                            <Select {...field}>
+                                                {departments.map((dep) => <MenuItem key={dep} value={dep}>{dep}</MenuItem>)}
+                                            </Select>
+                                        )}
+                                        name="department"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"} id="depart">Semestre/année d&apos;échange</Typography>
-                                                <Controller
-                                                    render={({ field }) => (
-                                                        <Select {...field}>
-                                                            {semesters.map((sem) => <MenuItem key={sem} value={sem}>{sem}</MenuItem>)}
-                                                        </Select>
-                                                    )}
-                                                    name="semester"
-                                                    control={control}
-                                                />
-                                            </Grid>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"} id="depart">Semestre/année d&apos;échange</Typography>
+                                    <Controller
+                                        render={({ field }) => (
+                                            <Select {...field}>
+                                                {semesters.map((sem) => <MenuItem key={sem} value={sem}>{sem}</MenuItem>)}
+                                            </Select>
+                                        )}
+                                        name="semester"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"} >Année d&apos;échange </Typography>
-                                                <Controller
-                                                    render={({ field }) =>
-                                                        <TextField type="number" {...field} className={classes.textFieldSize} />}
-                                                    name="year"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"} >Université</Typography>
-                                                <Controller
-                                                    render={({ field }) => (
-                                                        <Select {...field}>
-                                                            {uni.map((elem) => <MenuItem key={elem.id} value={elem.id}>{elem.name}</MenuItem>)}
-                                                        </Select>
-                                                    )}
-                                                    name="university"
-                                                    control={control}
-                                                />
-                                            </Grid>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"} >Année d&apos;échange </Typography>
+                                    <Controller
+                                        render={({ field }) =>
+                                            <TextField type="number" {...field} className={classes.textFieldSize} />}
+                                        name="year"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                            <Grid item sm={12}>
-                                                <Typography>Visa demandé pour l&apos;échange ?</Typography>
-                                                <Controller
-                                                    render={({ field }) =>
-                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : Comme je suis de nationalité ... j&apos;ai dû faire un visa..." multiline rows={5} {...field} />}
-                                                    name="visa"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"}>Université</Typography>
+                                    <Controller
+                                        render={({ field }) => (
+                                            <Select {...field}>
+                                                {uni.map((elem) => <MenuItem key={elem.id} value={elem.id}>{elem.name}</MenuItem>)}
+                                            </Select>
+                                        )}
+                                        name="university"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                    <Grid item xs={6}>
-                                        <Grid container>
-                                            <Grid item xs={12}>
-                                                <Typography variant={"h6"} > Commentaire </Typography>
-                                                <Controller
-                                                    render={({ field }) =>
-                                                        <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." multiline rows={5} {...field} />}
-                                                    name="comment"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                            <Grid item sm={6}>
-                                                <Typography>Type de contrat</Typography>
-                                                <Controller
-                                                    render={({ field }) => (
-                                                        <RadioGroup aria-label="gender" {...field}>
-                                                            <FormControlLabel value="E" control={<Radio />} label="Echange"/>
-                                                            <FormControlLabel value="DD" control={<Radio />} label="Double Diplôme" />
-                                                        </RadioGroup>
-                                                    )}
-                                                    name="mobility_type"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                            <Grid item sm={6}>
-                                                <Typography variant={"h6"}>Logé à l&apos;université ?</Typography>
-                                                <Controller
-                                                    name="univ_appartment"
-                                                    control={control}
-                                                    render={({ field }) => (
-                                                        <Checkbox
-                                                            onChange={(e) => field.onChange(e.target.checked)}
-                                                            checked={field.value}
-                                                        />
-                                                    )}
-                                                />
-                                            </Grid>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"}>Type de contrat</Typography>
+                                    <Controller
+                                        render={({ field }) => (
+                                            <RadioGroup aria-label="mobility_type" {...field}>
+                                                <FormControlLabel value="E" control={<Radio color="primary"/>} label="Échange" className={classes.radio}/>
+                                                <FormControlLabel value="DD" control={<Radio color="primary"/>} label="Double Diplôme" className={classes.radio}/>
+                                            </RadioGroup>
+                                        )}
+                                        name="mobility_type"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                            <Grid item xs={12} className={classes.items}>
-                                                <Typography>Email</Typography>
-                                                <Controller
-                                                    render={({ field }) =>
-                                                        <TextField type="email" {...field} />}
-                                                    name="email"
-                                                    placeholder="eric.maurincomme@insa-lyon.fr"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography>
-                                                    Souhaitez-vous que nous partagions votre e-mail<br/>
-                                                    aux élèves intéressés par votre échange souhaitant vous poser des questions ?
-                                                </Typography>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"}>Visa demandé pour l&apos;échange ?</Typography>
+                                    <Controller
+                                        render={({ field }) =>
+                                            <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : Comme je suis de nationalité ... j&apos;ai dû faire un visa..." multiline rows={5} {...field} />}
+                                        name="visa"
+                                        control={control}
+                                    />
+                                </Grid>
 
-                                                <Controller
-                                                    render={({ field }) => (
-                                                        <RadioGroup aria-label="contact" {...field}>
-                                                            <FormControlLabel value={"false"} control={<Radio color="primary"/>} label="Non"/>
-                                                            <FormControlLabel value={"true"} control={<Radio color="primary"/>} label="Oui"/>
-                                                        </RadioGroup>
-                                                    )}
-                                                    name="contact"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                            <Grid item sm={12}>
-                                                <Typography>Loyer moyen payé (€)</Typography>
-                                                <Controller
-                                                    render={({ field }) => <TextField type={"number"} {...field} />}
-                                                    name="rent"
-                                                    control={control}
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"} > Commentaire </Typography>
+                                    <Controller
+                                        render={({ field }) =>
+                                            <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." multiline rows={5} {...field} />}
+                                        name="comment"
+                                        control={control}
+                                    />
+                                </Grid>
+
+                                <Grid item md={6} xs={12}>
+                                    <Typography variant={"h6"}>Logé à l&apos;université ?</Typography>
+                                    <Controller
+                                        name="univ_appartment"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <Checkbox
+                                                onChange={(e) => field.onChange(e.target.checked)}
+                                                checked={field.value}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+
+                                <Grid item md={6} xs={12}>
+                                    <Typography>Loyer moyen payé (€)</Typography>
+                                    <Controller
+                                        render={({ field }) => <TextField type={"number"} {...field} />}
+                                        name="rent"
+                                        control={control}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} spacing={3}>
+                                    <Typography variant={"body1"}>
+                                        Souhaitez-vous que nous partagions votre e-mail<br/>
+                                        aux élèves intéressés par cet échange souhaitant vous poser des questions ?
+                                    </Typography>
+
+                                    <Controller
+                                        render={({ field }) => (
+                                            <RadioGroup aria-label="contact" {...field}>
+                                                <FormControlLabel value={"false"} control={<Radio color="primary"/>} label="Non" className={classes.radio}/>
+                                                <FormControlLabel value={"true"} control={<Radio color="primary"/>} label="Oui" className={classes.radio}/>
+                                            </RadioGroup>
+                                        )}
+                                        name="contact"
+                                        control={control}
+                                    />
                                 </Grid>
                             </Grid>
-
                         </Box>
 
                         <Box component="div" maxWidth="sm" className={classes.grid}>
@@ -334,12 +317,13 @@ export default function Experience({errorHandler}) {
                                 <RatingForm control={control} title="Contact avec les étudiants" name="student_proximity" Icon={ChatIcon} />
                                 <RatingForm control={control} title="Intérêt dans les cours" name="courses_interest" Icon={AccountBalanceIcon} />
 
-                                <HCaptcha onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)} languageOverride="fr"
-                                    sitekey={config.HCAPTCHA_SITEKEY}
-                                    theme="light"
-                                />
 
                                 <Grid item xs={12} className={classes.items}>
+                                    <HCaptcha onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)} languageOverride="fr"
+                                        sitekey={config.HCAPTCHA_SITEKEY}
+                                        theme="light"
+                                    />
+
                                     <Button variant="contained" color="primary" type="submit">
                                         Envoyer  <SendIcon fontSize={"small"}/>
                                     </Button>

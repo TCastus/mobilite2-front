@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     map: {
         marginTop: theme.spacing(2),
         width: '100%',
-        height: '500px',
+        height: '60vh',
     },
 }));
 

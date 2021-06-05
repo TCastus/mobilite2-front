@@ -14,6 +14,8 @@ import {
     AccountBalance as AccountBalanceIcon, MusicNote as MusicNoteIcon, Public as PublicIcon
 } from '@material-ui/icons';
 import * as PropTypes from "prop-types";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 import PageHeader from "../Component/PageHeader";
 import RatingForm from "../Component/RatingForm";
@@ -21,6 +23,7 @@ import {useForm, Controller} from "react-hook-form";
 import {getUniAll, postReview} from "../Request/uni_request";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import {getDefaultErrorMessage} from "../Request/error_handling";
+import { Element, scroller } from 'react-scroll';
 import config from "../config.json";
 
 Experience.propTypes = {
@@ -88,11 +91,11 @@ const semesters = ['4A-S1', '4A-S2', '5A-S1', '5A-S2', '4A', '5A'];
 const defaultValues = {
     surname: "",
     name: "",
+    email: "",
     department: "BB",
     year: 2020,
-    comment:"",
+    comments:"",
     contact: "false",
-    email: "",
     security: 0,
     cost_of_living: 0,
     culture: 0,
@@ -104,13 +107,21 @@ const defaultValues = {
     courses_difficulty: 0,
     student_proximity: 0,
     courses_interest: 0,
-    university: 1,
+    university: -1,
     semester: "4A-S1"
 };
 
+const schema = yup.object().shape({
+    name: yup.string().required('Champ obligatoire'),
+    surname: yup.string().required('Champ obligatoire'),
+    email: yup.string().required('Champ obligatoire').email('Mauvais format d\'email'),
+    year: yup.number().required('Champ obligatoire')
+        .integer('Année entière').min(1957, 'Année non valide').max(2040, 'Année non valide'),
+});
+
 export default function Experience({errorHandler}) {
     const classes = useStyles();
-    const { handleSubmit, control } = useForm({defaultValues});
+    const { handleSubmit, control, formState:{errors}, setValue } = useForm({resolver: yupResolver(schema), defaultValues});
 
     const [captchaToken, setCaptchaToken] = useState("");
     const [uni, setUni] = React.useState([]);
@@ -118,70 +129,94 @@ export default function Experience({errorHandler}) {
     React.useEffect(() => {
         getUniAll().then((res) => {
             setUni(res.data);
+            setValue('university', res.data[0].id);
         }).catch( err => {
             errorHandler(getDefaultErrorMessage(err));
         });
-    }, [errorHandler]);
+    }, [errorHandler, setValue]);
 
     const submitForm = (form) => {
-        const form2 = {...form};
+        const form2 = {};
+        for (let key in form) {
+            form2[key] = form[key] === null ? 0 : form[key];
+        }
 
         if (captchaToken !== "") {
             form2['h-captcha-response'] = captchaToken;
             postReview(form2).then((res)=> {
                 console.log(res);
-            }).catch( err => {
-                errorHandler(getDefaultErrorMessage(err));
+            }).catch( () => {
+                errorHandler("Erreurs dans le formulaire !");
+                scroll.scrollToTop();
             });
         }
     };
 
-    const handleVerificationSuccess = (token, ekey) => {
+    const formError = () => {
+        scroller.scrollTo('scrollForm', {
+            duration: 500,
+            smooth: true,
+        });
+    };
+
+    const handleVerificationSuccess = (token) => {
         setCaptchaToken(token);
-        console.log(token, ekey);
     };
 
     return (
         <>
             <PageHeader title={"Partagez votre expérience"}/>
 
+            <Element name="scrollForm" />
+
             <Container maxWidth="md">
-                <form onSubmit={handleSubmit(submitForm)}>
+                <form onSubmit={handleSubmit(submitForm, formError)}>
                     <Box component="div" className="header">
                         <Box component="div">
                             <Typography variant={'h4'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Vous revenez d&apos;échange ?</Typography>
                             <Typography variant={'h5'} className={classes.items} style={{fontVariantCaps: 'small-caps'}}>Remplissez le formulaire ci-dessous et aidez les futures<br/> générations à faire leur choix !</Typography>
                             <Grid container className={classes.items} spacing={3}>
                                 <Grid item md={6} xs={12}>
-                                    <Typography variant={"h6"} > Prénom </Typography>
+                                    <Typography variant={"h6"} > Prénom* </Typography>
                                     <Controller
-                                        render={({ field }) => <TextField placeholder="Gérard" {...field} className={classes.textFieldSize} />}
+                                        render={({ field }) =>
+                                            <TextField placeholder="Gérard" {...field}
+                                                className={classes.textFieldSize}
+                                                error={errors.surname}
+                                                helperText={errors.surname?.message}/>}
                                         name="surname"
                                         control={control}
                                     />
                                 </Grid>
 
                                 <Grid item md={6} xs={12}>
-                                    <Typography variant={"h6"}> Nom </Typography>
+                                    <Typography variant={"h6"}> Nom* </Typography>
                                     <Controller
-                                        render={({ field }) => <TextField placeholder="Depardieu" {...field} className={classes.textFieldSize} />}
+                                        render={({ field }) => 
+                                            <TextField placeholder="Depardieu" {...field} 
+                                                className={classes.textFieldSize}
+                                                error={errors.name}
+                                                helperText={errors.name?.message}/>}
                                         name="name"
                                         control={control}
                                     />
                                 </Grid>
 
                                 <Grid item md={6} xs={12} className={classes.items}>
-                                    <Typography>Email</Typography>
+                                    <Typography variant={"h6"}>Email*</Typography>
                                     <Controller
                                         render={({ field }) =>
-                                            <TextField placeholder="gerard.depardieu@gmail.com" type="email" {...field} />}
+                                            <TextField placeholder="gerard.depardieu@gmail.com"
+                                                type="email"
+                                                error={errors.email}
+                                                helperText={errors.email?.message}{...field} />}
                                         name="email"
                                         control={control}
                                     />
                                 </Grid>
 
                                 <Grid item md={6} xs={12}>
-                                    <Typography variant={"h6"} id="depart">Département</Typography>
+                                    <Typography variant={"h6"} id="depart">Département*</Typography>
                                     <Controller
                                         render={({ field }) => (
                                             <Select {...field}>
@@ -207,17 +242,20 @@ export default function Experience({errorHandler}) {
                                 </Grid>
 
                                 <Grid item md={6} xs={12}>
-                                    <Typography variant={"h6"} >Année d&apos;échange </Typography>
+                                    <Typography variant={"h6"} >Année d&apos;échange* </Typography>
                                     <Controller
                                         render={({ field }) =>
-                                            <TextField type="number" {...field} className={classes.textFieldSize} />}
+                                            <TextField type="number" {...field}
+                                                error={errors.year}
+                                                helperText={errors.year?.message}
+                                                className={classes.textFieldSize} />}
                                         name="year"
                                         control={control}
                                     />
                                 </Grid>
 
                                 <Grid item md={6} xs={12}>
-                                    <Typography variant={"h6"}>Université</Typography>
+                                    <Typography variant={"h6"}>Université*</Typography>
                                     <Controller
                                         render={({ field }) => (
                                             <Select {...field}>
@@ -258,7 +296,7 @@ export default function Experience({errorHandler}) {
                                     <Controller
                                         render={({ field }) =>
                                             <TextField className={classes.comment} style={{textAlign: 'left'}} placeholder="ex : J'ai beaucoup aimé cet échange, j'ai très bien été acceuilli..." multiline rows={5} {...field} />}
-                                        name="comment"
+                                        name="comments"
                                         control={control}
                                     />
                                 </Grid>
@@ -319,14 +357,16 @@ export default function Experience({errorHandler}) {
 
 
                                 <Grid item xs={12} className={classes.items}>
-                                    <HCaptcha onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)} languageOverride="fr"
+                                    <HCaptcha onVerify={(token) => handleVerificationSuccess(token)} languageOverride="fr"
                                         sitekey={config.HCAPTCHA_SITEKEY}
                                         theme="light"
                                     />
 
-                                    <Button variant="contained" color="primary" type="submit">
+                                    <Button variant="contained" color="primary" type="submit" disabled={captchaToken === ""}>
                                         Envoyer  <SendIcon fontSize={"small"}/>
                                     </Button>
+                                    {captchaToken === "" && <Typography component={"p"} variant={"caption"} style={{color:"red"}}>Captcha non validé</Typography> }
+
                                 </Grid>
                             </Grid>
                         </Box>

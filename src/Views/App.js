@@ -31,7 +31,7 @@ function App() {
         <div className="App">
             <MuiThemeProvider theme={theme}>
 
-                <BrowserRouter>
+                <BrowserRouter basename={process.env.NODE_ENV==="production" ? '/mobilite2-front/': ''}>
                     <CssBaseline />
                     <Navbar routes={routeIndex.navigation}/>
 

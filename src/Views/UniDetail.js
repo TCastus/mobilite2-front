@@ -11,8 +11,6 @@ import {
     MusicNote as MusicNoteIcon,
     MusicOff as MusicOffIcon,
     Public as PublicIcon, Security as SecurityIcon,
-    Star as StarIcon,
-    StarBorder as StarBorderIcon,
     NoEncryption as NoEncryptionIcon,
     ImportContacts as ImportContactsIcon,
     SpeakerNotesOff as SpeakerNotesOffIcon,
@@ -87,12 +85,11 @@ const useStyles = makeStyles((theme) => ({
 export default function UniDetail({errorHandler}) {
     const classes = useStyles();
 
-    const [loaded, setLoaded] = useState(false); // true if API content is loaded
-    const [uni, setUni] = useState({}); // contains API content
+    const [loaded, setLoaded] = useState(false);
+    const [uni, setUni] = useState({});
 
     const { id } = useParams();
 
-    // Load university data from API
     useEffect(() => {
         getUni(id).then((res) => {
             console.log(res.data);
@@ -110,20 +107,20 @@ export default function UniDetail({errorHandler}) {
                 <Grid container spacing={5}>
                     <Grid item sm={6} xs={12}>
                         {uni.latitude && uni.longitude &&
-                            <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={8}
-                                scrollWheelZoom={false} className={classes.map}>
+                                <MapContainer center={[parseFloat(uni.latitude), parseFloat(uni.longitude)]} zoom={8}
+                                    scrollWheelZoom={false} className={classes.map}>
 
-                                <TileLayer
-                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                />
+                                    <TileLayer
+                                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    />
 
-                                <Marker position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
-                                    <Popup>
-                                        {uni.name}
-                                    </Popup>
-                                </Marker>
-                            </MapContainer>
+                                    <Marker position={[parseFloat(uni.latitude), parseFloat(uni.longitude)]}>
+                                        <Popup>
+                                            {uni.name}
+                                        </Popup>
+                                    </Marker>
+                                </MapContainer>
                         }
                     </Grid>
 
@@ -143,31 +140,29 @@ export default function UniDetail({errorHandler}) {
 
                         </Grid>
 
-                        {uni.placesDD.length > 0 && [...new Set(uni.placesDD
-                            .map((res)=>res.department_availability.map((dep)=>dep.name))
-                            .reduce((list1, list2)=>list1.concat(list2)))]
-                            .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}
+                        {/*{uni.placesDD.length > 0 && [...new Set(uni.placesDD*/}
+                        {/*    .map((res)=>res.department_availability.map((dep)=>dep.name))*/}
+                        {/*    .reduce((list1, list2)=>list1.concat(list2)))]*/}
+                        {/*    .map((item) => <Chip className={classes.chip} key={item} size={"small"} label={item} />)}*/}
 
 
                         <Box component = { "div" } className={classes.infos}>
 
-                            <Typography variant={"h5"} className={classes.textCenter} >L universite en elle-meme</Typography>
+                            <Typography variant={"h5"} className={classes.textCenter} >L&apos;universite en elle-meme</Typography>
                             <Typography variant={"h6"} className={classes.textWeight}>
                                 <Typography>Classement mondial de l universite : {uni.cwur_rank}</Typography>
                                 <Typography>Site web : {uni.website}</Typography>
                             </Typography>
 
-                            <Typography variant={"h5"}  className={classes.textCenter}>Comment y acceder ?</Typography>
+                            <Typography variant={"h5"}  className={classes.textCenter}>Comment y accéder ?</Typography>
                             <Typography variant={"h6"} className={classes.textWeight}>
                                 {/*<Typography>Duree de l echange : {"1 semestre"}</Typography>*/}
                                 {/*<Typography>Quand partir ? : {"4A S1"}</Typography>*/}
-                                <Typography>Nombre de places en double diplomes : {uni.placesDD}</Typography>
-                                <Typography>Nombre de places en echange : {uni.placesExchange}</Typography>
+                                {/*<Typography>Nombre de places en double diplomes : {uni.placesDD}</Typography>*/}
+                                {/*<Typography>Nombre de places en echange : {uni.placesExchange}</Typography>*/}
                                 <Typography>Demande : {uni.access}</Typography>
                                 {/*<Typography>Niveau d anglais requis : {"TOEIC"}</Typography>*/}
                             </Typography>
-
-
 
                             <Typography variant={"h5"} className={classes.textCenter}>Logement</Typography>
                             <Typography variant={"h6"} className={classes.textWeight}>
@@ -178,12 +173,12 @@ export default function UniDetail({errorHandler}) {
 
 
                             {/*<Typography variant={"h5"} className={classes.textCenter}>Aides Financières</Typography>
-                            <Typography variant={"h6"} className={classes.textWeight}>Aides proposées</Typography>*/}
+                                        <Typography variant={"h6"} className={classes.textWeight}>Aides proposées</Typography>*/}
 
                         </Box>
 
                         <Button variant="contained" color="primary" component={Link} to="/experience">
-                            Je suis allé.e ici !
+                                        Je suis allé.e ici !
                         </Button>
                     </Grid>
 
@@ -194,7 +189,7 @@ export default function UniDetail({errorHandler}) {
                                 <Box component={"div"}>
                                     <Typography variant={"body1"}>Pas de commentaire pour cette université</Typography>
                                     <Button variant="contained" color="primary" component={Link} to="/experience">
-                                        Donner mon avis
+                                                    Donner mon avis
                                     </Button>
                                 </Box>
                             ) :

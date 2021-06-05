@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const access = [{
-    value: '',
+    value: 'Indifférent',
     label: 'indifférent',
 },{
     value: 'Low',
@@ -134,7 +134,7 @@ const departments = [{
 const defaultValues = {
     country: "",
     outside_europe: "true",
-    access: "",
+    access: "Indifférent",
     department_availability: "all"
 };
 
@@ -252,7 +252,7 @@ function Rechercher({errorHandler}) {
 
                                         <Grid container className={classes.items}>
                                             <Grid item xs={3} className={classes.items}>
-                                                <Typography variant={'h6'}>Hors Europe</Typography>
+                                                <Typography variant={'h6'}>Europe uniquement</Typography>
                                             </Grid>
                                             <Grid item xs={6}>
                                                 <Controller

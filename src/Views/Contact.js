@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) =>
             margin: theme.spacing(1, 'auto'),
 
             textAlign: 'center',
+            [theme.breakpoints.up("xs")] : {
+                padding: 15,
+                margin: 1,
+            },
         },
 
         width:{

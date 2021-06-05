@@ -3,12 +3,13 @@ import '../Assets/Style/App.css';
 import {makeStyles} from '@material-ui/core/styles';
 import {CircularProgress, Typography} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import PageHeader from "../Component/PageHeader";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {getUniAll} from "../Request/uni_request";
 import {getDefaultErrorMessage} from "../Request/error_handling";
 import * as PropTypes from "prop-types";
+import SnackBarComponent from "../Component/SnackBarComponent";
 
 Home.propTypes = {
     errorHandler: PropTypes.func.isRequired,
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     map: {
         marginTop: theme.spacing(2),
         width: '100%',
-        height: '500px',
+        height: '60vh',
     },
 }));
 
@@ -58,12 +59,12 @@ export default function Home({errorHandler}) {
 
     const [uniA, setUniA] = React.useState({});
     const [loaded, setLoaded] = React.useState(false);
+    const location = useLocation();
 
     React.useEffect(() => {
         getUniAll().then((res) => {
             setUniA(res.data);
             setLoaded(true);
-            console.log(res.data);
         }).catch( err => {
             errorHandler(getDefaultErrorMessage(err));
         });
@@ -71,7 +72,7 @@ export default function Home({errorHandler}) {
 
     return (
         <Box component="div" className="note">
-
+            {location.pathname === "/success" && <SnackBarComponent type={"success"} message={"Formulaire envoyé !"} />}
             <PageHeader title={"Mobilités Internationales"}
                 subtitle={"Découvrez les avis des étudiants revenus d'échange"}/>
 

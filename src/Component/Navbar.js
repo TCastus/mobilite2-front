@@ -1,11 +1,7 @@
 import React from 'react';
 import {
-    AppBar, Drawer,
-    Hidden,
-    IconButton, List, ListItem, ListItemIcon, ListItemText,
-    makeStyles,
-    Toolbar,
-    Typography
+    AppBar, Drawer, Hidden, IconButton, List, ListItem,
+    ListItemIcon, ListItemText, makeStyles, Toolbar, Typography
 } from "@material-ui/core";
 import {Link} from "react-router-dom";
 import * as PropTypes from "prop-types";
@@ -82,7 +78,7 @@ export default function Navbar({routes}) {
                     <Hidden smDown>
                         {routes.map((route, index) => {
                             return (
-                                <Typography key={"nav_" + index} variant="h6" className={classes.link} component={Link} to={route.path}>
+                                <Typography key={"nav_" + index} variant="h6" className={classes.link} component={Link} to={Array.isArray(route.path)? route.path[0]: route.path}>
                                     {route.name}
                                 </Typography>);
                         })}

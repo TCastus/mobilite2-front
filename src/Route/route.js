@@ -1,9 +1,8 @@
 import React from "react";
 
-import HomeIcon from '@material-ui/icons/Home';
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
-import EuroIcon from '@material-ui/icons/Euro';
-import DescriptionIcon from '@material-ui/icons/Description';
+import { Home as HomeIcon, RecordVoiceOver as RecordVoiceOverIcon,
+    Euro as EuroIcon, Description as DescriptionIcon, Search as SearchIcon }
+    from '@material-ui/icons';
 
 import Home from "../Views/Home";
 import Experience from "../Views/Experience";
@@ -16,7 +15,6 @@ import UniDetail from "../Views/UniDetail";
 import Rechercher from "../Views/Rechercher";
 
 
-
 /*
 Constant used for route generation in ../App.js
 To create the routes & navbar, we iterate through this array of objects
@@ -27,7 +25,7 @@ export const routeIndex = {
         {
             name: "Accueil",
             component: Home,
-            path: '/',
+            path: ['/', '/success'],
             icon: <HomeIcon />,
         },
         {
@@ -40,7 +38,7 @@ export const routeIndex = {
             name: "Rechercher",
             component: Rechercher,
             path: '/rechercher',
-            icon: <EuroIcon />,
+            icon: <SearchIcon />,
         },
         {
             name: "Financements",

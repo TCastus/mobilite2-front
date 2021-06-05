@@ -25,7 +25,7 @@ export const routeIndex = {
         {
             name: "Accueil",
             component: Home,
-            path: '/',
+            path: ['/', '/success'],
             icon: <HomeIcon />,
         },
         {

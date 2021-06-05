@@ -25,6 +25,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import {getDefaultErrorMessage} from "../Request/error_handling";
 import { Element, scroller } from 'react-scroll';
 import config from "../config.json";
+import {useHistory} from "react-router";
 
 Experience.propTypes = {
     errorHandler: PropTypes.func.isRequired,
@@ -125,6 +126,7 @@ export default function Experience({errorHandler}) {
 
     const [captchaToken, setCaptchaToken] = useState("");
     const [uni, setUni] = React.useState([]);
+    const history = useHistory();
 
     React.useEffect(() => {
         getUniAll().then((res) => {
@@ -144,7 +146,7 @@ export default function Experience({errorHandler}) {
         if (captchaToken !== "") {
             form2['h-captcha-response'] = captchaToken;
             postReview(form2).then((res)=> {
-                console.log(res);
+                history.push('/success');
             }).catch( () => {
                 errorHandler("Erreurs dans le formulaire !");
                 scroll.scrollToTop();

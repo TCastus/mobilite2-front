@@ -318,7 +318,7 @@ export default function Experience({errorHandler}) {
                                 </Grid>
 
                                 <Grid item md={6} xs={12}>
-                                    <Typography>Loyer moyen payé (€)</Typography>
+                                    <Typography variant={"h6"}>Loyer moyen payé (€)</Typography>
                                     <Controller
                                         render={({ field }) => <TextField type={"number"} {...field} />}
                                         name="rent"

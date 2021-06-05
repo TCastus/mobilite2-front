@@ -37,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
         },
 
     },
+    box: {
+        [theme.breakpoints.up("sm")] : {
+            width:"75%",
+        },
+    },
     title2: {
         color: theme.palette.third.gold,
         padding: 10,
@@ -63,7 +68,7 @@ function Finance() {
     return (
         <Box component="div" classeName={classes.center}>
             <PageHeader title="Financer sa mobilité"/>
-            <Box component= "div" mx="auto">
+            <Box component= "div" mx="auto" className={classes.box}>
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
                     L’INSA Lyon est chargé de gérer et distribuer à ses étudiants les subventions
                     annuelles perçues par Erasmus+, la Région AURA et le Ministère de l’Enseignement
@@ -74,7 +79,7 @@ function Finance() {
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>LA BOURSE REGION BRMIE <br/> (Bourse Région Mobilité
+                    <Typography className={classes.title} align={'center'} variant={'h6'}>LA BOURSE REGION BRMIE <br/> (Bourse Région Mobilité
                         Internationale Etudiants)</Typography>
                     <Typography variant={'h6'} className={classes.title2}>Destination :</Typography>
                     <Typography variant={'h6'} className={classes.content}>Tout pays étranger autre que son pays d’origine<br/> </Typography>
@@ -119,7 +124,7 @@ function Finance() {
                 </Typography>
 
                 <Typography align="left" variant={'h6'}  className={classes.grid}>
-                    <Typography className={classes.title} align={'center'}>
+                    <Typography className={classes.title} align={'center'} variant={'h6'}>
                         LA BOURSE ERASMUS+
                     </Typography>
                     <Typography variant={'h6'} className={classes.title2}>Destination : </Typography>

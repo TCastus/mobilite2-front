@@ -17,6 +17,7 @@ import SnackBarComponent from "../Component/SnackBarComponent";
  */
 function App() {
     const [errorMessage, setError] = useState("");
+    console.log(process.env.NODE_ENV);
 
     /* Generate a list of <Route> components using the description in route.js */
     const gen_routes = Object.keys(routeIndex).map((category, cat_index) => {

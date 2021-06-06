@@ -137,7 +137,6 @@ export default function UniDetail({errorHandler}) {
                             <NotePaper IconOn={MenuBookIcon} IconOff={ImportContactsIcon} title={"Difficulté des cours"} note={uni.courses_difficulty__avg} />
                             <NotePaper IconOn={AccountBalanceIcon} IconOff={ClearIcon} title={"Intérêt dans les cours"} note={uni.courses_interest__avg} />
                             <NotePaper IconOn={ChatIcon} IconOff={SpeakerNotesOffIcon} title={"Contact avec les étudiants"} note={uni.student_proximity__avg} />
-
                         </Grid>
 
                         {/*{uni.placesDD.length > 0 && [...new Set(uni.placesDD*/}
@@ -177,7 +176,7 @@ export default function UniDetail({errorHandler}) {
 
                         </Box>
 
-                        <Button variant="contained" color="primary" component={Link} to="/experience">
+                        <Button variant="contained" color="primary" component={Link} to={`/experience/${uni.id}`}>
                                         Je suis allé.e ici !
                         </Button>
                     </Grid>
@@ -188,9 +187,6 @@ export default function UniDetail({errorHandler}) {
                             uni.reviews.length === 0 ? (
                                 <Box component={"div"}>
                                     <Typography variant={"body1"}>Pas de commentaire pour cette université</Typography>
-                                    <Button variant="contained" color="primary" component={Link} to="/experience">
-                                                    Donner mon avis
-                                    </Button>
                                 </Box>
                             ) :
                                 uni.reviews.map((item, index) =>

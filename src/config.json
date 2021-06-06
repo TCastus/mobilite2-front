@@ -1,6 +1,6 @@
 {
   "API_PROD": "https://mobi-back.herokuapp.com/",
   "API_DEV": "http://localhost:8000/",
-  "ALWAYS_USE_PROD": false,
+  "ALWAYS_USE_PROD": true,
   "HCAPTCHA_SITEKEY": "5de4cc78-09a3-4686-847d-a66baf6174ab"
 }

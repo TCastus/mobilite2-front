@@ -125,9 +125,9 @@ export default function UniDetail({errorHandler}) {
                     </Grid>
 
                     <Grid item sm={6} xs={12}>
-                        <Typography variant={"h4"} className={classes.avis} style={{fontVariantCaps: 'small-caps'}}>Les avis des étudiants</Typography>
+                        <Typography variant={"h4"} className={classes.avis} style={{fontVariantCaps: 'small-caps'}}>L&apos;avis des étudiants</Typography>
 
-                        <Typography variant={"body1"} className={classes.textCenter}>Nombre d étudiants ayant laissés leur avis : {uni.review_number} </Typography>
+                        <Typography variant={"body1"} className={classes.textCenter}>Nombre d&apos;étudiants ayant laissé leur avis : {uni.review_number} </Typography>
 
                         <Grid container spacing={2}>
                             <NotePaper IconOn={AttachMoneyIcon} IconOff={MoneyOffIcon} title={"Coût de la vie"} note={uni.cost_of_living__avg} />
@@ -148,9 +148,9 @@ export default function UniDetail({errorHandler}) {
 
                         <Box component = { "div" } className={classes.infos}>
 
-                            <Typography variant={"h5"} className={classes.textCenter} >L&apos;universite en elle-meme</Typography>
+                            <Typography variant={"h5"} className={classes.textCenter} >L&apos;université en elle-même</Typography>
                             <Typography variant={"h6"} className={classes.textWeight}>
-                                <Typography>Classement mondial de l universite : {uni.cwur_rank}</Typography>
+                                <Typography>Classement mondial de l&apos;université : {uni.cwur_rank}</Typography>
                                 <Typography>Site web : {uni.website}</Typography>
                             </Typography>
 
@@ -195,7 +195,7 @@ export default function UniDetail({errorHandler}) {
                             ) :
                                 uni.reviews.map((item, index) =>
                                     <Card key={index} className={classes.commentCard}>
-                                        <Typography variant={"h6"} className={classes.commentTitle}>Commentaire de {item.surname} {item.name} diplômé en {item.diploma_year}</Typography>
+                                        <Typography variant={"h6"} className={classes.commentTitle}>Commentaire de {item.surname} {item.name} parti en {item.year}</Typography>
                                         <Typography variant={"body1"} className={classes.comment}>{item.comments}</Typography>
                                     </Card>
                                 )

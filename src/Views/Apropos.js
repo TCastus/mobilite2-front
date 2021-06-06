@@ -193,7 +193,7 @@ function Apropos() {
                     Nos projets pour la suite ?
                 </Typography>
                 <Typography variant={'h6'} className={classes.content}>
-                    Pour l’instant, ce site est dédié aux étudiants de TC et de BS, mais nous souhaiterions qu’à l’avenir, il soit utilisé pour tous
+                    Pour l’instant, ce site est dédié aux étudiants de TC, mais nous souhaiterions qu’à l’avenir, il soit utilisé pour tous
                     les départements de l’INSA Lyon. Pour tous les étudiants, trouver un échange qui leur correspond est une étape importante dans
                     leur vie étudiante, personnelle et même professionnelle. Grâce à son implémentation simple, il est facile de modifier notre site
                     pour ajouter de nouvelles informations : il serait donc possible de le déployer pour tous les départements. <br/> <br/>

@@ -20,7 +20,7 @@ import {
 import {getUni} from "../Request/uni_request";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {makeStyles} from "@material-ui/core/styles";
-import {Button, Card, Chip, Container, Typography} from "@material-ui/core";
+import {Button, Card, Container, Typography} from "@material-ui/core";
 import {CircularProgress} from "@material-ui/core";
 import PageHeader from "../Component/PageHeader";
 import NotePaper from "../Component/NotePaper";
@@ -61,9 +61,6 @@ const useStyles = makeStyles((theme) => ({
     chip: {
         margin: theme.spacing(0.5),
     },
-    commentTitle: {
-        textAlign: "left",
-    },
     comment: {
         textAlign: "left",
     },
@@ -81,6 +78,17 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'normal',
     }
 }));
+
+const mobi_type = {
+    'E': 'Échange',
+    'DD': 'Double-diplome'
+};
+
+const access = {
+    'Low': 'Basse',
+    'Medium': 'Moyenne',
+    'High': 'Élevée'
+};
 
 export default function UniDetail({errorHandler}) {
     const classes = useStyles();
@@ -127,17 +135,26 @@ export default function UniDetail({errorHandler}) {
                     <Grid item sm={6} xs={12}>
                         <Typography variant={"h4"} className={classes.avis} style={{fontVariantCaps: 'small-caps'}}>Les avis des étudiants</Typography>
 
-                        <Typography variant={"body1"} className={classes.textCenter}>Nombre d étudiants ayant laissés leur avis : {uni.review_number} </Typography>
+                        <Typography variant={"body1"} className={classes.textCenter}>Nombre d&apos;étudiants ayant donné leur avis : {uni.review_number} </Typography>
 
-                        <Grid container spacing={2}>
-                            <NotePaper IconOn={AttachMoneyIcon} IconOff={MoneyOffIcon} title={"Coût de la vie"} note={uni.cost_of_living__avg} />
-                            <NotePaper IconOn={SecurityIcon} IconOff={NoEncryptionIcon} title={"Sécurité"} note={uni.security__avg} />
-                            <NotePaper IconOn={MusicNoteIcon} IconOff={MusicOffIcon} title={"Vie nocturne"} note={uni.night_life__avg} />
-                            <NotePaper IconOn={PublicIcon} IconOff={LanguageIcon} title={"Vie culturelle"} note={uni.culture__avg} />
-                            <NotePaper IconOn={MenuBookIcon} IconOff={ImportContactsIcon} title={"Difficulté des cours"} note={uni.courses_difficulty__avg} />
-                            <NotePaper IconOn={AccountBalanceIcon} IconOff={ClearIcon} title={"Intérêt dans les cours"} note={uni.courses_interest__avg} />
-                            <NotePaper IconOn={ChatIcon} IconOff={SpeakerNotesOffIcon} title={"Contact avec les étudiants"} note={uni.student_proximity__avg} />
-                        </Grid>
+                        {uni.review_number > 0 ?
+                            <Grid container spacing={2}>
+                                <NotePaper IconOn={AttachMoneyIcon} IconOff={MoneyOffIcon} title={"Coût de la vie"}
+                                    note={uni.cost_of_living.cost_of_living__avg}/>
+                                <NotePaper IconOn={SecurityIcon} IconOff={NoEncryptionIcon} title={"Sécurité"}
+                                    note={uni.security.security__avg}/>
+                                <NotePaper IconOn={MusicNoteIcon} IconOff={MusicOffIcon} title={"Vie nocturne"}
+                                    note={uni.night_life.night_life__avg}/>
+                                <NotePaper IconOn={PublicIcon} IconOff={LanguageIcon} title={"Vie culturelle"}
+                                    note={uni.culture.culture__avg}/>
+                                <NotePaper IconOn={MenuBookIcon} IconOff={ImportContactsIcon} title={"Difficulté des cours"}
+                                    note={uni.courses_difficulty.courses_difficulty__avg}/>
+                                <NotePaper IconOn={AccountBalanceIcon} IconOff={ClearIcon} title={"Intérêt dans les cours"}
+                                    note={uni.courses_interest.courses_interest__avg}/>
+                                <NotePaper IconOn={ChatIcon} IconOff={SpeakerNotesOffIcon}
+                                    title={"Contact avec les étudiants"} note={uni.student_proximity.student_proximity__avg}/>
+                            </Grid> : <Typography variant={"body1"}>Pas assez de reviews pour noter l&apos;université</Typography>
+                        }
 
                         {/*{uni.placesDD.length > 0 && [...new Set(uni.placesDD*/}
                         {/*    .map((res)=>res.department_availability.map((dep)=>dep.name))*/}
@@ -147,37 +164,36 @@ export default function UniDetail({errorHandler}) {
 
                         <Box component = { "div" } className={classes.infos}>
 
-                            <Typography variant={"h5"} className={classes.textCenter} >L&apos;universite en elle-meme</Typography>
-                            <Typography variant={"h6"} className={classes.textWeight}>
-                                <Typography>Classement mondial de l universite : {uni.cwur_rank}</Typography>
-                                <Typography>Site web : {uni.website}</Typography>
-                            </Typography>
+                            <Typography variant={"h5"} className={classes.textCenter}>Informations générales</Typography>
+                            {uni.cwur_rank && <Typography>Classement mondial de l universite : {uni.cwur_rank}</Typography>}
+                            {uni.website && <Typography>Site web : <a href={uni.website}>{uni.website}</a></Typography>}
 
-                            <Typography variant={"h5"}  className={classes.textCenter}>Comment y accéder ?</Typography>
-                            <Typography variant={"h6"} className={classes.textWeight}>
-                                {/*<Typography>Duree de l echange : {"1 semestre"}</Typography>*/}
-                                {/*<Typography>Quand partir ? : {"4A S1"}</Typography>*/}
-                                {/*<Typography>Nombre de places en double diplomes : {uni.placesDD}</Typography>*/}
-                                {/*<Typography>Nombre de places en echange : {uni.placesExchange}</Typography>*/}
-                                <Typography>Demande : {uni.access}</Typography>
-                                {/*<Typography>Niveau d anglais requis : {"TOEIC"}</Typography>*/}
-                            </Typography>
+                            <Typography variant={"h5"}  className={classes.textCenter}>Accessibilité</Typography>
+                            {uni.placesDD.length > 0 && <><Typography variant={'body1'}>Places en double diplôme : </Typography>
+                                <ul>
+                                    {uni.placesDD.map((place) =>
+                                        <Typography component={"li"} variant={"body1"} key={`${place.number}_${place.department_availability}`}>
+                                            {place.number} places pour {place.department_availability.map((elem) => elem.name + " ")}
+                                        </Typography>
+                                    )}
+                                </ul> </>}
 
-                            <Typography variant={"h5"} className={classes.textCenter}>Logement</Typography>
-                            <Typography variant={"h6"} className={classes.textWeight}>
-                                <Typography>Résidence sur le campus : {uni.univ_appartment ? "Oui" : "Non"}</Typography>
-                                <Typography>Coût du logement (approximatif) : {uni.rent_average}</Typography>
-                                {/*<Typography>Le campus : </Typography>*/}
-                            </Typography>
+                            {uni.placesExchange.length > 0 && <><Typography variant={'body1'}>Places en échange : </Typography>
+                                <ul>
+                                    {uni.placesExchange.map((place) =>
+                                        <Typography component={"li"} variant={"body1"} key={`${place.number}_${place.department_availability}_${place.semester}`}>
+                                            {place.number} places pour {place.department_availability.map((elem) => elem.name + " " )}
+                                            {place.semester.length > 1 ? 'au semestre' : 'aux semestres'} {place.semester.map((elem) => elem.name + " ")}
+                                        </Typography>
+                                    )}
+                                </ul> </>}
 
-
-                            {/*<Typography variant={"h5"} className={classes.textCenter}>Aides Financières</Typography>
-                                        <Typography variant={"h6"} className={classes.textWeight}>Aides proposées</Typography>*/}
-
+                            <Typography>Demande : {access[uni.access]}</Typography>
+                            {uni.rent.rent__avg && <Typography>Coût du logement moyen : {uni.rent.rent__avg}</Typography>}
                         </Box>
 
                         <Button variant="contained" color="primary" component={Link} to={`/experience/${uni.id}`}>
-                                        Je suis allé.e ici !
+                            Je suis allé.e ici !
                         </Button>
                     </Grid>
 
@@ -186,13 +202,23 @@ export default function UniDetail({errorHandler}) {
                         {
                             uni.reviews.length === 0 ? (
                                 <Box component={"div"}>
-                                    <Typography variant={"body1"}>Pas de commentaire pour cette université</Typography>
+                                    <Typography variant={"body1"}>Aucun commentaire pour cette université</Typography>
                                 </Box>
                             ) :
                                 uni.reviews.map((item, index) =>
                                     <Card key={index} className={classes.commentCard}>
-                                        <Typography variant={"h6"} className={classes.commentTitle}>Commentaire de {item.surname} {item.name} diplômé en {item.diploma_year}</Typography>
-                                        <Typography variant={"body1"} className={classes.comment}>{item.comments}</Typography>
+                                        <Typography variant={"h6"} className={classes.comment}>
+                                            Commentaire de {item.surname} {item.name} {item.email_perm.length > 0 ? `(${item.email_perm})`:''}
+                                        </Typography>
+                                        <Typography variant={"body2"} className={classes.comment}>
+                                            parti en {mobi_type[item.mobility_type]} en {item.year} en {item.semester}
+                                        </Typography>
+                                        <Typography variant={"body1"} className={classes.comment}>
+                                            Commentaire : {item.comments}
+                                        </Typography>
+                                        <Typography variant={"body1"} className={classes.comment}>
+                                            Visa : {item.visa}
+                                        </Typography>
                                     </Card>
                                 )
                         }

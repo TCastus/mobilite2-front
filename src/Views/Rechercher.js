@@ -23,8 +23,6 @@ import {getDefaultErrorMessage} from "../Request/error_handling";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
         marginBottom: theme.spacing(3),
     },
     experience: {

@@ -31,7 +31,7 @@ export const routeIndex = {
         {
             name: "Avis",
             component: Experience,
-            path: '/experience',
+            path: ['/experience', '/experience/:id'],
             icon: <RecordVoiceOverIcon />,
         },
         {

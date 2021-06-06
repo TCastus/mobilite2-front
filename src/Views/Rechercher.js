@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../Assets/Style/App.css';
 import {makeStyles} from "@material-ui/core/styles";
 import {
-    Button, Chip,
+    Button, CircularProgress,
     Container, FormControlLabel,
     Grid, MenuItem,
     Paper, Radio, RadioGroup, Select,
@@ -17,14 +17,12 @@ import PageHeader from "../Component/PageHeader";
 import {getSearchAdvance, postSearchName} from "../Request/uni_request";
 import SearchSlider from "../Component/SearchSlider";
 import * as PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {getDefaultErrorMessage} from "../Request/error_handling";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
         marginBottom: theme.spacing(3),
     },
     experience: {
@@ -148,7 +146,9 @@ function Rechercher({errorHandler}) {
     const [name, setName] = useState("");
 
     const [uniList, setUniList] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [rechercheDone, setRecherDone] = useState(false);
+    const history = useHistory();
 
     // First form submission
     const searchName = (e) => {
@@ -173,6 +173,7 @@ function Rechercher({errorHandler}) {
     // Second form submission
     const searchAdvanced = (form) => {
         console.log(form);
+        setLoading(true);
 
         getSearchAdvance(form).then(res => {
             setUniList(res.data);
@@ -185,6 +186,7 @@ function Rechercher({errorHandler}) {
             }
 
             setRecherDone(true);
+            setLoading(false);
 
         }).catch((err) => {
             errorHandler(getDefaultErrorMessage(err));
@@ -322,7 +324,8 @@ function Rechercher({errorHandler}) {
 
                 <Element name="scrollResults" />
 
-                {rechercheDone &&
+                {loading && <CircularProgress />}
+                {!loading && rechercheDone &&
                 <div className={classes.root}>
                     <Typography
                         variant={'h5'}>{uniList.length} université{uniList.length > 1 ? "s" : ""} trouvée{uniList.length > 1 ? "s" : ""}</Typography>
@@ -330,29 +333,20 @@ function Rechercher({errorHandler}) {
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell align="right">Nom</TableCell>
-                                    <TableCell align="right">Pays</TableCell>
-                                    <TableCell align="center">Départements</TableCell>
-                                    <TableCell align="left">Demande</TableCell>
+                                    <TableCell align="left">Nom</TableCell>
+                                    <TableCell align="left">Pays</TableCell>
+                                    <TableCell align="left">Ville</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {uniList.map((row) => (
-                                    <TableRow key={row.name}>
-                                        <TableCell align="right" component="th" scope="row">
-                                            <Link to={"/universite/" + row.id}>
-                                                {row.name}
-                                            </Link>
+                                    <TableRow key={row.name} hover>
+                                        <TableCell align="left" component="th" scope="row" onClick={()=>history.push(`/universite/${row.id}`)}
+                                            style={{cursor: 'pointer'}}>
+                                            {row.name}
                                         </TableCell>
-                                        <TableCell align="right">{row.country_name}</TableCell>
-                                        <TableCell align="center">
-                                            {row.placesDD.length + row.placesExchange.length !== 0 && [...new Set((row.placesExchange.concat(row.placesDD))
-                                                .map((res) => res.department_availability.map((dep) => dep.name))
-                                                .reduce((list1, list2) => list1.concat(list2)))]
-                                                .map((item) => <Chip className={classes.chip} key={item} size={"small"}
-                                                    label={item}/>)}
-                                        </TableCell>
-                                        <TableCell align="left">{row.access}</TableCell>
+                                        <TableCell align="left">{row.country_name}</TableCell>
+                                        <TableCell align="left">{row.city_name}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

@@ -35,11 +35,11 @@ export const getUni = (i) => {
 };
 
 /**
- * Get all universities' details from API
+ * Get all universities' short infomation
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const getUniAll = () => {
-    return client.get('/api/university/')
+export const getUniAllShort = () => {
+    return client.get('/api/university_short/')
         .then(res => {
             return res;
         }).catch(rematchError);

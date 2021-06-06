@@ -20,12 +20,13 @@ import * as yup from "yup";
 import PageHeader from "../Component/PageHeader";
 import RatingForm from "../Component/RatingForm";
 import {useForm, Controller} from "react-hook-form";
-import {getUniAll, postReview} from "../Request/uni_request";
+import {getUniAllShort, postReview} from "../Request/uni_request";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import {getDefaultErrorMessage} from "../Request/error_handling";
 import { Element, scroller } from 'react-scroll';
 import config from "../config.json";
 import {useHistory} from "react-router";
+import {useParams} from "react-router-dom";
 
 Experience.propTypes = {
     errorHandler: PropTypes.func.isRequired,
@@ -127,11 +128,12 @@ export default function Experience({errorHandler}) {
     const [captchaToken, setCaptchaToken] = useState("");
     const [uni, setUni] = React.useState([]);
     const history = useHistory();
+    const id_uni = useParams();
 
     React.useEffect(() => {
-        getUniAll().then((res) => {
+        getUniAllShort().then((res) => {
             setUni(res.data);
-            setValue('university', res.data[0].id);
+            setValue('university', id_uni.id ? String(id_uni.id) : res.data[0].id);
         }).catch( err => {
             errorHandler(getDefaultErrorMessage(err));
         });
@@ -145,7 +147,7 @@ export default function Experience({errorHandler}) {
 
         if (captchaToken !== "") {
             form2['h-captcha-response'] = captchaToken;
-            postReview(form2).then((res)=> {
+            postReview(form2).then(()=> {
                 history.push('/success');
             }).catch( () => {
                 errorHandler("Erreurs dans le formulaire !");
@@ -261,7 +263,7 @@ export default function Experience({errorHandler}) {
                                     <Controller
                                         render={({ field }) => (
                                             <Select {...field}>
-                                                {uni.map((elem) => <MenuItem key={elem.id} value={elem.id}>{elem.name}</MenuItem>)}
+                                                {uni.map((elem) => <MenuItem key={elem.id} value={elem.id}>{elem.country_name + " - " + elem.name}</MenuItem>)}
                                             </Select>
                                         )}
                                         name="university"

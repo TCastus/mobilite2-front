@@ -6,7 +6,7 @@ import Box from "@material-ui/core/Box";
 import {Link, useLocation} from "react-router-dom";
 import PageHeader from "../Component/PageHeader";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
-import {getUniAll} from "../Request/uni_request";
+import {getUniAllShort} from "../Request/uni_request";
 import {getDefaultErrorMessage} from "../Request/error_handling";
 import * as PropTypes from "prop-types";
 import SnackBarComponent from "../Component/SnackBarComponent";
@@ -62,7 +62,7 @@ export default function Home({errorHandler}) {
     const location = useLocation();
 
     React.useEffect(() => {
-        getUniAll().then((res) => {
+        getUniAllShort().then((res) => {
             setUniA(res.data);
             setLoaded(true);
         }).catch( err => {

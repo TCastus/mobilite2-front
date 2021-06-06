@@ -29,7 +29,7 @@ export const routeIndex = {
             icon: <HomeIcon />,
         },
         {
-            name: "Avis",
+            name: "Donner son avis",
             component: Experience,
             path: ['/experience', '/experience/:id'],
             icon: <RecordVoiceOverIcon />,
@@ -47,7 +47,7 @@ export const routeIndex = {
             icon: <EuroIcon />,
         },
         {
-            name:"Mobilités",
+            name:"Renseignements",
             component: Mobilite,
             path: '/mobilite',
             icon: <DescriptionIcon />

@@ -104,7 +104,7 @@ export default function Navbar({routes}) {
                     <List>
                         {routes.map((route, index) => {
                             return (
-                                <ListItem button key={"nav_" + index} component={Link} to={route.path}>
+                                <ListItem button key={"nav_" + index} component={Link} to={Array.isArray(route.path)? route.path[0]: route.path}>
                                     <ListItemIcon>{route.icon}</ListItemIcon>
                                     <ListItemText primary={route.name} />
                                 </ListItem>

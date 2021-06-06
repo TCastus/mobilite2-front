@@ -7,6 +7,7 @@ import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
 import {theme} from "../Theme";
 import FooterAppBar from "../Component/FooterAppBar";
 import SnackBarComponent from "../Component/SnackBarComponent";
+import ScrollToTop from "../Component/ScrollToTop";
 
 /**
  * Main component of the mobilite app
@@ -34,6 +35,8 @@ function App() {
 
                 <BrowserRouter basename={process.env.NODE_ENV==="production" ? '/mobilite2-front/': ''}>
                     <CssBaseline />
+                    <ScrollToTop />
+
                     <Navbar routes={routeIndex.navigation}/>
 
                     <Switch>

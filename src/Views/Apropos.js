@@ -10,10 +10,6 @@ import alice from "../Assets/aPropos/alice.png";
 import estelle from "../Assets/aPropos/estelle.png";
 import thomas from "../Assets/aPropos/thomas.png";
 import bastien from "../Assets/aPropos/bastien.png";
-import {theme} from "../Theme";
-
-
-
 
 const useStyles = makeStyles((theme) =>
     ({
@@ -45,6 +41,7 @@ const useStyles = makeStyles((theme) =>
             },
 
         },
+
         content: {
             backgroundColor: theme.palette.third.white,
             color: theme.palette.third.darkGrey,
@@ -92,12 +89,14 @@ function Apropos() {
     return (
         <Box component="div" className= {classes.BoxType}>
             <PageHeader title={"A propos"} subtitle={"Qu'est-ce que c'est que ce site ?"} />
+
             <Box component= "div" width="75%" mx="auto" >
                 <Box component="div" className={classes.title}>
-                    <Typography variant={'h3'} >
-                        Mobilité, une application par les étudiants, pour les étudiants <br /> <br />
-                        Notre objectif ? <br/>
-                        Aider les étudiants à choisir l’échange qui leur correspond le mieux, afin de leur garantir un voyage inoubliable.
+                    <Typography variant={'h3'} style={{paddingBottom: "10px"}}>
+                        Mobilité, une application par les étudiants, pour les étudiants
+                    </Typography>
+                    <Typography variant={"h5"}>
+                        Pour aider les étudiants à choisir l’échange qui leur correspond le mieux, afin de leur garantir un voyage inoubliable.
                     </Typography>
                 </Box>
 
@@ -128,8 +127,8 @@ function Apropos() {
                 </Typography>
             </Box>
 
-            <Box component="div" mx="auto" width="95%" >
-                <Grid container className={classes.contentMembers} alignItems="center" width >
+            <Box component="div" mx="auto" width="70%" >
+                <Grid container className={classes.contentMembers} alignItems="center" >
                     <Grid item xs={6} >
                         <img src={louis} height="85%" width="85%" alt={"photo de louis - responsable du projet"}/>
                     </Grid>

@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
         fontVariantCaps: theme.fontVariantCaps.smallCaps,
         alignItems: 'center',
     },
+    button: {
+        margin: "10px",
+    }
 }));
 
 export default function Mobilite() {
@@ -45,15 +48,15 @@ export default function Mobilite() {
 
                 <Grid container spacing={3}>
                     <Grid item xs={12} className={classes.boxFAQ}>
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=2784">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=2784">
                             TC
                         </Button>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3344">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3344">
                             SGM
                         </Button>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=4303">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=4303">
                             IF
                         </Button>
                     </Grid>
@@ -61,15 +64,15 @@ export default function Mobilite() {
                 <Grid container spacing={3}>
                     <Grid item xs={12} className={classes.boxFAQ}>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://intranetgm.insa-lyon.fr/international/mobilite-sortante">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://intranetgm.insa-lyon.fr/international/mobilite-sortante">
                             GM
                         </Button>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3343">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3343">
                             GI
                         </Button>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3713">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3713">
                             GE
                         </Button>
 
@@ -78,15 +81,15 @@ export default function Mobilite() {
                 <Grid container spacing={3}>
                     <Grid item xs={12} className={classes.boxFAQ}>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3075">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=3075">
                             GEN
                         </Button>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=5463">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://moodle.insa-lyon.fr/course/view.php?id=5463">
                             GCU
                         </Button>
 
-                        <Button variant="contained" color="primary" target = "_blank" href="https://intranetbs.insa-lyon.fr/content/documents-utiles-0">
+                        <Button variant="contained" className={classes.button} color="primary" target = "_blank" href="https://intranetbs.insa-lyon.fr/content/documents-utiles-0">
                             BS
                         </Button>
                     </Grid>

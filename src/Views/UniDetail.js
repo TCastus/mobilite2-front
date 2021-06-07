@@ -165,7 +165,7 @@ export default function UniDetail({errorHandler}) {
                         <Box component = { "div" } className={classes.infos}>
 
                             <Typography variant={"h5"} className={classes.textCenter}>Informations générales</Typography>
-                            {uni.cwur_rank && <Typography>Classement mondial de l universite : {uni.cwur_rank}</Typography>}
+                            {uni.cwur_rank && <Typography>Classement mondial de l&apos;université : {uni.cwur_rank}</Typography>}
                             {uni.website && <Typography>Site web : <a href={uni.website}>{uni.website}</a></Typography>}
 
                             <Typography variant={"h5"}  className={classes.textCenter}>Accessibilité</Typography>

@@ -61,7 +61,7 @@ function FooterAppBar({routes}) {
             <Box component="div" className={classes.shareExp}>
                 <Grid container spacing={1}>
                     <Grid item sm={6} style={{display: "flex", alignItems:"center", textAlign:"center", fontVariantCaps: 'small-caps', textDecoration:'underline'}}>
-                        <Typography component={Link} to={"experience"} variant={'h5'} style={{color: '#c59b08', margin:'0 auto'}}>Partagez votre expérience
+                        <Typography component={Link} to={"/experience"} variant={'h5'} style={{color: '#c59b08', margin:'0 auto'}}>Partagez votre expérience
                         </Typography>
                     </Grid >
 

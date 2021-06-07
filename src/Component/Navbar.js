@@ -3,7 +3,7 @@ import {
     AppBar, Drawer, Hidden, IconButton, List, ListItem,
     ListItemIcon, ListItemText, makeStyles, Toolbar, Typography
 } from "@material-ui/core";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import * as PropTypes from "prop-types";
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => {
 export default function Navbar({routes}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const history = useHistory();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -104,7 +105,7 @@ export default function Navbar({routes}) {
                     <List>
                         {routes.map((route, index) => {
                             return (
-                                <ListItem button key={"nav_" + index} component={Link} to={Array.isArray(route.path)? route.path[0]: route.path}>
+                                <ListItem button key={"nav_" + index} component={Link} onClick={()=>{setOpen(false);history.push(Array.isArray(route.path)? route.path[0]: route.path);}}>
                                     <ListItemIcon>{route.icon}</ListItemIcon>
                                     <ListItemText primary={route.name} />
                                 </ListItem>
